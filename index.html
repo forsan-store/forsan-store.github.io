@@ -12,14 +12,6 @@
       text-align: center;
       padding: 20px;
     }
-    h1 {
-      color: gold;
-      margin-bottom: 5px;
-    }
-    p.subtitle {
-      color: #ccc;
-      margin-bottom: 25px;
-    }
     .product {
       background: #222;
       border-radius: 12px;
@@ -27,17 +19,9 @@
       margin: 20px 0;
       box-shadow: 0 0 15px rgba(255,215,0,0.3);
     }
-    .price { 
-      color: limegreen; 
-      font-size: 22px; 
-      font-weight: bold; 
-    }
-    .warning { 
-      color: red; 
-      font-size: 14px; 
-      margin-top: 10px; 
-      line-height: 1.5;
-    }
+    .price { color: limegreen; font-size: 22px; font-weight: bold; }
+    .soon { color: #aaa; font-size: 18px; font-weight: bold; }
+    .warning { color: red; font-size: 14px; margin-top: 10px; }
     .btn {
       display: inline-block;
       background: #25D366;
@@ -59,24 +43,21 @@
       text-decoration: underline;
       font-weight: bold;
     }
-    .coming {
-      color: gold;
-      font-size: 20px;
-      font-weight: bold;
-      margin: 40px 0 10px;
-    }
   </style>
 </head>
 <body>
 
   <h1>⚔️ متجر فرسان ⚔️</h1>
-  <p class="subtitle">أفضل العروض الرقمية – خدمة مضمونة 100%</p>
+  <p>أفضل العروض الرقمية – خدمة مضمونة 100%</p>
 
-  <!-- المنتج الحالي -->
+  <!-- منتج البلس -->
   <div class="product">
-    <h2>🎮 بلايستيشن بلس (شهر واحد)</h2>
+    <h2>🎮 اشتراك بلايستيشن بلس</h2>
     <p>اشتراك أصلي يعمل على <b>PS4 و PS5</b> ⚡ الحساب مشترك</p>
-    <p class="price">18 ريال</p>
+
+    <p class="price">شهر: 25 ريال</p>
+    <p class="soon">3 شهور: قريبًا...</p>
+    <p class="soon">سنة: قريبًا...</p>
 
     <p class="warning">⚠️ ممنوع تغيير أي بيانات من الحساب.<br>
     ⚠️ ممنوع مشاركة الحساب مع أحد.<br>
@@ -89,36 +70,19 @@
     </div>
   </div>
 
-  <!-- المنتجات القادمة -->
-  <h2 class="coming">📦 قريباً</h2>
-  
+  <!-- نتفلكس قريباً -->
+  <h3>📦 قريباً</h3>
+
   <div class="product">
     <h2>🔥 اشتراك نتفلكس</h2>
-    <p style="color:gray;">سيتوفر قريباً...</p>
-  </div>
-
-  <div class="product">
-    <h2>🎵 اشتراك سبوتيفاي</h2>
-    <p style="color:gray;">سيتوفر قريباً...</p>
-  </div>
-
-  <div class="product">
-    <h2>🎬 اشتراك شاهد VIP</h2>
-    <p style="color:gray;">سيتوفر قريباً...</p>
+    <p class="soon">سيتوفر قريبًا...</p>
   </div>
 
   <script>
     document.getElementById("whatsappBtn").addEventListener("click", function() {
-      // رقم الطلب العشوائي
       let orderId = Math.floor(100000000 + Math.random() * 900000000); 
-      
-      // رقمك
       let phone = "966547349213";
-      
-      // الرسالة المرسلة للواتساب
       let msg = `أحتاج مساعدة في الطلب رقم: ${orderId}`;
-      
-      // يفتح الواتساب مع الرسالة
       window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     });
   </script>
