@@ -12,17 +12,16 @@
       text-align: center;
       padding: 20px;
     }
-    .hours {
-      background: #222;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(255,215,0,0.3);
-      font-size: 16px;
+    h1 {
+      color: gold;
     }
-    .hours span {
-      color: red;
-      font-weight: bold;
+    .work-time {
+      background: #222;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(255,215,0,0.4);
+      font-size: 14px;
     }
     .product {
       background: #222;
@@ -32,7 +31,6 @@
       box-shadow: 0 0 15px rgba(255,215,0,0.3);
     }
     .price { color: limegreen; font-size: 22px; font-weight: bold; }
-    .warning { color: red; font-size: 14px; margin-top: 10px; }
     .btn {
       display: inline-block;
       background: #25D366;
@@ -54,6 +52,12 @@
       text-decoration: underline;
       font-weight: bold;
     }
+    .soon {
+      color: gray;
+      font-size: 18px;
+      font-style: italic;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -61,21 +65,16 @@
   <h1>⚔️ متجر فرسان ⚔️</h1>
   <p>أفضل العروض الرقمية – خدمة مضمونة 100%</p>
 
-  <!-- ساعات العمل -->
-  <div class="hours">
-    ⏰ <b>ساعات العمل:</b> من 3:00 العصر إلى 11:00 الليل.<br>
-    ⚠️ <span>إذا كان خارج هذه الأوقات لن يتم الرد.</span>
+  <div class="work-time">
+    ⏰ ساعات العمل: من 3 العصر إلى 11 الليل  
+    <br>⚠️ خارج هذه الأوقات لن يتم الرد
   </div>
 
-  <!-- المنتجات -->
+  <!-- المنتج الأساسي -->
   <div class="product">
     <h2>🎮 بلايستيشن بلس (شهر واحد)</h2>
     <p>اشتراك أصلي يعمل على <b>PS4 و PS5</b> ⚡ الحساب مشترك</p>
-    <p class="price">18 ريال</p>
-
-    <p class="warning">⚠️ ممنوع تغيير أي بيانات من الحساب.<br>
-    ⚠️ ممنوع مشاركة الحساب مع أحد.<br>
-    ⛔ في حال المخالفة يتم سحب الحساب فوراً بدون أي تعويضات.</p>
+    <p class="price">22 ريال</p>
 
     <a id="whatsappBtn" class="btn">📱 اطلب عبر واتساب</a>
 
@@ -84,22 +83,29 @@
     </div>
   </div>
 
-  <!-- منتجات قادمة -->
+  <!-- المنتجات القادمة -->
   <div class="product">
     <h2>🎮 بلايستيشن بلس (3 شهور)</h2>
-    <p>🚧 قريبا</p>
+    <p class="soon">قريباً</p>
   </div>
 
   <div class="product">
     <h2>🎮 بلايستيشن بلس (12 شهر)</h2>
-    <p>🚧 قريبا</p>
+    <p class="soon">قريباً</p>
   </div>
 
   <script>
     document.getElementById("whatsappBtn").addEventListener("click", function() {
+      // رقم الطلب العشوائي
       let orderId = Math.floor(100000000 + Math.random() * 900000000); 
+      
+      // رقمك
       let phone = "966547349213";
+      
+      // الرسالة المرسلة للواتساب
       let msg = `أحتاج مساعدة في الطلب رقم: ${orderId}`;
+      
+      // يفتح الواتساب مع الرسالة
       window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     });
   </script>
