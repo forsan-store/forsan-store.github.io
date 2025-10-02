@@ -12,7 +12,27 @@
       text-align: center;
       padding: 20px;
     }
-    h1 { color: gold; }
+    h1 {
+      color: gold;
+      margin-bottom: 10px;
+    }
+    .hours {
+      background: #222;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(255,215,0,0.3);
+    }
+    .hours p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+    .warning-red {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      font-weight: bold;
+    }
     .product {
       background: #222;
       border-radius: 12px;
@@ -20,17 +40,15 @@
       margin: 20px 0;
       box-shadow: 0 0 15px rgba(255,215,0,0.3);
     }
-    .price { color: limegreen; font-size: 22px; font-weight: bold; }
-    .coming { 
-      color: orange; 
-      font-size: 18px; 
-      font-weight: bold; 
-      margin-top: 10px; 
+    .price {
+      color: limegreen;
+      font-size: 22px;
+      font-weight: bold;
     }
-    .warning { 
-      color: red; 
-      font-size: 14px; 
-      margin-top: 10px; 
+    .coming {
+      color: orange;
+      font-size: 18px;
+      font-weight: bold;
     }
     .btn {
       display: inline-block;
@@ -44,55 +62,67 @@
       transition: 0.3s;
     }
     .btn:hover { background: #128C7E; }
-    footer { margin-top: 40px; font-size: 13px; color: #aaa; }
+    .support {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .support a {
+      color: dodgerblue;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
 
   <h1>⚔️ متجر فرسان ⚔️</h1>
-  <p>أفضل متجر رقمي – سريع وآمن</p>
+  <p>أفضل العروض الرقمية – خدمة مضمونة 100%</p>
 
-  <!-- المنتج الأساسي -->
+  <div class="hours">
+    <p>⏰ ساعات العمل: من <b>4:00 م</b> إلى <b>12:00 ص</b></p>
+    <p class="warning-red">⚠️ خارج هذه الأوقات لن يتم الرد</p>
+  </div>
+
   <div class="product">
     <h2>🎮 بلايستيشن بلس (شهر واحد)</h2>
     <p>اشتراك أصلي يعمل على <b>PS4 و PS5</b> ⚡ الحساب مشترك</p>
     <p class="price">18 ريال</p>
-
-    <p class="warning">⚠️ ممنوع تغيير بيانات الحساب.<br>
-    ⚠️ ممنوع مشاركة الحساب.<br>
-    ⛔ في حال المخالفة يتم سحب الحساب بدون أي تعويضات.</p>
-
+    <p class="warning-red">⚠️ ممنوع تغيير أي بيانات من الحساب.<br>
+    ⚠️ ممنوع مشاركة الحساب مع أحد.<br>
+    ⛔ في حال المخالفة يتم سحب الحساب فوراً بدون أي تعويضات.</p>
     <a id="whatsappBtn" class="btn">📱 اطلب عبر واتساب</a>
-  </div>
-
-  <!-- المنتجات القادمة -->
-  <div class="product">
-    <h2>🎮 بلايستيشن بلس (3 شهور) 🔒</h2>
-    <p class="coming">🚧 قريبًا</p>
+    <div class="support">
+      للاستفسار: <a href="tel:+966547349213">+966547349213</a>
+    </div>
   </div>
 
   <div class="product">
-    <h2>🎮 بلايستيشن بلس (12 شهر) 🔒</h2>
-    <p class="coming">🚧 قريبًا</p>
+    <h2>🎮 بلايستيشن بلس (3 أشهر)</h2>
+    <p class="coming">🚧 قريباً</p>
   </div>
 
-  <h3>✨ ليش تختارنا؟</h3>
-  <p>✅ تسليم سريع خلال ساعات العمل<br>
-     ✅ دعم فوري عبر واتساب<br>
-     ✅ ثقة وضمان 100%</p>
+  <div class="product">
+    <h2>🎮 بلايستيشن بلس (12 شهر)</h2>
+    <p class="coming">🚧 قريباً</p>
+  </div>
+
+  <script>
+    document.getElementById("whatsappBtn").addEventListener("click", function() {
+      let orderId = Math.floor(100000000 + Math.random() * 900000000); 
+      let phone = "966547349213";
+      let msg = `مرحباً 👋\nأرغب بالاشتراك في (بلايستيشن بلس - شهر واحد)\nرقم الطلب: ${orderId}`;
+      window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    });
+  </script>
 
   <footer>
     <p>© 2025 متجر فرسان - جميع الحقوق محفوظة</p>
   </footer>
-
-  <script>
-    document.getElementById("whatsappBtn").addEventListener("click", function() {
-      let orderId = Math.floor(1000 + Math.random() * 9000);
-      let phone = "966547349213";
-      let msg = `مرحباً 👋 عندي استفسار بخصوص الطلب رقم: ${orderId}`;
-      window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-    });
-  </script>
 
 </body>
 </html>
