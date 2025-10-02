@@ -6,60 +6,126 @@
   <title>متجر فرسان</title>
   <style>
     body {
-      background-color: #000;
+      background: #111;
       color: #fff;
-      font-family: "Cairo", sans-serif;
+      font-family: 'Tajawal', sans-serif;
       text-align: center;
-      margin: 0;
       padding: 20px;
     }
     h1 {
       color: gold;
-      margin-bottom: 30px;
+      margin-bottom: 5px;
     }
-    .card {
-      background-color: #111;
-      border: 2px solid gold;
-      border-radius: 15px;
+    p.subtitle {
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+    .product {
+      background: #222;
+      border-radius: 12px;
       padding: 20px;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 15px gold;
+      margin: 20px 0;
+      box-shadow: 0 0 15px rgba(255,215,0,0.3);
     }
-    .price {
-      color: gold;
-      font-size: 22px;
-      margin: 10px 0;
+    .price { 
+      color: limegreen; 
+      font-size: 22px; 
+      font-weight: bold; 
     }
-    .warning {
-      color: red;
-      font-size: 16px;
+    .warning { 
+      color: red; 
+      font-size: 14px; 
+      margin-top: 10px; 
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      background: #25D366;
+      color: #fff;
+      padding: 12px 25px;
       margin-top: 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #128C7E; }
+    .support {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .support a {
+      color: dodgerblue;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    .coming {
+      color: gold;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 40px 0 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>💎 متجر فرسان 💎</h1>
+  <h1>⚔️ متجر فرسان ⚔️</h1>
+  <p class="subtitle">أفضل العروض الرقمية – خدمة مضمونة 100%</p>
 
-  <!-- بلايستيشن -->
-  <div class="card">
-    <h2>اشتراك بلايستيشن بلس</h2>
-    <p class="price">شهر: 25 ريال</p>
-    <p class="price">3 شهور: 70 ريال</p>
-    <p class="price">سنة: 230 ريال</p>
-    <p class="warning">⚠️ الحساب المشترك يعمل على PS4 و PS5 فقط</p>
-    <p class="warning">⚠️ ممنوع مشاركة الحساب مع أحد، غير كذا راح ينسحب بدون تعويض</p>
+  <!-- المنتج الحالي -->
+  <div class="product">
+    <h2>🎮 بلايستيشن بلس (شهر واحد)</h2>
+    <p>اشتراك أصلي يعمل على <b>PS4 و PS5</b> ⚡ الحساب مشترك</p>
+    <p class="price">18 ريال</p>
+
+    <p class="warning">⚠️ ممنوع تغيير أي بيانات من الحساب.<br>
+    ⚠️ ممنوع مشاركة الحساب مع أحد.<br>
+    ⛔ في حال المخالفة يتم سحب الحساب فوراً بدون أي تعويضات.</p>
+
+    <a id="whatsappBtn" class="btn">📱 اطلب عبر واتساب</a>
+
+    <div class="support">
+      للاستفسار: <a href="tel:+966547349213">+966547349213</a>
+    </div>
   </div>
 
-  <!-- نتفلكس -->
-  <div class="card">
-    <h2>اشتراك نتفلكس</h2>
-    <p class="price">شهر: 35 ريال</p>
-    <p class="price">3 شهور: 95 ريال</p>
-    <p class="price">سنة: 330 ريال</p>
+  <!-- المنتجات القادمة -->
+  <h2 class="coming">📦 قريباً</h2>
+  
+  <div class="product">
+    <h2>🔥 اشتراك نتفلكس</h2>
+    <p style="color:gray;">سيتوفر قريباً...</p>
   </div>
+
+  <div class="product">
+    <h2>🎵 اشتراك سبوتيفاي</h2>
+    <p style="color:gray;">سيتوفر قريباً...</p>
+  </div>
+
+  <div class="product">
+    <h2>🎬 اشتراك شاهد VIP</h2>
+    <p style="color:gray;">سيتوفر قريباً...</p>
+  </div>
+
+  <script>
+    document.getElementById("whatsappBtn").addEventListener("click", function() {
+      // رقم الطلب العشوائي
+      let orderId = Math.floor(100000000 + Math.random() * 900000000); 
+      
+      // رقمك
+      let phone = "966547349213";
+      
+      // الرسالة المرسلة للواتساب
+      let msg = `أحتاج مساعدة في الطلب رقم: ${orderId}`;
+      
+      // يفتح الواتساب مع الرسالة
+      window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    });
+  </script>
+
+  <footer>
+    <p>© 2025 متجر فرسان - جميع الحقوق محفوظة</p>
+  </footer>
 
 </body>
 </html>
