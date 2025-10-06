@@ -79,6 +79,7 @@
                         url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
+            margin-top: 80px;
         }
 
         .hero-content h1 {
@@ -114,14 +115,10 @@
             box-shadow: 0 10px 25px rgba(0, 112, 204, 0.4);
         }
 
-        .features {
-            padding: 5rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .section-title {
@@ -131,97 +128,136 @@
             color: #0070cc;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        /* كل قسم منفصل تماماً */
+        .main-sections {
+            display: flex;
+            flex-direction: column;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2.5rem;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s;
+        .section {
+            padding: 6rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            border-radius: 20px;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: #ffd700;
-            font-size: 1.5rem;
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        /* كل قسم بلون مختلف ومنفصل */
+        .features {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .pricing {
-            padding: 5rem 2rem;
             background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: 2px solid #0070cc;
+            margin: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 112, 204, 0.2);
         }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2.5rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .pricing-card:hover {
-            border-color: #0070cc;
-            transform: scale(1.05);
-        }
-
-        .price {
-            font-size: 2.5rem;
-            color: #ffd700;
-            margin: 1rem 0;
-        }
-
-        .popular {
-            background: linear-gradient(135deg, #0070cc, #00a8ff);
-            transform: scale(1.05);
+        .games {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            border: 2px solid #ffd700;
+            margin: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
         }
 
         .testimonials {
-            padding: 5rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        .contact {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
+            border: 2px solid #0070cc;
+            margin: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 112, 204, 0.3);
         }
 
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
+        /* تصميم الخانات العمودية */
+        .vertical-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .vertical-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3rem;
             border-radius: 15px;
-            border-left: 4px solid #0070cc;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .vertical-card:hover {
+            transform: translateY(-10px);
+            border-color: #0070cc;
+            box-shadow: 0 15px 30px rgba(0, 112, 204, 0.3);
+        }
+
+        .vertical-card h3 {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .vertical-card p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            color: #ffd700;
+            margin: 1.5rem 0;
+            font-weight: bold;
+        }
+
+        .game-list {
+            text-align: right;
+            list-style: none;
+            font-size: 1.1rem;
+        }
+
+        .game-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            transition: color 0.3s;
+        }
+
+        .game-list li:hover {
+            color: #ffd700;
         }
 
         .footer {
             background: rgba(0, 0, 0, 0.9);
-            padding: 3rem 2rem;
+            padding: 4rem 0;
             text-align: center;
             border-top: 2px solid #0070cc;
+            margin-top: 4rem;
+        }
+
+        /* مسافات بين الأقسام */
+        .section-spacer {
+            height: 4rem;
+            background: transparent;
         }
     </style>
 </head>
@@ -233,6 +269,7 @@
                 <a href="#home">الرئيسية</a>
                 <a href="#features">المميزات</a>
                 <a href="#pricing">الباقات</a>
+                <a href="#games">الألعاب</a>
                 <a href="#testimonials">آراء العملاء</a>
                 <a href="#contact">اتصل بنا</a>
             </div>
@@ -248,101 +285,179 @@
         </div>
     </section>
 
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">مميزات PlayStation Plus</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎮</div>
-                    <h3>ألعاب شهرية مجانية</h3>
-                    <p>احصل على ألعاب مجانية كل شهر مع بلايستيشن بلس</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔥</div>
-                    <h3>خصومات حصرية</h3>
-                    <p>استمتع بخصومات حصرية في متجر بلايستيشن</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>ألعاب متعددة اللاعبين</h3>
-                    <p>العب مع أصدقائك عبر الإنترنت بدون حدود</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">☁️</div>
-                    <h3>تخزين سحابي</h3>
-                    <p>احفظ بيانات اللعبة في السحابة وواصل من أي جهاز</p>
+    <div class="main-sections">
+        <!-- مسافة بين الأقسام -->
+        <div class="section-spacer"></div>
+
+        <!-- المميزات -->
+        <section class="section features" id="features">
+            <div class="container">
+                <h2 class="section-title">مميزات PlayStation Plus</h2>
+                <div class="vertical-cards">
+                    <div class="vertical-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>ألعاب شهرية مجانية</h3>
+                        <p>احصل على 2-3 ألعاب مجانية كل شهر مع بلايستيشن بلس، تتضمن ألعاب منوعات من أفضل الألعاب التي تناسب جميع الأذواق</p>
+                    </div>
+                    <div class="vertical-card">
+                        <div class="feature-icon">🔥</div>
+                        <h3>خصومات حصرية</h3>
+                        <p>استمتع بخصومات تصل إلى 50% في متجر بلايستيشن، بالإضافة إلى عروض حصرية متاحة فقط لأعضاء بلايستيشن بلس</p>
+                    </div>
+                    <div class="vertical-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>ألعاب متعددة اللاعبين</h3>
+                        <p>العب مع أصدقائك عبر الإنترنت بدون حدود، واستمتع بتجربة الألعاب الجماعية بجودة عالية وبدون تقطع</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 class="section-title">باقات الاشتراك</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>باقة أساسية</h3>
-                    <div class="price">149 ريال/شهرياً</div>
-                    <ul style="list-style: none; text-align: right; margin: 1.5rem 0;">
-                        <li>✅ ألعاب شهرية مجانية</li>
-                        <li>✅ خصومات متجر بلايستيشن</li>
-                        <li>✅ تخزين سحابي 100GB</li>
-                        <li>❌ بلايستيشن بلس كولكشن</li>
-                    </ul>
-                    <a href="#" class="btn">اختر الباقة</a>
-                </div>
-                <div class="pricing-card popular">
-                    <h3>باقة متقدمة</h3>
-                    <div class="price">249 ريال/شهرياً</div>
-                    <ul style="list-style: none; text-align: right; margin: 1.5rem 0;">
-                        <li>✅ كل مميزات الباقة الأساسية</li>
-                        <li>✅ بلايستيشن بلس كولكشن</li>
-                        <li>✅ ألعاب كلاسيكية</li>
-                        <li>✅ تجربة الألعاب قبل الشراء</li>
-                    </ul>
-                    <a href="#" class="btn">اختر الباقة</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>باقة نهائية</h3>
-                    <div class="price">349 ريال/شهرياً</div>
-                    <ul style="list-style: none; text-align: right; margin: 1.5rem 0;">
-                        <li>✅ كل مميزات الباقة المتقدمة</li>
-                        <li>✅ ألعاب سحابية</li>
-                        <li>✅ ألعاب PS5 حصرية</li>
-                        <li>✅ دعم لأجهزة متعددة</li>
-                    </ul>
-                    <a href="#" class="btn">اختر الباقة</a>
+        <!-- مسافة بين الأقسام -->
+        <div class="section-spacer"></div>
+
+        <!-- الباقات -->
+        <section class="section pricing" id="pricing">
+            <div class="container">
+                <h2 class="section-title">باقات الاشتراك</h2>
+                <div class="vertical-cards">
+                    <div class="vertical-card">
+                        <h3>الباقة الأساسية</h3>
+                        <div class="price">149 ريال/شهرياً</div>
+                        <ul class="game-list">
+                            <li>✅ ألعاب شهرية مجانية (2 لعبة)</li>
+                            <li>✅ خصومات متجر بلايستيشن</li>
+                            <li>✅ تخزين سحابي 100GB</li>
+                            <li>✅ ألعاب متعددة اللاعبين</li>
+                            <li>❌ بلايستيشن بلس كولكشن</li>
+                            <li>❌ الألعاب الكلاسيكية</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 2rem;">اختر الباقة</a>
+                    </div>
+                    <div class="vertical-card" style="border: 3px solid #0070cc; background: rgba(0, 112, 204, 0.15);">
+                        <h3>الباقة المتقدمة</h3>
+                        <div class="price">249 ريال/شهرياً</div>
+                        <ul class="game-list">
+                            <li>✅ كل مميزات الباقة الأساسية</li>
+                            <li>✅ بلايستيشن بلس كولكشن</li>
+                            <li>✅ ألعاب كلاسيكية</li>
+                            <li>✅ تجربة الألعاب قبل الشراء</li>
+                            <li>✅ تخزين سحابي 200GB</li>
+                            <li>✅ دعم الألعاب السحابية</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 2rem;">اختر الباقة</a>
+                    </div>
+                    <div class="vertical-card">
+                        <h3>الباقة النهائية</h3>
+                        <div class="price">349 ريال/شهرياً</div>
+                        <ul class="game-list">
+                            <li>✅ كل مميزات الباقة المتقدمة</li>
+                            <li>✅ ألعاب سحابية كاملة</li>
+                            <li>✅ ألعاب PS5 حصرية</li>
+                            <li>✅ دعم لأجهزة متعددة</li>
+                            <li>✅ تخزين سحابي 500GB</li>
+                            <li>✅ دعم فني متميز</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 2rem;">اختر الباقة</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <h2 class="section-title">آراء عملائنا</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p>"أفضل خدمة اشتراك للألعاب! جربت كل الباقات وكانت تجربة رائعة"</p>
-                    <p style="color: #ffd700; margin-top: 1rem;">- أحمد</p>
-                </div>
-                <div class="testimonial-card">
-                    <p>"الخصومات وحدها تغطي تكلفة الاشتراك، أنصح بها الجميع"</p>
-                    <p style="color: #ffd700; margin-top: 1rem;">- محمد</p>
-                </div>
-                <div class="testimonial-card">
-                    <p>"تجربة الألعاب الشهرية رائعة، اكتشفت ألعاب ماكنت أعرفها"</p>
-                    <p style="color: #ffd700; margin-top: 1rem;">- خالد</p>
+        <!-- مسافة بين الأقسام -->
+        <div class="section-spacer"></div>
+
+        <!-- الألعاب -->
+        <section class="section games" id="games">
+            <div class="container">
+                <h2 class="section-title">أشهر الألعاب</h2>
+                <div class="vertical-cards">
+                    <div class="vertical-card">
+                        <h3>🎯 ألعاب هذا الشهر</h3>
+                        <ul class="game-list">
+                            <li>FIFA 24 - مجاني حتى نهاية الشهر</li>
+                            <li>Call of Duty: Modern Warfare - خصم 30%</li>
+                            <li>Spider-Man: Miles Morales - متاح للجميع</li>
+                            <li>God of War Ragnarök - قريباً</li>
+                            <li>Assassin's Creed Valhalla - خصم 40%</li>
+                        </ul>
+                    </div>
+                    <div class="vertical-card">
+                        <h3>🏆 الألعاب الحصرية</h3>
+                        <ul class="game-list">
+                            <li>The Last of Us Part II</li>
+                            <li>Ghost of Tsushima</li>
+                            <li>Horizon Forbidden West</li>
+                            <li>Ratchet & Clank: Rift Apart</li>
+                            <li>Demon's Souls</li>
+                            <li>Returnal</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="footer" id="contact">
+        <!-- مسافة بين الأقسام -->
+        <div class="section-spacer"></div>
+
+        <!-- آراء العملاء -->
+        <section class="section testimonials" id="testimonials">
+            <div class="container">
+                <h2 class="section-title">آراء عملائنا</h2>
+                <div class="vertical-cards">
+                    <div class="vertical-card">
+                        <p>"أفضل خدمة اشتراك للألعاب! جربت كل الباقات وكانت تجربة رائعة، الألعاب الشهرية دايماً ممتازة وتناسب جميع الأذواق"</p>
+                        <p style="color: #ffd700; margin-top: 1.5rem; font-size: 1.2rem;">- أحمد 🇸🇦</p>
+                    </div>
+                    <div class="vertical-card">
+                        <p>"الخصومات وحدها تغطي تكلفة الاشتراك، وفرت أكثر من 500 ريال في عروض المتجر خلال شهرين فقط"</p>
+                        <p style="color: #ffd700; margin-top: 1.5rem; font-size: 1.2rem;">- محمد 🇦🇪</p>
+                    </div>
+                    <div class="vertical-card">
+                        <p>"تجربة الألعاب الشهرية رائعة، اكتشفت ألعاب ماكنت أعرفها وأصبحت من ألعابي المفضلة بفضل الباقة"</p>
+                        <p style="color: #ffd700; margin-top: 1.5rem; font-size: 1.2rem;">- خالد 🇰🇼</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- مسافة بين الأقسام -->
+        <div class="section-spacer"></div>
+
+        <!-- اتصل بنا -->
+        <section class="section contact" id="contact">
+            <div class="container">
+                <h2 class="section-title">اتصل بنا</h2>
+                <div class="vertical-cards">
+                    <div class="vertical-card">
+                        <h3>📞 الدعم الفني</h3>
+                        <p>متاح 24/7 لمساعدتك في أي استفسار أو مشكلة تواجهك</p>
+                        <p style="color: #ffd700; margin-top: 1.5rem; font-size: 1.3rem;">+966 50 123 4567</p>
+                    </div>
+                    <div class="vertical-card">
+                        <h3>📧 البريد الإلكتروني</h3>
+                        <p>للاستفسارات والطلبات والاقتراحات</p>
+                        <p style="color: #ffd700; margin-top: 1.5rem; font-size: 1.3rem;">info@fursan-ps.com</p>
+                    </div>
+                    <div class="vertical-card">
+                        <h3>📍 وسائل التواصل</h3>
+                        <p>تابعنا على منصات التواصل الاجتماعي</p>
+                        <p style="color: #ffd700; margin-top: 1.5rem; font-size: 1.3rem;">@fursan_ps</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- مسافة أخيرة -->
+        <div class="section-spacer"></div>
+    </div>
+
+    <footer class="footer">
         <div class="container">
-            <h3 style="color: #0070cc; margin-bottom: 1rem;">فرسان - PlayStation Plus</h3>
-            <p>للاستفسارات والطلبات: <span style="color: #ffd700;">info@fursan-ps.com</span></p>
-            <p style="margin-top: 2rem; color: #888;">© 2024 فرسان. جميع الحقوق محفوظة</p>
+            <h3 style="color: #0070cc; margin-bottom: 1.5rem; font-size: 2rem;">فرسان - PlayStation Plus</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">الوجهة الأولى لعشاق الألعاب في العالم العربي</p>
+            <p style="margin-top: 2rem; color: #888; font-size: 1.1rem;">© 2024 فرسان. جميع الحقوق محفوظة</p>
         </div>
     </footer>
 </body>
-</html>
+    </html>
