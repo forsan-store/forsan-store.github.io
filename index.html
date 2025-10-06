@@ -1,118 +1,165 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر فرسان</title>
+    <title>موقعي الرائع</title>
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(120deg, #1f1f1f, #111);
-            color: #fff;
+            padding: 0;
+            box-sizing: border-box;
         }
-        header {
-            background: #ff2e63;
-            padding: 20px;
-            text-align: center;
-            font-size: 2em;
-            font-weight: bold;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            line-height: 1.6;
         }
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background: #222;
-            padding: 15px 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            color: #ff2e63;
-        }
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-        .product {
-            background: #333;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(255,46,99,0.5);
-        }
-        .product img {
+
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 0;
+            position: fixed;
             width: 100%;
-            display: block;
+            top: 0;
         }
-        .product-details {
-            padding: 15px;
-            text-align: center;
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
-        .product-details h3 {
-            margin: 10px 0;
-        }
-        .product-details button {
-            background: #ff2e63;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            color: #fff;
+
+        .logo {
+            font-size: 1.5rem;
             font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
         }
-        .product-details button:hover {
-            background: #ff5e8c;
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
-        footer {
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 20px;
-            background: #111;
-            margin-top: 20px;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
         }
     </style>
 </head>
-<body><header>متجر فرسان</header>
-<nav>
-    <a href="#">الرئيسية</a>
-    <a href="#products">المنتجات</a>
-    <a href="#contact">تواصل معنا</a>
-</nav><section class="products" id="products">
-    <div class="product">
-        <img src="https://cdn.pixabay.com/photo/2017/03/01/16/07/ps4-2107173_960_720.jpg" alt="منتج 1">
-        <div class="product-details">
-            <h3>منتج 1</h3>
-            <p>السعر: 30 ريال</p>
-            <button>اشتري الآن</button>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">موقعي</div>
+            <div class="nav-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#features">المميزات</a>
+                <a href="#contact">اتصل بنا</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>مرحباً بك في موقعي</h1>
+            <p>هذا موقع احترافي تم إنشاؤه خصيصاً لك</p>
+            <a href="#features" class="btn">اكتشف المزيد</a>
         </div>
-    </div>
-    <div class="product">
-        <img src="https://cdn.pixabay.com/photo/2017/03/01/16/07/ps4-2107173_960_720.jpg" alt="منتج 2">
-        <div class="product-details">
-            <h3>منتج 2</h3>
-            <p>السعر: 80 ريال</p>
-            <button>اشتري الآن</button>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">مميزاتنا</h2>
+            <p style="text-align: center; font-size: 1.1rem;">اكتشف ما يجعل موقعنا متميزاً</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>تصميم عصري</h3>
+                    <p>تصميم حديث وجذاب يتناسب مع جميع الأجهزة</p>
+                </div>
+                <div class="feature-card">
+                    <h3>سهل الاستخدام</h3>
+                    <p>واجهة مستخدم بسيطة وبديهية</p>
+                </div>
+                <div class="feature-card">
+                    <h3>دعم فني</h3>
+                    <p>فريق دعم متاح لمساعدتك دائماً</p>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="product">
-        <img src="https://cdn.pixabay.com/photo/2017/03/01/16/07/ps4-2107173_960_720.jpg" alt="منتج 3">
-        <div class="product-details">
-            <h3>منتج 3</h3>
-            <p>السعر: 300 ريال</p>
-            <button>اشتري الآن</button>
-        </div>
-    </div>
-</section><footer id="contact">
-    تواصل معنا: info@forsanstore.com
-</footer></body>
-</html>
+    </section>
+</body>
+                </html>
