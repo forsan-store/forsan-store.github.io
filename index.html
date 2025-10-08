@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>فرسان | كابلات وشواحن أصلية</title>
+    <title>فرسان | كابل USB-C سريع</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -10,227 +10,206 @@
             padding: 0;
             background: #f8f9fa;
             color: #333;
+            text-align: center;
         }
         .header {
             background: linear-gradient(135deg, #0d3b66, #1e6ea7);
             color: white;
-            padding: 25px 20px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         .header h1 {
             margin: 0;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
         }
-        .header p {
-            margin: 10px 0 0;
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        .banner {
-            background: #ffd500;
-            color: #000;
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-        .products {
+        .product-page {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 25px;
-            padding: 30px 20px;
+            gap: 40px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .product {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 280px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            text-align: center;
-            transition: transform 0.3s;
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
         }
-        .product:hover {
-            transform: translateY(-5px);
-        }
-        .product img {
+        .product-image img {
             width: 100%;
-            max-width: 200px;
-            height: 200px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        .product h3 {
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+            text-align: right;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .product-title {
             color: #0d3b66;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        .product-description {
+            color: #666;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .price-section {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-right: 5px solid #ffd500;
+        }
+        .original-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        .current-price {
+            color: #d10;
+            font-size: 2.5rem;
+            font-weight: bold;
             margin: 10px 0;
         }
-        .price {
-            color: #d10;
-            font-size: 1.8rem;
+        .save-amount {
+            color: #28a745;
+            font-size: 1.3rem;
             font-weight: bold;
-            margin: 15px 0;
         }
-        .button {
+        .features {
+            text-align: right;
+            margin: 25px 0;
+        }
+        .feature {
+            background: #e7f3ff;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-right: 4px solid #0d3b66;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn-primary {
             background: #0d3b66;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
+            padding: 18px 35px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.1rem;
-            width: 100%;
+            font-size: 1.3rem;
+            flex: 2;
             transition: background 0.3s;
         }
-        .button:hover {
+        .btn-primary:hover {
             background: #1e6ea7;
+        }
+        .btn-secondary {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            flex: 1;
+            transition: background 0.3s;
+        }
+        .btn-secondary:hover {
+            background: #34ce57;
+        }
+        .delivery-info {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-right: 4px solid #28a745;
         }
         .footer {
             background: #0d3b66;
             color: white;
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
-            margin-top: 40px;
+            margin-top: 50px;
         }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin: 20px 0;
-        }
-        .footer-links a {
-            color: #ffd500;
-            text-decoration: none;
-        }
-        .additional-sections {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background: white;
-            padding: 40px 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .section {
-            flex: 1;
-            min-width: 250px;
-            margin: 15px;
-            padding: 20px;
-            text-align: center;
-        }
-        .section h3 {
-            color: #0d3b66;
-            margin-bottom: 15px;
-        }
-        .section p {
-            color: #666;
-            line-height: 1.6;
-        }
-        .main-menu {
+        .nav-menu {
             background: #1a4d7c;
             padding: 15px 0;
             text-align: center;
         }
-        .main-menu a {
+        .nav-menu a {
             color: white;
             text-decoration: none;
             margin: 0 20px;
             font-size: 1.1rem;
             transition: color 0.3s;
         }
-        .main-menu a:hover {
+        .nav-menu a:hover {
             color: #ffd500;
         }
     </style>
 </head>
 <body>
-    <!-- القائمة الرئيسية -->
-    <div class="main-menu">
-        <a href="#">الرئيسية</a>
-        <a href="#">المنتجات</a>
-        <a href="#">عروض خاصة</a>
-        <a href="#">طلباتي</a>
-        <a href="#">تواصل معنا</a>
+    <div class="nav-menu">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">الكابلات والشواحن</a>
+        <a href="offers.html">العروض</a>
+        <a href="contact.html">تواصل معنا</a>
     </div>
 
     <div class="header">
         <h1>فرسان</h1>
-        <p>كابلات وشواحن أصلية بجودة واحترافية</p>
+        <p>كابلات وشواحن أصلية بجودة عالية</p>
     </div>
 
-    <div class="banner">
-        🚚 شحن مجاني فوق 95 ريال | كود الخصم: FRISAN10
-    </div>
-
-    <div class="products">
-        <div class="product">
-            <img src="https://via.placeholder.com/200" alt="شاحن سريع">
-            <h3>شاحن سريع 45 واط</h3>
-            <p>شاحن أصلي - شحن سريع للأجهزة الحديثة</p>
-            <div class="price">65 ريال</div>
-            <button class="button">أضف إلى السلة</button>
-        </div>
-
-        <div class="product">
-            <img src="https://via.placeholder.com/200" alt="كابل USB-C">
-            <h3>كابل USB-C سريع</h3>
-            <p>كابل شحن سريع - طول 2 متر - نسيج مقوى</p>
-            <div class="price">25 ريال</div>
-            <button class="button">أضف إلى السلة</button>
-        </div>
-
-        <div class="product">
-            <img src="https://via.placeholder.com/200" alt="كابل Lightning">
-            <h3>كابل أيفون أصلي</h3>
-            <p>كابل لايتنينج - شحن سريع - ضمان سنة</p>
-            <div class="price">35 ريال</div>
-            <button class="button">أضف إلى السلة</button>
-        </div>
-
-        <div class="product">
-            <img src="https://via.placeholder.com/200" alt="محول متعدد">
-            <h3>محول شحن متعدد</h3>
-            <p>محول 3 منافذ - شحن سريع متزامن</p>
-            <div class="price">45 ريال</div>
-            <button class="button">أضف إلى السلة</button>
-        </div>
-    </div>
-
-    <!-- الأقسام الإضافية -->
-    <div class="additional-sections">
-        <div class="section">
-            <h3>🛒 السلة</h3>
-            <p>إدارة مشترياتك ومتابعة الطلبات</p>
-            <button class="button" style="background: #28a745; margin-top: 10px;">عرض السلة</button>
+    <div class="product-page">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/400" alt="كابل USB-C سريع">
         </div>
         
-        <div class="section">
-            <h3>📞 التواصل</h3>
-            <p>خدمة العملاء متاحة 24/7</p>
-            <p>📱 966500000000+</p>
-            <p>📧 support@firsan.sa</p>
-        </div>
-        
-        <div class="section">
-            <h3>👑 القائمة الرئيسية</h3>
-            <p>تصفح جميع أقسام المتجر والعروض الحصرية</p>
-            <button class="button" style="background: #dc3545; margin-top: 10px;">استكشف المتجر</button>
+        <div class="product-details">
+            <h2 class="product-title">كابل USB-C سريع</h2>
+            <p class="product-description">كابل شحن سريع ونقل بيانات بجودة عالية - طول 2 متر</p>
+            
+            <div class="price-section">
+                <div class="original-price">السعر الأصلي: 35 ريال</div>
+                <div class="current-price">25 ريال</div>
+                <div class="save-amount">وفر 10 ريال</div>
+            </div>
+
+            <div class="delivery-info">
+                ✅ توصيل سريع - شحن مجاني فوق 95 ريال
+            </div>
+
+            <div class="features">
+                <div class="feature">⚡ شحن سريع 3A</div>
+                <div class="feature">📱 متوافق مع جميع الأجهزة</div>
+                <div class="feature">🛡️ ضمان لمدة سنة</div>
+                <div class="feature">🎯 نسيج مقوى ضد الانثناء</div>
+            </div>
+
+            <div class="buttons">
+                <button class="btn-primary">إضافة للسلة</button>
+                <button class="btn-secondary">اشتر الآن</button>
+            </div>
         </div>
     </div>
 
     <div class="footer">
-        <div class="footer-links">
-            <a href="#">الأسئلة الشائعة</a>
-            <a href="#">سياسات وأحكام</a>
-            <a href="#">من نحن؟</a>
-            <a href="#">الدعم الفني</a>
-            <a href="#">اتصل بنا</a>
-        </div>
-
-        <p>📧 info@firsan.sa | 📞 966500000000+</p>
+        <p>📞 الدعم الفني: 966500000000+ | 📧 support@firsan.sa</p>
         <p>الحقوق محفوظة | فرسان 2025</p>
     </div>
 </body>
