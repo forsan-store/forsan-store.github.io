@@ -2,62 +2,176 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>متجر الشواحن السريعة</title>
+    <title>فرسان | كابلات وشواحن أصلية</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background: #f8f9fa;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(135deg, #0d3b66, #1e6ea7);
+            color: white;
+            padding: 25px 20px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .banner {
+            background: #ffd500;
+            color: #000;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 30px 20px;
         }
         .product {
             background: white;
+            border-radius: 12px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin: 20px auto;
-            max-width: 400px;
+            width: 280px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .product:hover {
+            transform: translateY(-5px);
         }
         .product img {
-            width: 200px;
+            width: 100%;
+            max-width: 200px;
             height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .product h3 {
+            color: #0d3b66;
+            margin: 10px 0;
         }
         .price {
             color: #d10;
-            font-size: 24px;
+            font-size: 1.8rem;
             font-weight: bold;
+            margin: 15px 0;
         }
         .button {
-            background: #007bff;
+            background: #0d3b66;
             color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #1e6ea7;
+        }
+        .footer {
+            background: #0d3b66;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 20px 0;
+        }
+        .footer-links a {
+            color: #ffd500;
+            text-decoration: none;
+        }
+        .certified {
+            background: #ffd500;
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 15px 0;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>متجر الشواحن السريعة ⚡</h1>
-
-    <div class="product">
-        <h2>شاحن سريع 25 واط</h2>
-        <img src="https://via.placeholder.com/200" alt="شاحن سريع">
-        <p>شاحن أصلي بجودة عالية - شحن سريع للأجهزة</p>
-        <p class="price">35 ريال</p>
-        <button class="button">أضف للسلة</button>
+    <div class="header">
+        <h1>فرسان</h1>
+        <p>كابلات وشواحن أصلية بجودة واحترافية</p>
     </div>
 
-    <div class="product">
-        <h2>كابل USB-C</h2>
-        <img src="https://via.placeholder.com/200" alt="كابل">
-        <p>كابل شحن سريع - طول 1.5 متر</p>
-        <p class="price">15 ريال</p>
-        <button class="button">أضف للسلة</button>
+    <div class="banner">
+        🚚 شحن مجاني فوق 95 ريال | كود الخصم: FRISAN10
+    </div>
+
+    <div class="products">
+        <div class="product">
+            <img src="https://via.placeholder.com/200" alt="شاحن سريع">
+            <h3>شاحن سريع 45 واط</h3>
+            <p>شاحن أصلي - شحن سريع للأجهزة الحديثة</p>
+            <div class="price">65 ريال</div>
+            <button class="button">أضف إلى السلة</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/200" alt="كابل USB-C">
+            <h3>كابل USB-C سريع</h3>
+            <p>كابل شحن سريع - طول 2 متر - نسيج مقوى</p>
+            <div class="price">25 ريال</div>
+            <button class="button">أضف إلى السلة</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/200" alt="كابل Lightning">
+            <h3>كابل أيفون أصلي</h3>
+            <p>كابل لايتنينج - شحن سريع - ضمان سنة</p>
+            <div class="price">35 ريال</div>
+            <button class="button">أضف إلى السلة</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/200" alt="محول متعدد">
+            <h3>محول شحن متعدد</h3>
+            <p>محول 3 منافذ - شحن سريع متزامن</p>
+            <div class="price">45 ريال</div>
+            <button class="button">أضف إلى السلة</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="certified">موثق لدى منصة الأعمال</div>
+        
+        <div class="footer-links">
+            <a href="#">الأسئلة الشائعة</a>
+            <a href="#">سياسات وأحكام</a>
+            <a href="#">من نحن؟</a>
+            <a href="#">الدعم الفني</a>
+            <a href="#">اتصل بنا</a>
+        </div>
+
+        <p>📧 info@firsan.sa | 📞 966500000000+</p>
+        <p>الحقوق محفوظة | فرسان 2025</p>
     </div>
 </body>
 </html>
