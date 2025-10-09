@@ -34,7 +34,7 @@ header {
     border-radius:15px;
     box-shadow:0 6px 20px rgba(0,0,0,0.15);
     padding:20px;
-    width:320px;
+    width:300px;
     text-align:center;
     transition:transform 0.3s,box-shadow 0.3s;
 }
@@ -109,26 +109,36 @@ header {
 
 <div class="main-container">
 
+<!-- تيشيرت 1 -->
 <div class="product-card">
-<h3>تيشيرت + كفر الجوال</h3>
+<h3>تيشيرت 1</h3>
 <img src="tshirt1.png" alt="تيشيرت">
-<img src="case1.png" alt="كفر جوال">
 <label>ارفع صورتك أو اكتب كلمتك:</label>
-<input type="file" id="productFile">
-<input type="text" id="productText" placeholder="اكتب كلمتك هنا">
-<label>اختر مقاس التيشيرت:</label>
-<select id="tshirtSize">
+<input type="file" id="tshirt1File">
+<input type="text" id="tshirt1Text" placeholder="اكتب كلمتك هنا">
+<label>اختر المقاس:</label>
+<select id="tshirt1Size">
 <option value="S">S</option>
 <option value="M">M</option>
 <option value="L">L</option>
 <option value="XL">XL</option>
 </select>
+<button onclick="addToCart('تيشيرت 1')">إضافة إلى السلة</button>
+</div>
+
+<!-- كفر جوال 1 -->
+<div class="product-card">
+<h3>كفر جوال 1</h3>
+<img src="case1.png" alt="كفر جوال">
+<label>ارفع صورتك أو اكتب كلمتك:</label>
+<input type="file" id="case1File">
+<input type="text" id="case1Text" placeholder="اكتب كلمتك هنا">
 <label>اختر نوع الكفر:</label>
-<select id="caseType">
+<select id="case1Type">
 <option value="سادة">سادة</option>
 <option value="شفاف">شفاف</option>
 </select>
-<button onclick="addToCart()">إضافة إلى السلة</button>
+<button onclick="addToCart('كفر جوال 1')">إضافة إلى السلة</button>
 </div>
 
 </div>
@@ -143,11 +153,16 @@ header {
 
 <script>
 let cart=[];
-function addToCart(){
-let text=document.getElementById('productText').value;
-let tshirt=document.getElementById('tshirtSize').value;
-let ctype=document.getElementById('caseType').value;
-cart.push("تيشيرت + كفر - "+(text?text:"") + " ["+tshirt+", "+ctype+"]");
+function addToCart(product){
+let text='',option='';
+if(product==='تيشيرت 1'){
+text=document.getElementById('tshirt1Text').value;
+option=document.getElementById('tshirt1Size').value;
+}else{
+text=document.getElementById('case1Text').value;
+option=document.getElementById('case1Type').value;
+}
+cart.push(product + (text?' - '+text:'') + (option?' ['+option+']':''));
 alert("تمت إضافة المنتج للسلة");
 updateCart();
 }
