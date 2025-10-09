@@ -16,7 +16,7 @@
             direction: rtl;
             background-color: #f8f9fa;
             line-height: 1.6;
-            padding-top: 120px; /* مساحة للهيدر الثابت */
+            padding-top: 180px; /* مساحة للهيدر والتنقل الثابت */
         }
 
         /* الهيدر الثابت */
@@ -37,7 +37,7 @@
             margin-bottom: 0.5rem;
         }
 
-        /* شريط التنقل */
+        /* شريط التنقل الثابت */
         .nav {
             background: #2c3e50;
             padding: 1rem 0;
@@ -61,6 +61,7 @@
             padding: 0.5rem 1rem;
             border-radius: 5px;
             transition: background 0.3s;
+            font-weight: bold;
         }
 
         .nav a:hover {
@@ -72,7 +73,7 @@
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
-            scroll-margin-top: 140px; /* علشان التنقل يشتغل مع الهيدر الثابت */
+            scroll-margin-top: 180px;
         }
 
         .section-title {
@@ -82,6 +83,7 @@
             border-radius: 8px;
             margin-bottom: 1.5rem;
             text-align: center;
+            font-size: 1.5rem;
         }
 
         /* المنتجات */
@@ -116,7 +118,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
         }
 
         .fabric-type {
@@ -131,7 +133,7 @@
 
         .price {
             color: #e74c3c;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             margin: 1rem 0;
         }
@@ -143,58 +145,38 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: background 0.3s;
             width: 100%;
+            font-weight: bold;
         }
 
         .btn:hover {
             background: #219a52;
         }
 
-        /* خانة الطلب */
-        .order-box {
+        /* الخانة الثابتة للطلب والتواصل */
+        .fixed-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 998;
+            width: 280px;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
+        .sidebar-title {
+            background: #667eea;
+            color: white;
             padding: 0.8rem;
-            border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        /* خانة التواصل */
-        .contact-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
 
         .contact-info {
@@ -202,24 +184,46 @@
         }
 
         .contact-info p {
-            margin: 0.5rem 0;
-            font-size: 1.1rem;
+            margin: 0.8rem 0;
+            font-size: 1rem;
+            color: #333;
         }
 
         .social-links {
             margin: 1.5rem 0;
+            text-align: center;
         }
 
         .social-links a {
             color: #667eea;
             margin: 0 0.5rem;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: color 0.3s;
+            display: inline-block;
         }
 
         .social-links a:hover {
             color: #764ba2;
+            transform: scale(1.1);
+        }
+
+        .order-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .order-btn:hover {
+            background: #c0392b;
         }
 
         /* الفوتر */
@@ -232,13 +236,29 @@
         }
 
         /* responsive */
+        @media (max-width: 1024px) {
+            .fixed-sidebar {
+                position: relative;
+                left: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                max-width: 400px;
+                margin: 2rem auto;
+            }
+            
+            body {
+                padding-top: 160px;
+            }
+        }
+
         @media (max-width: 768px) {
             body {
-                padding-top: 100px;
+                padding-top: 140px;
             }
             
             .nav {
-                top: 60px;
+                top: 70px;
             }
             
             .nav-container {
@@ -251,11 +271,16 @@
             }
             
             .section {
-                scroll-margin-top: 120px;
+                scroll-margin-top: 150px;
             }
             
             .header h1 {
                 font-size: 1.5rem;
+            }
+            
+            .fixed-sidebar {
+                position: relative;
+                margin: 2rem auto;
             }
         }
     </style>
@@ -276,6 +301,24 @@
         </div>
     </nav>
 
+    <!-- الخانة الثابتة للطلب والتواصل -->
+    <div class="fixed-sidebar">
+        <div class="sidebar-title">📞 الطلب السريع</div>
+        <div class="contact-info">
+            <p>📱 واتساب: +966 5X XXX XXXX</p>
+            <p>📧 إيميل: example@email.com</p>
+            <p>⏰ 9 ص - 10 م</p>
+        </div>
+        
+        <div class="social-links">
+            <a href="#" title="إنستغرام">📷</a>
+            <a href="#" title="تيك توك">🎵</a>
+            <a href="#" title="تويتر">🐦</a>
+        </div>
+        
+        <button class="order-btn" onclick="scrollToOrder()">🛒 اطلب الآن</button>
+    </div>
+
     <!-- قسم المنتجات -->
     <section class="section" id="products">
         <h2 class="section-title">🛍️ المنتجات</h2>
@@ -286,7 +329,7 @@
                 <div class="fabric-type">خليط قطن وبوليستر (60% قطن - 40% بوليستر)</div>
                 <p>تيشيرت عالي الجودة - لا ينكمش - مريح في اللبس</p>
                 <div class="price">45 ريال</div>
-                <button class="btn">اطلب الآن</button>
+                <button class="btn" onclick="scrollToOrder()">اطلب الآن</button>
             </div>
             
             <div class="product-card">
@@ -295,7 +338,7 @@
                 <div class="fabric-type">سادة أو شفاف</div>
                 <p>كفر جوال متين - يناسب جميع الموديلات - طباعة واضحة</p>
                 <div class="price">25 ريال</div>
-                <button class="btn">اطلب الآن</button>
+                <button class="btn" onclick="scrollToOrder()">اطلب الآن</button>
             </div>
         </div>
     </section>
@@ -313,8 +356,8 @@
                 <label for="product">نوع المنتج</label>
                 <select id="product">
                     <option value="">اختر المنتج</option>
-                    <option value="tshirt">تيشيرت قطني متميز</option>
-                    <option value="phone-case">كفر جوال</option>
+                    <option value="tshirt">تيشيرت قطني متميز - 45 ريال</option>
+                    <option value="phone-case">كفر جوال - 25 ريال</option>
                 </select>
             </div>
             
@@ -334,26 +377,7 @@
                 <textarea id="design" placeholder="صف التصميم الذي تريده أو اترك مساحة لرفع الصورة"></textarea>
             </div>
             
-            <button class="btn">إرسال الطلب</button>
-        </div>
-    </section>
-
-    <!-- قسم التواصل -->
-    <section class="section" id="contact">
-        <h2 class="section-title">📞 التواصل</h2>
-        <div class="contact-box">
-            <h3>للطلبات والاستفسارات</h3>
-            <div class="contact-info">
-                <p>📧 البريد الإلكتروني: example@email.com</p>
-                <p>📱 واتساب: +966 5X XXX XXXX</p>
-                <p>⏰ أوقات العمل: 9 صباحاً - 10 مساءً</p>
-            </div>
-            
-            <div class="social-links">
-                <a href="#">📷 إنستغرام</a>
-                <a href="#">🎵 تيك توك</a>
-                <a href="#">🐦 تويتر</a>
-            </div>
+            <button class="btn" onclick="submitOrder()">إرسال الطلب</button>
         </div>
     </section>
 
@@ -364,23 +388,33 @@
     </footer>
 
     <script>
-        // كود جافاسكريبت للتنقل السلس
+        // دالة للتمرير لنموذج الطلب
+        function scrollToOrder() {
+            document.getElementById('how-to-order').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // دالة إرسال الطلب
+        function submitOrder() {
+            const name = document.getElementById('name').value;
+            const product = document.getElementById('product').value;
+            
+            if(!name || !product) {
+                alert('⚠️ الرجاء ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            alert('🎉 شكراً لك! تم استلام طلبك وسنتواصل معك قريباً');
+        }
+
+        // التنقل السلس
         document.querySelectorAll('.nav a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
                 targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // كود لأزرار الطلب
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('شكراً لك! سيتم توجيهك إلى نموذج الطلب');
-                document.getElementById('how-to-order').scrollIntoView({
                     behavior: 'smooth'
                 });
             });
