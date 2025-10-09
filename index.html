@@ -4,23 +4,24 @@
 <meta charset="UTF-8">
 <title>فرسان شيرت</title>
 <style>
-body {margin:0;font-family:Arial,sans-serif;background:#f0f8ff;line-height:1.6;}
-header {position:sticky;top:0;background:linear-gradient(90deg,#00c6ff,#0072ff);color:white;padding:20px;text-align:center;font-size:28px;font-weight:bold;z-index:1000;}
-nav {background:#ff9a00;display:flex;justify-content:center;}
-nav a {color:white;text-decoration:none;padding:15px 20px;font-weight:bold;}
-nav a:hover {background:#ffbf69;}
-.container {padding:20px;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
-.card {background:#fff;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);width:220px;text-align:center;padding:15px;}
-.card img {width:100%;border-radius:10px;}
-.card button {margin-top:10px;padding:10px 15px;background:#00c851;color:white;border:none;border-radius:5px;cursor:pointer;}
-.card button:hover {background:#007e33;}
-.cart {position:fixed;top:90px;right:20px;background:#ff4444;color:white;padding:10px 15px;border-radius:5px;cursor:pointer;z-index:1000;}
-.cart:hover {background:#cc0000;}
-.product-section {display:none;padding:20px;background:#fff;margin:20px auto;width:90%;max-width:600px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
-.product-section img {width:100%;border-radius:10px;}
-.product-section input[type="file"], .product-section input[type="text"] {width:100%;margin:10px 0;padding:8px;}
-.product-section button {padding:10px 20px;background:#00c851;color:white;border:none;border-radius:5px;cursor:pointer;}
-.product-section button:hover {background:#007e33;}
+body{margin:0;font-family:Arial,sans-serif;background:#f0f8ff;line-height:1.6;}
+header{position:sticky;top:0;background:linear-gradient(90deg,#00c6ff,#0072ff);color:white;padding:20px;text-align:center;font-size:28px;font-weight:bold;z-index:1000;}
+nav{background:#ff9a00;display:flex;justify-content:center;}
+nav a{color:white;text-decoration:none;padding:15px 20px;font-weight:bold;}
+nav a:hover{background:#ffbf69;}
+.container{padding:20px;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.card{background:#fff;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.2);width:220px;text-align:center;padding:15px;transition:transform 0.3s,box-shadow 0.3s;}
+.card:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(0,0,0,0.3);}
+.card img{width:100%;border-radius:15px;}
+.card button{margin-top:10px;padding:10px 15px;background:#ff6f61;color:white;border:none;border-radius:5px;cursor:pointer;transition:background 0.3s;}
+.card button:hover{background:#ff3b2e;}
+.cart{position:fixed;top:90px;right:20px;background:#00c851;color:white;padding:10px 15px;border-radius:10px;cursor:pointer;z-index:1000;}
+.cart:hover{background:#007e33;}
+.product-section{display:none;padding:20px;background:#fff;margin:20px auto;width:90%;max-width:600px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+.product-section img{width:100%;border-radius:15px;}
+.product-section input[type="file"], .product-section input[type="text"], .product-section select{width:100%;margin:10px 0;padding:8px;border-radius:5px;border:1px solid #ccc;}
+.product-section button{padding:10px 20px;background:#ff6f61;color:white;border:none;border-radius:5px;cursor:pointer;transition:background 0.3s;}
+.product-section button:hover{background:#ff3b2e;}
 </style>
 </head>
 <body>
@@ -55,6 +56,13 @@ nav a:hover {background:#ffbf69;}
 <label>ارفع صورتك أو اكتب كلمتك المفضلة:</label>
 <input type="file" id="tshirt1file">
 <input type="text" id="tshirt1text" placeholder="اكتب كلمتك هنا">
+<label>اختر المقاس:</label>
+<select id="tshirt1size">
+<option value="S">S</option>
+<option value="M">M</option>
+<option value="L">L</option>
+<option value="XL">XL</option>
+</select>
 <button onclick="addToCart('تيشيرت 1')">إضافة إلى السلة</button>
 </div>
 
@@ -65,6 +73,11 @@ nav a:hover {background:#ffbf69;}
 <label>ارفع صورتك أو اكتب كلمتك المفضلة:</label>
 <input type="file" id="case1file">
 <input type="text" id="case1text" placeholder="اكتب كلمتك هنا">
+<label>اختر نوع الكفر:</label>
+<select id="case1type">
+<option value="سادة">سادة</option>
+<option value="شفاف">شفاف</option>
+</select>
 <button onclick="addToCart('كفر جوال 1')">إضافة إلى السلة</button>
 </div>
 
@@ -76,34 +89,33 @@ nav a:hover {background:#ffbf69;}
 </div>
 
 <script>
-let cart = [];
-
+let cart=[];
 function showSection(id){
-document.querySelectorAll('.container, .product-section').forEach(sec=>sec.style.display='none');
+document.querySelectorAll('.container,.product-section').forEach(sec=>sec.style.display='none');
 document.getElementById(id).style.display='block';
 updateCart();
 }
 
 function addToCart(product){
-let text = product==='تيشيرت 1'?document.getElementById('tshirt1text').value:document.getElementById('case1text').value;
-cart.push(product + (text? " - "+text : ""));
-alert(product + " تمت إضافته للسلة");
+let text='';
+let option='';
+if(product==='تيشيرت 1'){text=document.getElementById('tshirt1text').value;option=document.getElementById('tshirt1size').value;}
+else{text=document.getElementById('case1text').value;option=document.getElementById('case1type').value;}
+cart.push(product + (text?' - '+text:'') + (option?' ['+option+']':''));
+alert(product+' تمت إضافته للسلة');
 updateCart();
 }
 
 function updateCart(){
-let list = document.getElementById('cartList');
-if(list){
-list.innerHTML='';
-cart.forEach(item=>{let li=document.createElement('li');li.textContent=item;list.appendChild(li);});
-}
+let list=document.getElementById('cartList');
+if(list){list.innerHTML='';cart.forEach(item=>{let li=document.createElement('li');li.textContent=item;list.appendChild(li);});}
 }
 
 function sendWhatsApp(){
-if(cart.length===0){alert("السلة فارغة!");return;}
-let message="طلب من فرسان شيرت:\n"+cart.join("\n");
+if(cart.length===0){alert('السلة فارغة!');return;}
+let message="طلب من فرسان شيرت:\n"+cart.join('\n');
 let url="https://wa.me/رقمك_هنا?text="+encodeURIComponent(message);
-window.open(url,"_blank");
+window.open(url,'_blank');
 }
 
 // عرض الصفحة الرئيسية عند فتح الموقع
