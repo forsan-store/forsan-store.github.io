@@ -4,24 +4,137 @@
 <meta charset="UTF-8">
 <title>فرسان شيرت</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f0f8ff;line-height:1.6;}
-header{position:sticky;top:0;background:linear-gradient(90deg,#00c6ff,#0072ff);color:white;padding:20px;text-align:center;font-size:28px;font-weight:bold;z-index:1000;}
-nav{background:#ff9a00;display:flex;justify-content:center;}
-nav a{color:white;text-decoration:none;padding:15px 20px;font-weight:bold;}
-nav a:hover{background:#ffbf69;}
-.container{padding:20px;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
-.card{background:#fff;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.2);width:220px;text-align:center;padding:15px;transition:transform 0.3s,box-shadow 0.3s;}
-.card:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(0,0,0,0.3);}
-.card img{width:100%;border-radius:15px;}
-.card button{margin-top:10px;padding:10px 15px;background:#ff6f61;color:white;border:none;border-radius:5px;cursor:pointer;transition:background 0.3s;}
-.card button:hover{background:#ff3b2e;}
-.cart{position:fixed;top:90px;right:20px;background:#00c851;color:white;padding:10px 15px;border-radius:10px;cursor:pointer;z-index:1000;}
-.cart:hover{background:#007e33;}
-.product-section{display:none;padding:20px;background:#fff;margin:20px auto;width:90%;max-width:600px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
-.product-section img{width:100%;border-radius:15px;}
-.product-section input[type="file"], .product-section input[type="text"], .product-section select{width:100%;margin:10px 0;padding:8px;border-radius:5px;border:1px solid #ccc;}
-.product-section button{padding:10px 20px;background:#ff6f61;color:white;border:none;border-radius:5px;cursor:pointer;transition:background 0.3s;}
-.product-section button:hover{background:#ff3b2e;}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+    color: #333;
+}
+header {
+    position: sticky;
+    top: 0;
+    background: #00796b;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+nav {
+    display: flex;
+    justify-content: center;
+    background: #004d40;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+nav a:hover {
+    background: #00695c;
+}
+.main-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 30px 10px;
+    gap: 20px;
+    scroll-behavior: smooth;
+}
+.product-card {
+    flex: 0 0 300px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+.product-card img {
+    width: 100%;
+    border-radius: 15px;
+}
+.product-card button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: #ff6f61;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.product-card button:hover {
+    background: #ff3b2e;
+}
+.cart-button {
+    position: fixed;
+    top: 120px;
+    right: 20px;
+    background: #00c851;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+.cart-button:hover {
+    background: #007e33;
+}
+.product-section {
+    display: none;
+    max-width: 600px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    padding: 25px;
+}
+.product-section img {
+    width: 100%;
+    border-radius: 15px;
+}
+.product-section input, .product-section select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.product-section button {
+    width: 100%;
+    padding: 12px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.product-section button:hover {
+    background: #ff3b2e;
+}
+ul#cartList {
+    list-style: none;
+    padding: 0;
+}
+ul#cartList li {
+    background: #e0f2f1;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+}
 </style>
 </head>
 <body>
@@ -36,13 +149,13 @@ nav a:hover{background:#ffbf69;}
 </nav>
 
 <!-- الصفحة الرئيسية -->
-<div id="home" class="container">
-<div class="card">
+<div id="home" class="main-container">
+<div class="product-card">
 <img src="tshirt1.png" alt="تيشيرت 1">
 <h3>تيشيرت 1</h3>
 <button onclick="showSection('tshirt1')">عرض المنتج</button>
 </div>
-<div class="card">
+<div class="product-card">
 <img src="case1.png" alt="كفر جوال 1">
 <h3>كفر جوال 1</h3>
 <button onclick="showSection('case1')">عرض المنتج</button>
@@ -88,37 +201,34 @@ nav a:hover{background:#ffbf69;}
 <button onclick="sendWhatsApp()">إرسال الطلب على واتساب</button>
 </div>
 
+<div class="cart-button" onclick="showSection('cart')">السلة 🛒</div>
+
 <script>
 let cart=[];
 function showSection(id){
-document.querySelectorAll('.container,.product-section').forEach(sec=>sec.style.display='none');
+document.querySelectorAll('.main-container,.product-section').forEach(s=>s.style.display='none');
 document.getElementById(id).style.display='block';
 updateCart();
 }
-
 function addToCart(product){
-let text='';
-let option='';
+let text='',option='';
 if(product==='تيشيرت 1'){text=document.getElementById('tshirt1text').value;option=document.getElementById('tshirt1size').value;}
 else{text=document.getElementById('case1text').value;option=document.getElementById('case1type').value;}
 cart.push(product + (text?' - '+text:'') + (option?' ['+option+']':''));
 alert(product+' تمت إضافته للسلة');
 updateCart();
 }
-
 function updateCart(){
 let list=document.getElementById('cartList');
-if(list){list.innerHTML='';cart.forEach(item=>{let li=document.createElement('li');li.textContent=item;list.appendChild(li);});}
+if(list){list.innerHTML='';cart.forEach(i=>{let li=document.createElement('li');li.textContent=i;list.appendChild(li);});}
 }
-
 function sendWhatsApp(){
 if(cart.length===0){alert('السلة فارغة!');return;}
 let message="طلب من فرسان شيرت:\n"+cart.join('\n');
 let url="https://wa.me/رقمك_هنا?text="+encodeURIComponent(message);
 window.open(url,'_blank');
 }
-
-// عرض الصفحة الرئيسية عند فتح الموقع
+// عرض الصفحة الرئيسية عند الفتح
 showSection('home');
 </script>
 
