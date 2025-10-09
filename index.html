@@ -138,6 +138,22 @@
             margin: 10px 0;
         }
 
+        .fabric-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            border-right: 4px solid #27ae60;
+        }
+
+        .fabric-info .fabric-composition {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
         .product-description {
             color: #666;
             font-size: 1.1rem;
@@ -156,6 +172,7 @@
             color: #2c3e50;
             margin-bottom: 15px;
             font-size: 1.3rem;
+            text-align: right;
         }
 
         .features ul {
@@ -164,10 +181,13 @@
         }
 
         .features li {
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #e9ecef;
             color: #555;
             font-size: 1.1rem;
+            text-align: right;
+            position: relative;
+            padding-right: 30px;
         }
 
         .features li:last-child {
@@ -175,10 +195,12 @@
         }
 
         .features li:before {
-            content: "✓ ";
+            content: "✓";
             color: #27ae60;
             font-weight: bold;
-            margin-left: 10px;
+            position: absolute;
+            right: 0;
+            font-size: 1.2rem;
         }
 
         .upload-section {
@@ -192,6 +214,7 @@
         .upload-section h3 {
             margin-bottom: 15px;
             font-size: 1.5rem;
+            text-align: right;
         }
 
         .upload-btn {
@@ -207,6 +230,7 @@
             display: block;
             width: 100%;
             margin: 15px 0;
+            font-family: 'Arial', sans-serif;
         }
 
         .upload-btn:hover {
@@ -228,6 +252,7 @@
             display: block;
             width: 100%;
             margin: 20px 0;
+            font-family: 'Arial', sans-serif;
         }
 
         .add-to-cart-btn:hover {
@@ -248,6 +273,15 @@
             margin: 15px 0;
             font-size: 1.1rem;
             color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 20px;
+            word-wrap: break-word;
+        }
+
+        .image-preview.has-content {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            border: 2px solid #667eea;
         }
 
         /* السلة */
@@ -263,6 +297,7 @@
             z-index: 1000;
             padding: 20px;
             overflow-y: auto;
+            direction: rtl;
         }
 
         .cart-sidebar.active {
@@ -271,7 +306,7 @@
 
         .cart-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 15px;
@@ -301,6 +336,7 @@
             gap: 15px;
             padding: 15px;
             border-bottom: 1px solid #f1f1f1;
+            direction: rtl;
         }
 
         .cart-item-icon {
@@ -310,6 +346,7 @@
 
         .cart-item-details {
             flex: 1;
+            text-align: right;
         }
 
         .cart-item-name {
@@ -329,6 +366,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
+            font-family: 'Arial', sans-serif;
         }
 
         .cart-total {
@@ -356,6 +394,7 @@
             cursor: pointer;
             width: 100%;
             margin: 10px 0;
+            font-family: 'Arial', sans-serif;
         }
 
         .empty-cart {
@@ -395,6 +434,10 @@
                 width: 100%;
                 left: -100%;
             }
+            
+            .cart-icon {
+                left: 20px;
+            }
         }
     </style>
 </head>
@@ -419,17 +462,17 @@
                 
                 <div class="product-price">45 ريال</div>
                 
-                <p class="product-description">
-                    اطبع صورتك أو كلماتك المفضلة على تيشيرتات عالية الجودة
-                </p>
+                <div class="fabric-info">
+                    <div class="fabric-composition">👕 خليط قطن وبوليستر (60% قطن - 40% بوليستر)</div>
+                </div>
                 
                 <div class="features">
                     <h4>🎯 المميزات:</h4>
                     <ul>
-                        <li>خليط قطن وبوليستر (60% قطن - 40% بوليستر)</li>
                         <li>لا ينكمش بعد الغسيل</li>
                         <li>مريح في اللبس</li>
                         <li>جودة طباعة عالية</li>
+                        <li>ألوان ثابتة لا تبهت</li>
                     </ul>
                 </div>
 
@@ -438,7 +481,7 @@
                     <div class="image-preview" id="tshirt-preview">
                         🖼️ سيظهر التصميم هنا بعد الرفع
                     </div>
-                    <button class="upload-btn" onclick="uploadImage('tshirt')">رفع صورة</button>
+                    <button class="upload-btn" onclick="uploadImage('تيشيرت')">رفع صورة</button>
                     <button class="upload-btn" onclick="addText('tshirt')">كتابة نص</button>
                 </div>
 
@@ -456,9 +499,9 @@
                 
                 <div class="product-price">25 ريال</div>
                 
-                <p class="product-description">
-                    اطبع صورتك أو كلماتك على كفر جوال لحماية هاتفك بأسلوبك
-                </p>
+                <div class="fabric-info">
+                    <div class="fabric-composition">📱 خامات متينة عالية الجودة</div>
+                </div>
                 
                 <div class="features">
                     <h4>🎯 المميزات:</h4>
@@ -475,7 +518,7 @@
                     <div class="image-preview" id="case-preview">
                         🖼️ سيظهر التصميم هنا بعد الرفع
                     </div>
-                    <button class="upload-btn" onclick="uploadImage('case')">رفع صورة</button>
+                    <button class="upload-btn" onclick="uploadImage('كفر الجوال')">رفع صورة</button>
                     <button class="upload-btn" onclick="addText('case')">كتابة نص</button>
                 </div>
 
@@ -536,10 +579,8 @@
         }
 
         function updateCart() {
-            // تحديث العداد
             document.querySelector('.cart-count').textContent = cartCount;
             
-            // تحديث محتوى السلة
             const cartItems = document.getElementById('cartItems');
             const totalPrice = document.getElementById('totalPrice');
             
@@ -584,11 +625,10 @@
             
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             alert(`🎉 طلبك جاهز! المجموع: ${total} ريال\n\nسيتم توجيهك لإتمام الطلب...`);
-            // هنا يمكن إضافة redirect لصفحة الدفع
         }
 
         function uploadImage(type) {
-            alert(`📁 سيتم فتح نافذة لاختيار صورة لل${type === 'tshirt' ? 'تيشيرت' : 'كفر الجوال'}`);
+            alert(`📁 سيتم فتح نافذة لاختيار صورة لل${type}`);
         }
 
         function addText(type) {
@@ -596,12 +636,10 @@
             if (text) {
                 const preview = document.getElementById(`${type}-preview`);
                 preview.innerHTML = `📝 <strong>${text}</strong>`;
-                preview.style.background = 'rgba(255,255,255,0.9)';
-                preview.style.color = '#333';
+                preview.classList.add('has-content');
             }
         }
 
-        // إغلاق السلة عند النقر خارجها
         document.addEventListener('click', function(event) {
             const cartSidebar = document.getElementById('cartSidebar');
             const cartIcon = document.querySelector('.cart-icon');
