@@ -22,13 +22,14 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             color: #333;
+            position: relative;
         }
 
         .header {
@@ -38,6 +39,39 @@
             padding: 25px;
             border-radius: 15px;
             color: white;
+            position: relative;
+        }
+
+        .cart-icon {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cart-icon:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .header h1 {
@@ -95,6 +129,13 @@
             font-size: 2rem;
             color: #2c3e50;
             margin: 0;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 10px 0;
         }
 
         .product-description {
@@ -174,6 +215,27 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        .add-to-cart-btn {
+            background: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
         .image-preview {
             width: 100%;
             height: 200px;
@@ -186,6 +248,120 @@
             margin: 15px 0;
             font-size: 1.1rem;
             color: rgba(255,255,255,0.7);
+        }
+
+        /* السلة */
+        .cart-sidebar {
+            position: fixed;
+            left: -400px;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.active {
+            left: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f1f1;
+        }
+
+        .cart-header h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .cart-items {
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .cart-item-icon {
+            font-size: 2rem;
+            color: #667eea;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .cart-item-price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .remove-item {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .checkout-btn {
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            padding: 40px 20px;
         }
 
         .footer {
@@ -214,12 +390,21 @@
             .product-title {
                 font-size: 1.8rem;
             }
+            
+            .cart-sidebar {
+                width: 100%;
+                left: -100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒
+                <div class="cart-count">0</div>
+            </div>
             <h1>👕 فرسان ستور 📱</h1>
             <p>اطبع صورتك أو كلماتك المفضلة على تيشيرتات وكفرات الجوال</p>
         </div>
@@ -231,6 +416,8 @@
                     <div class="product-icon">👕</div>
                     <h2 class="product-title">تيشيرت مخصص</h2>
                 </div>
+                
+                <div class="product-price">45 ريال</div>
                 
                 <p class="product-description">
                     اطبع صورتك أو كلماتك المفضلة على تيشيرتات عالية الجودة
@@ -248,12 +435,16 @@
 
                 <div class="upload-section">
                     <h3>📤 ارفع صورتك أو اكتب كلماتك</h3>
-                    <div class="image-preview">
+                    <div class="image-preview" id="tshirt-preview">
                         🖼️ سيظهر التصميم هنا بعد الرفع
                     </div>
-                    <button class="upload-btn">رفع صورة</button>
-                    <button class="upload-btn">كتابة نص</button>
+                    <button class="upload-btn" onclick="uploadImage('tshirt')">رفع صورة</button>
+                    <button class="upload-btn" onclick="addText('tshirt')">كتابة نص</button>
                 </div>
+
+                <button class="add-to-cart-btn" onclick="addToCart('تيشيرت مخصص', 45, '👕')">
+                    🛒 إضافة إلى السلة - 45 ريال
+                </button>
             </div>
 
             <!-- كفر الجوال -->
@@ -262,6 +453,8 @@
                     <div class="product-icon">📱</div>
                     <h2 class="product-title">كفر جوال مخصص</h2>
                 </div>
+                
+                <div class="product-price">25 ريال</div>
                 
                 <p class="product-description">
                     اطبع صورتك أو كلماتك على كفر جوال لحماية هاتفك بأسلوبك
@@ -279,12 +472,16 @@
 
                 <div class="upload-section">
                     <h3>📤 ارفع صورتك أو اكتب كلماتك</h3>
-                    <div class="image-preview">
+                    <div class="image-preview" id="case-preview">
                         🖼️ سيظهر التصميم هنا بعد الرفع
                     </div>
-                    <button class="upload-btn">رفع صورة</button>
-                    <button class="upload-btn">كتابة نص</button>
+                    <button class="upload-btn" onclick="uploadImage('case')">رفع صورة</button>
+                    <button class="upload-btn" onclick="addText('case')">كتابة نص</button>
                 </div>
+
+                <button class="add-to-cart-btn" onclick="addToCart('كفر جوال مخصص', 25, '📱')">
+                    🛒 إضافة إلى السلة - 25 ريال
+                </button>
             </div>
         </div>
 
@@ -294,22 +491,124 @@
         </div>
     </div>
 
+    <!-- سلة التسوق -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 سلة التسوق</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                🛒 السلة فارغة
+                <br>
+                <span style="color: #999; font-size: 0.9rem;">أضف منتجات من فوق</span>
+            </div>
+        </div>
+        
+        <div class="cart-total">
+            <strong>المجموع:</strong>
+            <div class="total-price" id="totalPrice">0 ريال</div>
+        </div>
+        
+        <button class="checkout-btn" onclick="checkout()">💳 إتمام الطلب</button>
+    </div>
+
     <script>
-        // كود لمعاينة الصور
-        document.querySelectorAll('.upload-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                if(this.textContent.includes('رفع صورة')) {
-                    alert('🎉 سيتم فتح نافذة لاختيار الصورة');
-                } else {
-                    const text = prompt('✍️ اكتب النص الذي تريد طباعته:');
-                    if(text) {
-                        const preview = this.parentElement.querySelector('.image-preview');
-                        preview.innerHTML = `📝 <strong>${text}</strong>`;
-                        preview.style.background = 'rgba(255,255,255,0.9)';
-                        preview.style.color = '#333';
-                    }
-                }
+        let cart = [];
+        let cartCount = 0;
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+        }
+
+        function addToCart(name, price, icon) {
+            cart.push({ name, price, icon });
+            cartCount++;
+            updateCart();
+            alert(`✅ تم إضافة ${name} إلى السلة`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            cartCount--;
+            updateCart();
+        }
+
+        function updateCart() {
+            // تحديث العداد
+            document.querySelector('.cart-count').textContent = cartCount;
+            
+            // تحديث محتوى السلة
+            const cartItems = document.getElementById('cartItems');
+            const totalPrice = document.getElementById('totalPrice');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        🛒 السلة فارغة
+                        <br>
+                        <span style="color: #999; font-size: 0.9rem;">أضف منتجات من فوق</span>
+                    </div>
+                `;
+                totalPrice.textContent = '0 ريال';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price;
+                itemsHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-icon">${item.icon}</div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${item.price} ريال</div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">🗑️</button>
+                    </div>
+                `;
             });
+            
+            cartItems.innerHTML = itemsHTML;
+            totalPrice.textContent = total + ' ريال';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('🛒 السلة فارغة! أضف منتجات أولاً');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            alert(`🎉 طلبك جاهز! المجموع: ${total} ريال\n\nسيتم توجيهك لإتمام الطلب...`);
+            // هنا يمكن إضافة redirect لصفحة الدفع
+        }
+
+        function uploadImage(type) {
+            alert(`📁 سيتم فتح نافذة لاختيار صورة لل${type === 'tshirt' ? 'تيشيرت' : 'كفر الجوال'}`);
+        }
+
+        function addText(type) {
+            const text = prompt('✍️ اكتب النص الذي تريد طباعته:');
+            if (text) {
+                const preview = document.getElementById(`${type}-preview`);
+                preview.innerHTML = `📝 <strong>${text}</strong>`;
+                preview.style.background = 'rgba(255,255,255,0.9)';
+                preview.style.color = '#333';
+            }
+        }
+
+        // إغلاق السلة عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const cartSidebar = document.getElementById('cartSidebar');
+            const cartIcon = document.querySelector('.cart-icon');
+            
+            if (!cartSidebar.contains(event.target) && !cartIcon.contains(event.target)) {
+                cartSidebar.classList.remove('active');
+            }
         });
     </script>
 </body>
