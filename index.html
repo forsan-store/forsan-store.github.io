@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS Plus Pro - اشتراكات بسعر التكلفة</title>
+    <title>PS Plus KSA - اشتراكات بخصم 50%</title>
     <style>
         * {
             margin: 0;
@@ -100,6 +100,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 2px solid transparent;
+            position: relative;
         }
 
         .product-card:hover {
@@ -116,6 +117,19 @@
 
         .product-card.featured:hover {
             transform: scale(1.08);
+        }
+
+        .coming-soon {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
 
         .product-icon {
@@ -174,6 +188,16 @@
             box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
         }
 
+        .buy-btn.coming-soon-btn {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .buy-btn.coming-soon-btn:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
         .features {
             padding: 80px 0;
             background: white;
@@ -195,6 +219,16 @@
             font-size: 2.5rem;
             margin-bottom: 20px;
             color: #1e3c72;
+        }
+
+        .legal-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            color: #856404;
         }
 
         footer {
@@ -221,7 +255,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                🎮 <span>PS Plus</span> Pro
+                🎮 <span>PS Plus</span> KSA
             </div>
         </div>
     </header>
@@ -229,65 +263,72 @@
     <!-- قسم الهيرو -->
     <section class="hero">
         <div class="container">
-            <h1>اشتراكات PS Plus <span>بسعر التكلفة</span></h1>
-            <p>احصل على اشتراكك بخصم 50% - توصيل فوري خلال دقائق</p>
+            <h1>اشتراكات PS Plus <span>بخصم حصري</span></h1>
+            <p>احصل على اشتراكك بسعر مميز - توصيل فوري خلال دقائق</p>
         </div>
     </section>
 
     <!-- المنتجات -->
     <section class="products">
         <div class="container">
-            <h2 class="section-title">عروضنا الحصرية</h2>
+            <h2 class="section-title">العروض المتاحة</h2>
+            
+            <!-- إشعار قانوني -->
+            <div class="legal-notice">
+                ⚠️ <strong>تنويه قانوني:</strong> هذا موقع مستقل وغير تابع لشركة Sony. نقدم خدمة الوساطة في توفير الاشتراكات بأسعار تنافسية.
+            </div>
+
             <div class="product-grid">
                 <!-- اشتراك 1 شهر -->
-                <div class="product-card">
-                    <div class="product-icon">🕐</div>
+                <div class="product-card featured">
+                    <div class="product-icon">⭐</div>
                     <h3 class="product-title">اشتراك 1 شهر</h3>
                     <div class="price">
                         <span class="old-price">35 ريال</span>
-                        20 ريال
-                        <span class="discount">50%</span>
+                        26.99 ريال
+                        <span class="discount">30%</span>
                     </div>
                     <ul style="text-align: right; margin: 20px 0; list-style: none;">
-                        <li>✅ توصيل فوري</li>
-                        <li>✅ ضمان استرجاع</li>
-                        <li>✅ دعم فني 24/7</li>
+                        <li>✅ توصيل فوري خلال دقائق</li>
+                        <li>✅ ضمان استرجاع 24 ساعة</li>
+                        <li>✅ دعم فني متواصل</li>
+                        <li>✅ سعر مخفض حصري</li>
                     </ul>
-                    <button class="buy-btn">اشتري الآن</button>
+                    <button class="buy-btn">اشتري الآن - 26.99 ريال</button>
                 </div>
 
                 <!-- اشتراك 3 أشهر -->
-                <div class="product-card featured">
-                    <div class="product-icon">⭐</div>
+                <div class="product-card">
+                    <div class="coming-soon">قريباً</div>
+                    <div class="product-icon">🕒</div>
                     <h3 class="product-title">اشتراك 3 أشهر</h3>
                     <div class="price">
-                        <span class="old-price">80 ريال</span>
-                        55 ريال
-                        <span class="discount">60%</span>
+                        <span class="old-price">---</span>
+                        قريباً
                     </div>
                     <ul style="text-align: right; margin: 20px 0; list-style: none;">
-                        <li>✅ الأكثر مبيعاً</li>
-                        <li>✅ توفير 25 ريال</li>
-                        <li>✅ دعم فني متميز</li>
+                        <li>⏳ جاري التجهيز</li>
+                        <li>⏳ عرض خاص قريباً</li>
+                        <li>⏳ توفير إضافي</li>
                     </ul>
-                    <button class="buy-btn">اشتري الآن</button>
+                    <button class="buy-btn coming-soon-btn">قريباً إن شاء الله</button>
                 </div>
 
                 <!-- اشتراك 12 شهر -->
                 <div class="product-card">
+                    <div class="coming-soon">قريباً</div>
                     <div class="product-icon">👑</div>
                     <h3 class="product-title">اشتراك 12 شهر</h3>
                     <div class="price">
-                        <span class="old-price">280 ريال</span>
-                        140 ريال
-                        <span class="discount">65%</span>
+                        <span class="old-price">---</span>
+                        قريباً
                     </div>
                     <ul style="text-align: right; margin: 20px 0; list-style: none;">
-                        <li>✅ التوفير الأكبر</li>
-                        <li>✅ تحديث تلقائي</li>
-                        <li>✅ باقة العائلة</li>
+                        <li>⏳ جاري التجهيز</li>
+                        <li>⏳ توفير كبير قريباً</li>
+                        <li>⏳ باقة العائلة</li>
                     </ul>
-                    <button class="buy-btn">اشتري الآن</button>
+                    <button class="buy-btn coming-soon-btn">قريباً إن شاء الله</button>
                 </div>
             </div>
         </div>
@@ -296,27 +337,27 @@
     <!-- المميزات -->
     <section class="features">
         <div class="container">
-            <h2 class="section-title">لماذا تختارنا؟</h2>
+            <h2 class="section-title">لماذا تثق بنا؟</h2>
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>توصيل فوري</h3>
-                    <p>استلم كود الاشتراك خلال دقائق من الدفع</p>
+                    <p>استلم كود الاشتراك خلال 5 دقائق من التأكيد</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🛡️</div>
-                    <h3>ضمان 100%</h3>
-                    <p>استرجاع الأموال إذا واجهتك أي مشكلة</p>
+                    <h3>ضمان الاسترجاع</h3>
+                    <p>استرجاع كامل المبلغ خلال 24 ساعة إذا لم يعمل الكود</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💎</div>
-                    <h3>أسعار التكلفة</h3>
-                    <p>نقدم لكم الأسعار بأقل هامش ربح</p>
+                    <h3>أسعار تنافسية</h3>
+                    <p>نوفر لكم أفضل الأسعار في السوق السعودي</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📞</div>
-                    <h3>دعم فني</h3>
-                    <p>فريق دعم متاح على مدار الساعة</p>
+                    <h3>دعم سعودي</h3>
+                    <p>فريق دعم محلي يتحدث العربية على مدار الساعة</p>
                 </div>
             </div>
         </div>
@@ -325,19 +366,31 @@
     <!-- الفوتر -->
     <footer>
         <div class="container">
-            <p>© 2024 PS Plus Pro. جميع الحقوق محفوظة</p>
-            <p>مدعوم من شركاء سوني المعتمدين في الشرق الأوسط</p>
+            <p>© 2024 PS Plus KSA. خدمة وساطة مستقلة</p>
+            <p style="opacity: 0.8; margin-top: 10px; font-size: 0.9rem;">
+                هذا الموقع غير تابع لشركة Sony أو PlayStation.<br>
+                نقدم خدمة وساطة في توفير الاشتراكات بأسعار تنافسية.
+            </p>
         </div>
     </footer>
 
     <script>
         // إضافة تفاعل للزر
         document.querySelectorAll('.buy-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const product = this.closest('.product-card').querySelector('.product-title').textContent;
-                alert(`شكراً لاختيارك ${product}! سيتم توجيهك لصفحة الدفع الآمن.`);
-                // هنا يمكن إضافة ربط بنظام دفع حقيقي
-            });
+            if (!button.classList.contains('coming-soon-btn')) {
+                button.addEventListener('click', function() {
+                    const product = this.closest('.product-card').querySelector('.product-title').textContent;
+                    const price = "26.99 ريال";
+                    
+                    // محاكاة عملية الشراء
+                    const phone = prompt(`لشراء ${product}\n\nسعر: ${price}\n\nالرجاء إدخال رقم واتساب للتواصل:`);
+                    if (phone) {
+                        alert(`شكراً لك! سيتم التواصل معك على الرقم ${phone} خلال دقائق لإتمام عملية الشراء.`);
+                        // هنا يمكن إضافة ربط برسالة واتساب
+                        window.open(`https://wa.me/966500000000?text=أريد شراء ${product} - السعر: ${price}`, '_blank');
+                    }
+                });
+            }
         });
 
         // تأثير التمرير
