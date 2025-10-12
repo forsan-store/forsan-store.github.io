@@ -26,7 +26,7 @@
 
         /* الهيدر */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             padding: 20px 0;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
@@ -64,12 +64,14 @@
             font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: 700;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 30px;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 500;
         }
 
         /* المنتجات */
@@ -83,6 +85,7 @@
             font-size: 2.5rem;
             margin-bottom: 50px;
             color: #764ba2;
+            font-weight: 700;
         }
 
         .product-grid {
@@ -138,14 +141,19 @@
         }
 
         .product-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
-            font-weight: bold;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .product-card.featured .product-title {
+            color: white;
         }
 
         .price {
             font-size: 2.5rem;
-            font-weight: bold;
+            font-weight: 800;
             margin: 20px 0;
             color: #764ba2;
         }
@@ -157,7 +165,8 @@
         .old-price {
             text-decoration: line-through;
             color: #999;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 500;
         }
 
         .discount {
@@ -165,7 +174,8 @@
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
             margin-left: 10px;
         }
 
@@ -175,8 +185,8 @@
             border: none;
             padding: 15px 30px;
             border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
@@ -200,8 +210,8 @@
 
         .delivery-info {
             background: #e8f5e8;
-            border: 1px solid #4caf50;
-            border-radius: 8px;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
             padding: 15px;
             margin: 15px 0;
             text-align: center;
@@ -209,13 +219,22 @@
 
         .delivery-info h4 {
             color: #2e7d32;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .delivery-info p {
+            color: #2e7d32;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 5px 0;
         }
 
         .support-schedule {
             background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 8px;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
             padding: 15px;
             margin: 15px 0;
             text-align: center;
@@ -223,7 +242,16 @@
 
         .support-schedule h4 {
             color: #856404;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .support-schedule p {
+            color: #856404;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 5px 0;
         }
 
         .features {
@@ -241,22 +269,51 @@
         .feature-card {
             text-align: center;
             padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
         }
 
         .feature-icon {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 20px;
             color: #764ba2;
         }
 
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .feature-card .sub-text {
+            color: #718096;
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-top: 10px;
+        }
+
         .legal-notice {
             background: #fff3cd;
-            border: 1px solid #ffeaa7;
+            border: 2px solid #ffeaa7;
             border-radius: 10px;
             padding: 20px;
             margin: 30px 0;
             text-align: center;
             color: #856404;
+            font-weight: 600;
+        }
+
+        .legal-notice strong {
+            font-weight: 700;
         }
 
         footer {
@@ -266,14 +323,42 @@
             padding: 40px 0;
         }
 
+        footer p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 10px 0;
+        }
+
+        .product-features {
+            text-align: right;
+            margin: 20px 0;
+            list-style: none;
+        }
+
+        .product-features li {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 12px 0;
+            padding-right: 10px;
+            color: #4a5568;
+        }
+
+        .product-card.featured .product-features li {
+            color: white;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .product-card.featured {
                 transform: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -320,7 +405,7 @@
                     <!-- معلومات التوصيل -->
                     <div class="delivery-info">
                         <h4>⏰ مواعيد التوصيل</h4>
-                        <p>يتم التوصيل خلال <strong>2-6 ساعات</strong> من تأكيد الطلب</p>
+                        <p>يتم التوصيل خلال <strong>ساعات العمل فقط</strong></p>
                         <p>أوقات العمل: <strong>3 عصراً - 11 ليلاً</strong></p>
                     </div>
 
@@ -331,7 +416,7 @@
                         <p>الرد على الاستفسارات خلال <strong>4 ساعات كحد أقصى</strong></p>
                     </div>
 
-                    <ul style="text-align: right; margin: 20px 0; list-style: none;">
+                    <ul class="product-features">
                         <li>✅ ضمان استرجاع 24 ساعة</li>
                         <li>✅ أسعار تنافسية</li>
                         <li>✅ خدمة عملاء مخصصة</li>
@@ -349,7 +434,7 @@
                         <span class="old-price">---</span>
                         قريباً
                     </div>
-                    <ul style="text-align: right; margin: 20px 0; list-style: none;">
+                    <ul class="product-features">
                         <li>⏳ جاري التجهيز</li>
                         <li>⏳ عرض خاص قريباً</li>
                         <li>⏳ توفير إضافي</li>
@@ -366,7 +451,7 @@
                         <span class="old-price">---</span>
                         قريباً
                     </div>
-                    <ul style="text-align: right; margin: 20px 0; list-style: none;">
+                    <ul class="product-features">
                         <li>⏳ جاري التجهيز</li>
                         <li>⏳ توفير كبير قريباً</li>
                         <li>⏳ باقة العائلة</li>
@@ -385,26 +470,26 @@
                 <div class="feature-card">
                     <div class="feature-icon">⏰</div>
                     <h3>مواعيد التوصيل</h3>
-                    <p>التوصيل خلال <strong>2-6 ساعات</strong> من الطلب</p>
-                    <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">أوقات العمل: 3 عصراً - 11 ليلاً</p>
+                    <p>التوصيل خلال <strong>ساعات العمل فقط</strong></p>
+                    <p class="sub-text">أوقات العمل: 3 عصراً - 11 ليلاً</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📞</div>
                     <h3>دعم العملاء</h3>
                     <p>الرد على الاستفسارات خلال <strong>4 ساعات كحد أقصى</strong></p>
-                    <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">دعم فني متخصص</p>
+                    <p class="sub-text">دعم فني متخصص</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🛡️</div>
                     <h3>ضمان الجودة</h3>
                     <p>استرجاع كامل المبلغ خلال 24 ساعة إذا لم يعمل الكود</p>
-                    <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">ضمان مضمون 100%</p>
+                    <p class="sub-text">ضمان مضمون 100%</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💎</div>
                     <h3>أسعار شاملة</h3>
                     <p>لا توجد رسوم خفية - السعر النهائي واضح من البداية</p>
-                    <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">شفافية كاملة</p>
+                    <p class="sub-text">شفافية كاملة</p>
                 </div>
             </div>
         </div>
@@ -414,7 +499,7 @@
     <footer>
         <div class="container">
             <p>© 2024 PS Plus KSA. خدمة وساطة مستقلة</p>
-            <p style="opacity: 0.8; margin-top: 10px; font-size: 0.9rem;">
+            <p style="opacity: 0.9; margin-top: 15px; font-size: 1rem;">
                 هذا الموقع غير تابع لشركة Sony أو PlayStation.<br>
                 نقدم خدمة وساطة في توفير الاشتراكات بأسعار تنافسية.<br>
                 أوقات العمل: 3 عصراً - 11 ليلاً | الرد على الاستفسارات خلال 4 ساعات
@@ -431,9 +516,9 @@
                     const price = "26.99 ريال";
                     
                     // محاكاة عملية الشراء
-                    const phone = prompt(`لشراء ${product}\n\nسعر: ${price}\n\n⏰ سيتم التوصيل خلال 2-6 ساعات\n\nالرجاء إدخال رقم واتساب للتواصل:`);
+                    const phone = prompt(`لشراء ${product}\n\nسعر: ${price}\n\n⏰ سيتم التوصيل خلال ساعات العمل\n\nالرجاء إدخال رقم واتساب للتواصل:`);
                     if (phone) {
-                        alert(`شكراً لك! سيتم التواصل معك على الرقم ${phone} خلال ساعة لتأكيد الطلب، والتوصيل خلال 2-6 ساعات.`);
+                        alert(`شكراً لك! سيتم التواصل معك على الرقم ${phone} خلال ساعة لتأكيد الطلب، والتوصيل خلال ساعات العمل.`);
                         // هنا يمكن إضافة ربط برسالة واتساب
                         window.open(`https://wa.me/966500000000?text=أريد شراء ${product} - السعر: ${price}`, '_blank');
                     }
