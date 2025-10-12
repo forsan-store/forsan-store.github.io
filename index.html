@@ -3,772 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS Plus KSA - اشتراكات بخصم حصري</title>
+    <title>المهمة المستحيلة | لعبة المغامرات</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary-color: #764ba2;
-            --secondary-color: #667eea;
-            --text-dark: #2d3748;
-            --text-light: #718096;
         }
 
         body {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            direction: rtl;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 1200px;
+        .game-container {
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-        }
-
-        /* الهيدر */
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* الهيرو */
-        .hero {
-            background: linear-gradient(rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 150px 0 100px;
-            text-align: center;
-            margin-top: 70px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        /* الأقسام */
-        .section {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        /* المنتجات */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid transparent;
             position: relative;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary-color);
-        }
-
-        .product-card.featured {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .product-card.featured:hover {
-            transform: scale(1.08);
-        }
-
-        .coming-soon {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--secondary-color);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .product-icon {
-            font-size: 3rem;
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .product-title {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-            color: var(--text-dark);
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .product-card.featured .product-title {
-            color: white;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: 800;
+        .stats {
+            display: flex;
+            justify-content: space-around;
             margin: 20px 0;
-            color: var(--primary-color);
+            font-size: 1.2em;
         }
 
-        .product-card.featured .price {
-            color: white;
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 120px;
+            backdrop-filter: blur(10px);
         }
 
-        .old-price {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 1.3rem;
-            font-weight: 500;
-        }
-
-        .discount {
-            background: var(--secondary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
-        .buy-btn {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .game-area {
+            position: relative;
             width: 100%;
+            height: 400px;
+            background: linear-gradient(160deg, #2c3e50, #34495e);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            margin: 20px 0;
+        }
+
+        #player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            border-radius: 50%;
+            box-shadow: 0 0 20px #4ecdc4;
+            transition: all 0.1s ease;
+        }
+
+        .coin {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #ffd700, #ff6b00);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 15px #ffd700;
+        }
+
+        .enemy {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            border-radius: 8px;
+            animation: rotate 3s infinite linear;
+        }
+
+        .controls {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
             margin-top: 20px;
         }
 
-        .buy-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        /* معلومات التوصيل */
-        .delivery-info {
-            background: #e8f5e8;
-            border: 2px solid #4caf50;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            text-align: center;
-        }
-
-        .delivery-info h4 {
-            color: #2e7d32;
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .delivery-info p {
-            color: #2e7d32;
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 5px 0;
-        }
-
-        /* آراء العملاء */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        /* خطوات الشراء */
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .step-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .step-number {
-            background: var(--primary-color);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 20px;
-        }
-
-        /* الأسئلة الشائعة */
-        .faq-grid {
-            max-width: 800px;
-            margin: 50px auto 0;
-        }
-
-        .faq-item {
-            background: white;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-        }
-
-        .faq-question {
-            padding: 20px;
-            background: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            padding: 20px;
-            background: white;
-            color: var(--text-dark);
-            display: none;
-        }
-
-        .faq-answer.active {
-            display: block;
-        }
-
-        /* اتصل بنا */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .contact-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        /* عنا */
-        .about-content {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* تتبع الطلبات */
-        .tracking-form {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .track-btn {
-            background: var(--primary-color);
-            color: white;
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1em;
             cursor: pointer;
-            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .product-features {
-            text-align: right;
-            margin: 20px 0;
-            list-style: none;
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
-        .product-features li {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 12px 0;
-            padding-right: 10px;
-            color: #4a5568;
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            display: none;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
-        .product-card.featured .product-features li {
-            color: white;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        footer {
-            background: #2d3748;
-            color: white;
-            text-align: center;
-            padding: 40px 0;
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .product-card.featured {
-                transform: none;
-            }
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #feca57;
+            border-radius: 50%;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <!-- الهيدر -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                🎮 <span>PS Plus</span> KSA
+    <div class="game-container">
+        <div class="header">
+            <h1>🎯 المهمة المستحيلة</h1>
+            <p>اجمع النقاط وتجنب الأعداء! استخدم مفاتيح الأسهم للتحرك</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div>🎯 النقاط</div>
+                <div id="score">0</div>
             </div>
-            <nav class="nav-links">
-                <a href="#products">العروض</a>
-                <a href="#how-to-buy">كيفية الشراء</a>
-                <a href="#testimonials">آراء العملاء</a>
-                <a href="#faq">الأسئلة الشائعة</a>
-                <a href="#tracking">تتبع الطلب</a>
-                <a href="#contact">اتصل بنا</a>
-                <a href="#about">عننا</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- قسم الهيرو -->
-    <section class="hero">
-        <div class="container">
-            <h1>اشتراكات PS Plus <span>بخصم حصري</span></h1>
-            <p>احصل على اشتراكك بسعر مميز - نضمن لك الجودة والأمان</p>
-        </div>
-    </section>
-
-    <!-- المنتجات -->
-    <section id="products" class="section">
-        <div class="container">
-            <h2 class="section-title">العروض المتاحة</h2>
-            <div class="product-grid">
-                <!-- اشتراك 1 شهر -->
-                <div class="product-card featured">
-                    <div class="product-icon">⭐</div>
-                    <h3 class="product-title">اشتراك 1 شهر</h3>
-                    <div class="price">
-                        <span class="old-price">35 ريال</span>
-                        26.99 ريال
-                        <span class="discount">30%</span>
-                    </div>
-
-                    <div class="delivery-info">
-                        <h4>⏰ مواعيد التوصيل</h4>
-                        <p>يتم التوصيل خلال <strong>ساعات العمل فقط</strong></p>
-                        <p>أوقات العمل: <strong>3 عصراً - 11 ليلاً</strong></p>
-                    </div>
-
-                    <ul class="product-features">
-                        <li>✅ أسعار تنافسية</li>
-                        <li>✅ خدمة عملاء مخصصة</li>
-                        <li>✅ دفع آمن</li>
-                        <li>✅ توصيل خلال ساعات العمل</li>
-                    </ul>
-                    <button class="buy-btn">اشتري الآن - 26.99 ريال</button>
-                </div>
-
-                <!-- اشتراك 3 أشهر -->
-                <div class="product-card">
-                    <div class="coming-soon">قريباً</div>
-                    <div class="product-icon">🕒</div>
-                    <h3 class="product-title">اشتراك 3 أشهر</h3>
-                    <div class="price">
-                        <span class="old-price">---</span>
-                        قريباً
-                    </div>
-                    <ul class="product-features">
-                        <li>⏳ جاري التجهيز</li>
-                        <li>⏳ عرض خاص قريباً</li>
-                        <li>⏳ توفير إضافي</li>
-                    </ul>
-                    <button class="buy-btn coming-soon-btn">قريباً إن شاء الله</button>
-                </div>
-
-                <!-- اشتراك 12 شهر -->
-                <div class="product-card">
-                    <div class="coming-soon">قريباً</div>
-                    <div class="product-icon">👑</div>
-                    <h3 class="product-title">اشتراك 12 شهر</h3>
-                    <div class="price">
-                        <span class="old-price">---</span>
-                        قريباً
-                    </div>
-                    <ul class="product-features">
-                        <li>⏳ جاري التجهيز</li>
-                        <li>⏳ توفير كبير قريباً</li>
-                        <li>⏳ باقة العائلة</li>
-                    </ul>
-                    <button class="buy-btn coming-soon-btn">قريباً إن شاء الله</button>
-                </div>
+            <div class="stat-box">
+                <div>❤️ الحياة</div>
+                <div id="lives">3</div>
+            </div>
+            <div class="stat-box">
+                <div>⏱️ الوقت</div>
+                <div id="timer">60</div>
             </div>
         </div>
-    </section>
 
-    <!-- كيفية الشراء -->
-    <section id="how-to-buy" class="section" style="background: white;">
-        <div class="container">
-            <h2 class="section-title">كيفية الشراء</h2>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>اختر الاشتراك</h3>
-                    <p>اختر الاشتراك المناسب واضغط على "اشتري الآن"</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>أدخل معلوماتك</h3>
-                    <p>أدخل رقم واتساب للتواصل معك</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>انتظر التواصل</h3>
-                    <p>سيتم التواصل معك خلال ساعة لتأكيد الطلب</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3>استلم الكود</h3>
-                    <p>استلم كود الاشتراك خلال ساعات العمل</p>
-                </div>
-            </div>
+        <div class="game-area" id="gameArea">
+            <div id="player"></div>
+            <!-- العناصر تظهر بالجافاسكريبت -->
         </div>
-    </section>
 
-    <!-- آراء العملاء -->
-    <section id="testimonials" class="section">
-        <div class="container">
-            <h2 class="section-title">آراء العملاء</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"خدمة ممتازة وسريعة، استلمت الكود خلال ساعتين فقط. شكراً لكم!"</p>
-                    <p class="testimonial-author">- محمد العتيبي</p>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"أسعار منافسة جداً والخدمة احترافية. أنصح الجميع بالتجربة"</p>
-                    <p class="testimonial-author">- أحمد السعد</p>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"تعامل راقي ودعم سريع. كود شغال 100% بدون أي مشاكل"</p>
-                    <p class="testimonial-author">- فهد القحطاني</p>
-                </div>
-            </div>
+        <div class="controls">
+            <button onclick="startGame()">▶️ بدء اللعبة</button>
+            <button onclick="resetGame()">🔄 إعادة开始</button>
+            <button onclick="showInstructions()">📋 التعليمات</button>
         </div>
-    </section>
+    </div>
 
-    <!-- الأسئلة الشائعة -->
-    <section id="faq" class="section" style="background: white;">
-        <div class="container">
-            <h2 class="section-title">الأسئلة الشائعة</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        كيف أتأكد من مصداقيتكم؟
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        نقدم خدمتنا منذ فترة ولدينا عملاء دائمين. يمكنك رؤية آراء العملاء في القسم المخصص.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        كم تستغرق عملية التوصيل؟
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        التوصيل خلال ساعات العمل (3 عصراً - 11 ليلاً) بعد تأكيد الطلب.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        هل الدفع آمن؟
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        نعم، نستخدم طرق دفع آمنة ومباشرة عبر واتساب.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- تتبع الطلبات -->
-    <section id="tracking" class="section">
-        <div class="container">
-            <h2 class="section-title">تتبع طلبك</h2>
-            <div class="tracking-form">
-                <div class="form-group">
-                    <input type="text" placeholder="أدخل رقم طلبك" id="order-number">
-                </div>
-                <button class="track-btn" onclick="trackOrder()">تتبع الطلب</button>
-                <div id="tracking-result" style="margin-top: 20px; display: none;"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- اتصل بنا -->
-    <section id="contact" class="section" style="background: white;">
-        <div class="container">
-            <h2 class="section-title">اتصل بنا</h2>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📱</div>
-                    <h3>واتساب</h3>
-                    <p>للطلبات والاستفسارات</p>
-                    <p style="color: var(--primary-color); font-weight: 600;">+966 50 000 0000</p>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">⏰</div>
-                    <h3>أوقات العمل</h3>
-                    <p>3 عصراً - 11 ليلاً</p>
-                    <p>الرد خلال 4 ساعات كحد أقصى</p>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">📧</div>
-                    <h3>البريد الإلكتروني</h3>
-                    <p>للشكاوى والمقترحات</p>
-                    <p style="color: var(--primary-color); font-weight: 600;">info@psplus-ksa.com</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- عنا -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">عنّا</h2>
-            <div class="about-content">
-                <h3 style="color: var(--primary-color); margin-bottom: 20px;">من نحن؟</h3>
-                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
-                    نحن فريق متخصص في توفير اشتراكات PS Plus بأسعار تنافسية. نهدف إلى تقديم أفضل الخدمات 
-                    لعملائنا الكرام مع الحفاظ على الجودة والسرعة في التوصيل.
-                </p>
-                <h4 style="color: var(--primary-color); margin: 30px 0 15px;">لماذا تختارنا؟</h4>
-                <ul style="list-style: none; font-size: 1.1rem; line-height: 1.8;">
-                    <li>✅ أسعار منافسة وجودة مضمونة</li>
-                    <li>✅ خدمة عملاء متخصصة</li>
-                    <li>✅ توصيل سريع خلال ساعات العمل</li>
-                    <li>✅ دعم فني متواصل</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- الفوتر -->
-    <footer>
-        <div class="container">
-            <p>© 2024 PS Plus KSA. خدمة وساطة مستقلة</p>
-            <p style="opacity: 0.9; margin-top: 15px; font-size: 1rem;">
-                هذا الموقع غير تابع لشركة Sony أو PlayStation.<br>
-                نقدم خدمة وساطة في توفير الاشتراكات بأسعار تنافسية.<br>
-                أوقات العمل: 3 عصراً - 11 ليلاً
-            </p>
-        </div>
-    </footer>
+    <div class="message" id="gameMessage">
+        <h2 id="messageTitle"></h2>
+        <p id="messageText"></p>
+        <button onclick="hideMessage()">موافق</button>
+    </div>
 
     <script>
-        // تفعيل الأسئلة الشائعة
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', function() {
-                const answer = this.nextElementSibling;
-                const isActive = answer.classList.contains('active');
-                
-                // إغلاق جميع الإجابات
-                document.querySelectorAll('.faq-answer').forEach(ans => {
-                    ans.classList.remove('active');
-                });
-                
-                // فتح/إغلاق الإجابة الحالية
-                if (!isActive) {
-                    answer.classList.add('active');
-                }
-            });
+        // العناصر الأساسية
+        const gameArea = document.getElementById('gameArea');
+        const player = document.getElementById('player');
+        const scoreElement = document.getElementById('score');
+        const livesElement = document.getElementById('lives');
+        const timerElement = document.getElementById('timer');
+        const gameMessage = document.getElementById('gameMessage');
+        const messageTitle = document.getElementById('messageTitle');
+        const messageText = document.getElementById('messageText');
+
+        // متغيرات اللعبة
+        let score = 0;
+        let lives = 3;
+        let timeLeft = 60;
+        let gameInterval;
+        let timerInterval;
+        let isGameRunning = false;
+        let playerPosition = { x: 375, y: 175 };
+
+        // تهيئة اللاعب
+        player.style.left = playerPosition.x + 'px';
+        player.style.top = playerPosition.y + 'px';
+
+        // التحكم باللاعب
+        document.addEventListener('keydown', (e) => {
+            if (!isGameRunning) return;
+
+            const speed = 20;
+            const gameRect = gameArea.getBoundingClientRect();
+            const playerSize = 50;
+
+            switch(e.key) {
+                case 'ArrowUp':
+                    playerPosition.y = Math.max(0, playerPosition.y - speed);
+                    break;
+                case 'ArrowDown':
+                    playerPosition.y = Math.min(gameRect.height - playerSize, playerPosition.y + speed);
+                    break;
+                case 'ArrowLeft':
+                    playerPosition.x = Math.max(0, playerPosition.x - speed);
+                    break;
+                case 'ArrowRight':
+                    playerPosition.x = Math.min(gameRect.width - playerSize, playerPosition.x + speed);
+                    break;
+            }
+
+            player.style.left = playerPosition.x + 'px';
+            player.style.top = playerPosition.y + 'px';
+            checkCollisions();
         });
 
-        // تتبع الطلبات
-        function trackOrder() {
-            const orderNumber = document.getElementById('order-number').value;
-            const resultDiv = document.getElementById('tracking-result');
+        // إنشاء العملات
+        function createCoin() {
+            if (!isGameRunning) return;
+
+            const coin = document.createElement('div');
+            coin.className = 'coin';
+            coin.style.left = Math.random() * (gameArea.offsetWidth - 30) + 'px';
+            coin.style.top = Math.random() * (gameArea.offsetHeight - 30) + 'px';
+            gameArea.appendChild(coin);
+
+            // إزالة العملة بعد 5 ثواني
+            setTimeout(() => {
+                if (coin.parentNode) {
+                    coin.remove();
+                }
+            }, 5000);
+        }
+
+        // إنشاء الأعداء
+        function createEnemy() {
+            if (!isGameRunning) return;
+
+            const enemy = document.createElement('div');
+            enemy.className = 'enemy';
+            enemy.style.left = Math.random() * (gameArea.offsetWidth - 40) + 'px';
+            enemy.style.top = Math.random() * (gameArea.offsetHeight - 40) + 'px';
+            gameArea.appendChild(enemy);
+        }
+
+        // الكشف عن التصادمات
+        function checkCollisions() {
+            const playerRect = player.getBoundingClientRect();
             
-            if (orderNumber) {
-                resultDiv.innerHTML = `
-                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border: 2px solid #4caf50;">
-                        <h4 style="color: #2e7d32; margin-bottom: 10px;">حالة الطلب #${orderNumber}</h4>
-                        <p style="color: #2e7d32; font-weight: 600;">✅ قيد المعالجة</p>
-                        <p style="color: #666; margin-top: 10px;">سيتم التواصل معك قريباً لتأكيد التفاصيل</p>
-                    </div>
-                `;
-                resultDiv.style.display = 'block';
-            } else {
-                alert('الرجاء إدخال رقم الطلب');
+            // الكشف عن العملات
+            document.querySelectorAll('.coin').forEach(coin => {
+                const coinRect = coin.getBoundingClientRect();
+                if (isColliding(playerRect, coinRect)) {
+                    collectCoin(coin);
+                }
+            });
+
+            // الكشف عن الأعداء
+            document.querySelectorAll('.enemy').forEach(enemy => {
+                const enemyRect = enemy.getBoundingClientRect();
+                if (isColliding(playerRect, enemyRect)) {
+                    hitEnemy(enemy);
+                }
+            });
+        }
+
+        function isColliding(rect1, rect2) {
+            return !(rect1.right < rect2.left || 
+                     rect1.left > rect2.right || 
+                     rect1.bottom < rect2.top || 
+                     rect1.top > rect2.bottom);
+        }
+
+        function collectCoin(coin) {
+            score += 10;
+            scoreElement.textContent = score;
+            createParticles(coin.getBoundingClientRect());
+            coin.remove();
+            
+            // تأثير صوتي (افتراضي)
+            const audio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==");
+            audio.play().catch(() => {});
+        }
+
+        function hitEnemy(enemy) {
+            lives--;
+            livesElement.textContent = lives;
+            createParticles(enemy.getBoundingClientRect());
+            enemy.remove();
+
+            if (lives <= 0) {
+                endGame('💀 Game Over!', 'انتهت حياتك! حاول مرة أخرى.');
             }
         }
 
-        // زر الشراء
-        document.querySelectorAll('.buy-btn').forEach(button => {
-            if (!button.classList.contains('coming-soon-btn')) {
-                button.addEventListener('click', function() {
-                    const product = this.closest('.product-card').querySelector('.product-title').textContent;
-                    const price = "26.99 ريال";
-                    
-                    const phone = prompt(`لشراء ${product}\n\nسعر: ${price}\n\n⏰ سيتم التوصيل خلال ساعات العمل\n\nالرجاء إدخال رقم واتساب للتواصل:`);
-                    if (phone) {
-                        alert(`شكراً لك! سيتم التواصل معك على الرقم ${phone} خلال ساعة لتأكيد الطلب.`);
-                        window.open(`https://wa.me/966500000000?text=أريد شراء ${product} - السعر: ${price}`, '_blank');
-                    }
-                });
-            }
-        });
+        function createParticles(position) {
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = (position.left + position.width / 2) + 'px';
+                particle.style.top = (position.top + position.height / 2) + 'px';
+                document.body.appendChild(particle);
 
-        // تأثير التمرير
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 2 + Math.random() * 3;
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed;
+
+                let opacity = 1;
+                const particleInterval = setInterval(() => {
+                    const rect = particle.getBoundingClientRect();
+                    particle.style.left = (rect.left + vx) + 'px';
+                    particle.style.top = (rect.top + vy) + 'px';
+                    opacity -= 0.02;
+                    particle.style.opacity = opacity;
+
+                    if (opacity <= 0) {
+                        clearInterval(particleInterval);
+                        particle.remove();
+                    }
+                }, 16);
             }
-        });
+        }
+
+        // المؤقت
+        function startTimer() {
+            timeLeft = 60;
+            timerElement.textContent = timeLeft;
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    endGame('⏰ الوقت انتهى!', `نهائيتك: ${score} نقطة`);
+                }
+            }, 1000);
+        }
+
+        // بدء اللعبة
+        function startGame() {
+            if (isGameRunning) return;
+            
+            isGameRunning = true;
+            score = 0;
+            lives = 3;
+            scoreElement.textContent = score;
+            livesElement.textContent = lives;
+            
+            // تنظيف المنطقة
+            document.querySelectorAll('.coin, .enemy').forEach(el => el.remove());
+            
+            // بدء المؤقت
+            startTimer();
+            
+            // إنشاء العناصر
+            gameInterval = setInterval(() => {
+                createCoin();
+                if (Math.random() < 0.3) createEnemy();
+            }, 2000);
+
+            showMessage('🎮 ابدأ!', 'استخدم مفاتيح الأسهم للتحرك واجمع النقاط!');
+        }
+
+        function endGame(title, text) {
+            isGameRunning = false;
+            clearInterval(gameInterval);
+            clearInterval(timerInterval);
+            showMessage(title, text);
+        }
+
+        function resetGame() {
+            isGameRunning = false;
+            clearInterval(gameInterval);
+            clearInterval(timerInterval);
+            
+            score = 0;
+            lives = 3;
+            timeLeft = 60;
+            
+            scoreElement.textContent = score;
+            livesElement.textContent = lives;
+            timerElement.textContent = timeLeft;
+            
+            playerPosition = { x: 375, y: 175 };
+            player.style.left = playerPosition.x + 'px';
+            player.style.top = playerPosition.y + 'px';
+            
+            document.querySelectorAll('.coin, .enemy').forEach(el => el.remove());
+        }
+
+        function showInstructions() {
+            showMessage('📋 التعليمات', `
+                🎯 هدف اللعبة: اجمع أكبر عدد من النقاط
+                ⬆️⬇️⬅️➡️ : استخدم مفاتيح الأسهم للتحرك
+                💰 اجمع العملات الذهبية: +10 نقاط
+                ❌ تجنب المربعات الحمراء: -1 حياة
+                ⏱️ لديك 60 ثانية فقط!
+            `);
+        }
+
+        function showMessage(title, text) {
+            messageTitle.textContent = title;
+            messageText.textContent = text;
+            gameMessage.style.display = 'block';
+        }
+
+        function hideMessage() {
+            gameMessage.style.display = 'none';
+        }
+
+        // تهيئة أولية
+        showInstructions();
     </script>
 </body>
 </html>
