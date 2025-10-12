@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المهمة المستحيلة | لعبة المغامرات</title>
+    <title>صائد الكنوز الفضائي | لعبة فريدة</title>
     <style>
         * {
             margin: 0;
@@ -13,115 +13,179 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             color: white;
             text-align: center;
             direction: rtl;
             overflow: hidden;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px);
+            background-size: 550px 550px, 350px 350px;
+            background-position: 0 0, 40px 60px;
+            animation: stars 20s linear infinite;
+        }
+
+        @keyframes stars {
+            from { background-position: 0 0, 40px 60px; }
+            to { background-position: 550px 550px, 390px 410px; }
         }
 
         .game-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
         }
 
         .header {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 20, 40, 0.8);
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid #00f3ff;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 3em;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            background: linear-gradient(45deg, #00f3ff, #ff00cc, #00ff88);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-            font-size: 1.2em;
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 243, 255, 0.5); }
+            to { text-shadow: 0 0 40px rgba(255, 0, 204, 0.7); }
         }
 
-        .stat-box {
-            background: rgba(255, 255, 255, 0.1);
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 30, 60, 0.7);
             padding: 15px;
-            border-radius: 10px;
-            min-width: 120px;
-            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid #00f3ff;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 5px 0;
+            color: #00f3ff;
         }
 
         .game-area {
             position: relative;
             width: 100%;
-            height: 400px;
-            background: linear-gradient(160deg, #2c3e50, #34495e);
-            border-radius: 15px;
+            height: 500px;
+            background: rgba(0, 10, 30, 0.6);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            margin: 20px 0;
+            border: 3px solid #00f3ff;
+            box-shadow: 
+                inset 0 0 50px rgba(0, 243, 255, 0.2),
+                0 0 50px rgba(0, 243, 255, 0.3);
         }
 
         #player {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #00f3ff, #0066ff);
             border-radius: 50%;
-            box-shadow: 0 0 20px #4ecdc4;
-            transition: all 0.1s ease;
+            box-shadow: 
+                0 0 30px #00f3ff,
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            z-index: 100;
+            transition: all 0.15s ease;
         }
 
-        .coin {
+        .treasure {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle, #ffd700, #ff6b00);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        .alien {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: radial-gradient(circle, #ff00cc, #cc00ff);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: alienFloat 4s ease-in-out infinite;
+            box-shadow: 0 0 25px #ff00cc;
+        }
+
+        .black-hole {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #000, #330066);
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 0 30px #000,
+                0 0 40px #6600cc;
+            animation: blackHole 6s linear infinite;
+        }
+
+        .power-up {
             position: absolute;
             width: 30px;
             height: 30px;
-            background: radial-gradient(circle, #ffd700, #ff6b00);
+            background: radial-gradient(circle, #00ff88, #00cc66);
             border-radius: 50%;
-            animation: pulse 1.5s infinite;
-            box-shadow: 0 0 15px #ffd700;
-        }
-
-        .enemy {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
-            border-radius: 8px;
-            animation: rotate 3s infinite linear;
+            animation: spin 2s linear infinite;
+            box-shadow: 0 0 20px #00ff88;
         }
 
         .controls {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
         }
 
-        button {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
+        .control-btn {
+            background: linear-gradient(45deg, #0066ff, #00ccff);
             border: none;
-            padding: 15px 30px;
-            margin: 10px;
-            border-radius: 25px;
+            padding: 18px;
+            border-radius: 15px;
             color: white;
-            font-size: 1.1em;
+            font-size: 1.2em;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.4);
+            backdrop-filter: blur(10px);
         }
 
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        .control-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.6);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        .special-btn {
+            background: linear-gradient(45deg, #ff00cc, #cc00ff);
+            grid-column: span 3;
         }
 
         .message {
@@ -129,172 +193,315 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 20, 40, 0.95);
             padding: 40px;
-            border-radius: 20px;
+            border-radius: 25px;
+            border: 3px solid #00f3ff;
             display: none;
             z-index: 1000;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 60px rgba(0, 243, 255, 0.5);
+            min-width: 400px;
+        }
+
+        .upgrade-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 30, 60, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00ff88;
+            display: none;
             backdrop-filter: blur(10px);
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
-        @keyframes rotate {
+        @keyframes alienFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        @keyframes blackHole {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .particle {
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .trail {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #feca57;
+            width: 10px;
+            height: 10px;
+            background: #00f3ff;
             border-radius: 50%;
             pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .combo-display {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5em;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="game-container">
         <div class="header">
-            <h1>🎯 المهمة المستحيلة</h1>
-            <p>اجمع النقاط وتجنب الأعداء! استخدم مفاتيح الأسهم للتحرك</p>
+            <h1>🚀 صائد الكنوز الفضائي</h1>
+            <p>استكشف الفضاء، اجمع الكنوز، وتجنب الأعداء!</p>
         </div>
 
-        <div class="stats">
-            <div class="stat-box">
-                <div>🎯 النقاط</div>
-                <div id="score">0</div>
+        <div class="stats-container">
+            <div class="stat-card">
+                <div>💎 الكنوز</div>
+                <div class="stat-value" id="treasureScore">0</div>
             </div>
-            <div class="stat-box">
-                <div>❤️ الحياة</div>
-                <div id="lives">3</div>
+            <div class="stat-card">
+                <div>🛡️ الطاقة</div>
+                <div class="stat-value" id="energy">100%</div>
             </div>
-            <div class="stat-box">
-                <div>⏱️ الوقت</div>
-                <div id="timer">60</div>
+            <div class="stat-card">
+                <div>⚡ السرعة</div>
+                <div class="stat-value" id="speed">1x</div>
+            </div>
+            <div class="stat-card">
+                <div>🎯 المضاعف</div>
+                <div class="stat-value" id="multiplier">1x</div>
             </div>
         </div>
 
         <div class="game-area" id="gameArea">
             <div id="player"></div>
+            <div class="combo-display" id="comboDisplay">Combo!</div>
             <!-- العناصر تظهر بالجافاسكريبت -->
         </div>
 
         <div class="controls">
-            <button onclick="startGame()">▶️ بدء اللعبة</button>
-            <button onclick="resetGame()">🔄 إعادة开始</button>
-            <button onclick="showInstructions()">📋 التعليمات</button>
+            <button class="control-btn" onclick="startGame()">🚀 ابدأ الرحلة</button>
+            <button class="control-btn" onclick="showUpgrades()">🛠️ الترقيات</button>
+            <button class="control-btn" onclick="showInstructions()">📚 التعليمات</button>
+            <button class="control-btn special-btn" onclick="useSpecialPower()">✨ الطاقة الخاصة (SPACE)</button>
         </div>
+    </div>
+
+    <div class="upgrade-menu" id="upgradeMenu">
+        <h3>🛠️ متجر الترقيات</h3>
+        <div class="upgrade-item" onclick="buyUpgrade('speed')">
+            🚀 زيادة السرعة (50 كنز)
+        </div>
+        <div class="upgrade-item" onclick="buyUpgrade('magnet')">
+            🧲 مغناطيس الكنوز (100 كنز)
+        </div>
+        <div class="upgrade-item" onclick="buyUpgrade('shield')">
+            🛡️ درع وقائي (150 كنز)
+        </div>
+        <button onclick="hideUpgrades()" style="margin-top: 15px;">إغلاق</button>
     </div>
 
     <div class="message" id="gameMessage">
         <h2 id="messageTitle"></h2>
         <p id="messageText"></p>
-        <button onclick="hideMessage()">موافق</button>
+        <button class="control-btn" onclick="hideMessage()" style="margin-top: 20px;">موافق</button>
     </div>
 
     <script>
         // العناصر الأساسية
         const gameArea = document.getElementById('gameArea');
         const player = document.getElementById('player');
-        const scoreElement = document.getElementById('score');
-        const livesElement = document.getElementById('lives');
-        const timerElement = document.getElementById('timer');
+        const treasureScoreElement = document.getElementById('treasureScore');
+        const energyElement = document.getElementById('energy');
+        const speedElement = document.getElementById('speed');
+        const multiplierElement = document.getElementById('multiplier');
+        const comboDisplay = document.getElementById('comboDisplay');
         const gameMessage = document.getElementById('gameMessage');
-        const messageTitle = document.getElementById('messageTitle');
-        const messageText = document.getElementById('messageText');
+        const upgradeMenu = document.getElementById('upgradeMenu');
 
-        // متغيرات اللعبة
-        let score = 0;
-        let lives = 3;
-        let timeLeft = 60;
-        let gameInterval;
-        let timerInterval;
+        // متغيرات اللعبة المتقدمة
+        let treasureScore = 0;
+        let energy = 100;
+        let speedMultiplier = 1;
+        let scoreMultiplier = 1;
+        let combo = 0;
         let isGameRunning = false;
-        let playerPosition = { x: 375, y: 175 };
+        let playerPosition = { x: 470, y: 220 };
+        let upgrades = {
+            speed: 1,
+            magnet: false,
+            shield: false
+        };
 
         // تهيئة اللاعب
         player.style.left = playerPosition.x + 'px';
         player.style.top = playerPosition.y + 'px';
 
-        // التحكم باللاعب
+        // نظام التحكم المحسن
+        const keys = {};
         document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+            
+            if (e.key === ' ' && isGameRunning) {
+                useSpecialPower();
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+
+        function gameLoop() {
             if (!isGameRunning) return;
 
-            const speed = 20;
+            const speed = 8 * upgrades.speed;
             const gameRect = gameArea.getBoundingClientRect();
-            const playerSize = 50;
 
-            switch(e.key) {
-                case 'ArrowUp':
-                    playerPosition.y = Math.max(0, playerPosition.y - speed);
-                    break;
-                case 'ArrowDown':
-                    playerPosition.y = Math.min(gameRect.height - playerSize, playerPosition.y + speed);
-                    break;
-                case 'ArrowLeft':
-                    playerPosition.x = Math.max(0, playerPosition.x - speed);
-                    break;
-                case 'ArrowRight':
-                    playerPosition.x = Math.min(gameRect.width - playerSize, playerPosition.x + speed);
-                    break;
+            if (keys['ArrowUp'] || keys['w']) {
+                playerPosition.y = Math.max(0, playerPosition.y - speed);
+            }
+            if (keys['ArrowDown'] || keys['s']) {
+                playerPosition.y = Math.min(gameRect.height - 60, playerPosition.y + speed);
+            }
+            if (keys['ArrowLeft'] || keys['a']) {
+                playerPosition.x = Math.max(0, playerPosition.x - speed);
+            }
+            if (keys['ArrowRight'] || keys['d']) {
+                playerPosition.x = Math.min(gameRect.width - 60, playerPosition.x + speed);
             }
 
             player.style.left = playerPosition.x + 'px';
             player.style.top = playerPosition.y + 'px';
-            checkCollisions();
-        });
 
-        // إنشاء العملات
-        function createCoin() {
+            createTrail();
+            checkCollisions();
+            updateEnergy();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function createTrail() {
+            const trail = document.createElement('div');
+            trail.className = 'trail';
+            trail.style.left = (playerPosition.x + 30) + 'px';
+            trail.style.top = (playerPosition.y + 30) + 'px';
+            gameArea.appendChild(trail);
+
+            setTimeout(() => {
+                if (trail.parentNode) {
+                    trail.remove();
+                }
+            }, 1000);
+        }
+
+        // إنشاء العناصر المختلفة
+        function createTreasure() {
             if (!isGameRunning) return;
 
-            const coin = document.createElement('div');
-            coin.className = 'coin';
-            coin.style.left = Math.random() * (gameArea.offsetWidth - 30) + 'px';
-            coin.style.top = Math.random() * (gameArea.offsetHeight - 30) + 'px';
-            gameArea.appendChild(coin);
+            const treasure = document.createElement('div');
+            treasure.className = 'treasure';
+            treasure.style.left = Math.random() * (gameArea.offsetWidth - 35) + 'px';
+            treasure.style.top = Math.random() * (gameArea.offsetHeight - 35) + 'px';
+            gameArea.appendChild(treasure);
 
-            // إزالة العملة بعد 5 ثواني
             setTimeout(() => {
-                if (coin.parentNode) {
-                    coin.remove();
+                if (treasure.parentNode) {
+                    treasure.remove();
+                }
+            }, 8000);
+        }
+
+        function createAlien() {
+            if (!isGameRunning || Math.random() > 0.4) return;
+
+            const alien = document.createElement('div');
+            alien.className = 'alien';
+            alien.style.left = Math.random() * (gameArea.offsetWidth - 45) + 'px';
+            alien.style.top = Math.random() * (gameArea.offsetHeight - 45) + 'px';
+            gameArea.appendChild(alien);
+
+            setTimeout(() => {
+                if (alien.parentNode) {
+                    alien.remove();
+                }
+            }, 10000);
+        }
+
+        function createBlackHole() {
+            if (!isGameRunning || Math.random() > 0.2) return;
+
+            const blackHole = document.createElement('div');
+            blackHole.className = 'black-hole';
+            blackHole.style.left = Math.random() * (gameArea.offsetWidth - 70) + 'px';
+            blackHole.style.top = Math.random() * (gameArea.offsetHeight - 70) + 'px';
+            gameArea.appendChild(blackHole);
+
+            setTimeout(() => {
+                if (blackHole.parentNode) {
+                    blackHole.remove();
+                }
+            }, 15000);
+        }
+
+        function createPowerUp() {
+            if (!isGameRunning || Math.random() > 0.1) return;
+
+            const powerUp = document.createElement('div');
+            powerUp.className = 'power-up';
+            powerUp.style.left = Math.random() * (gameArea.offsetWidth - 30) + 'px';
+            powerUp.style.top = Math.random() * (gameArea.offsetHeight - 30) + 'px';
+            gameArea.appendChild(powerUp);
+
+            setTimeout(() => {
+                if (powerUp.parentNode) {
+                    powerUp.remove();
                 }
             }, 5000);
         }
 
-        // إنشاء الأعداء
-        function createEnemy() {
-            if (!isGameRunning) return;
-
-            const enemy = document.createElement('div');
-            enemy.className = 'enemy';
-            enemy.style.left = Math.random() * (gameArea.offsetWidth - 40) + 'px';
-            enemy.style.top = Math.random() * (gameArea.offsetHeight - 40) + 'px';
-            gameArea.appendChild(enemy);
-        }
-
-        // الكشف عن التصادمات
+        // نظام التصادم المتقدم
         function checkCollisions() {
             const playerRect = player.getBoundingClientRect();
             
-            // الكشف عن العملات
-            document.querySelectorAll('.coin').forEach(coin => {
-                const coinRect = coin.getBoundingClientRect();
-                if (isColliding(playerRect, coinRect)) {
-                    collectCoin(coin);
+            // الكنوز
+            document.querySelectorAll('.treasure').forEach(treasure => {
+                const treasureRect = treasure.getBoundingClientRect();
+                if (isColliding(playerRect, treasureRect)) {
+                    collectTreasure(treasure);
                 }
             });
 
-            // الكشف عن الأعداء
-            document.querySelectorAll('.enemy').forEach(enemy => {
-                const enemyRect = enemy.getBoundingClientRect();
-                if (isColliding(playerRect, enemyRect)) {
-                    hitEnemy(enemy);
+            // الأعداء
+            document.querySelectorAll('.alien').forEach(alien => {
+                const alienRect = alien.getBoundingClientRect();
+                if (isColliding(playerRect, alienRect)) {
+                    hitAlien(alien);
+                }
+            });
+
+            // الثقوب السوداء
+            document.querySelectorAll('.black-hole').forEach(hole => {
+                const holeRect = hole.getBoundingClientRect();
+                if (isColliding(playerRect, holeRect)) {
+                    hitBlackHole(hole);
+                }
+            });
+
+            // الطاقة
+            document.querySelectorAll('.power-up').forEach(power => {
+                const powerRect = power.getBoundingClientRect();
+                if (isColliding(playerRect, powerRect)) {
+                    collectPowerUp(power);
                 }
             });
         }
@@ -306,38 +513,123 @@
                      rect1.top > rect2.bottom);
         }
 
-        function collectCoin(coin) {
-            score += 10;
-            scoreElement.textContent = score;
-            createParticles(coin.getBoundingClientRect());
-            coin.remove();
+        function collectTreasure(treasure) {
+            combo++;
+            const basePoints = 10;
+            const points = basePoints * scoreMultiplier + combo;
             
-            // تأثير صوتي (افتراضي)
-            const audio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==");
-            audio.play().catch(() => {});
+            treasureScore += points;
+            treasureScoreElement.textContent = treasureScore;
+            
+            createParticles(treasure.getBoundingClientRect(), '#ffd700');
+            showCombo(combo, points);
+            treasure.remove();
+
+            // تأثيرات صوتية بسيطة
+            playSound(200, 0.1);
         }
 
-        function hitEnemy(enemy) {
-            lives--;
-            livesElement.textContent = lives;
-            createParticles(enemy.getBoundingClientRect());
-            enemy.remove();
+        function hitAlien(alien) {
+            if (upgrades.shield) {
+                upgrades.shield = false;
+                showMessage('🛡️', 'الدرع انكسر! لكنك نجوت.');
+            } else {
+                energy -= 20;
+                combo = 0;
+                createParticles(alien.getBoundingClientRect(), '#ff00cc');
+                
+                if (energy <= 0) {
+                    endGame('💥 انتهت الطاقة', 'سفينتك تدمرت!');
+                    return;
+                }
+            }
+            alien.remove();
+            playSound(100, 0.2);
+        }
 
-            if (lives <= 0) {
-                endGame('💀 Game Over!', 'انتهت حياتك! حاول مرة أخرى.');
+        function hitBlackHole(hole) {
+            energy -= 30;
+            combo = 0;
+            createParticles(hole.getBoundingClientRect(), '#6600cc');
+            
+            // دفع اللاعب بعيداً
+            playerPosition.x = Math.max(0, playerPosition.x - 100);
+            playerPosition.y = Math.max(0, playerPosition.y - 100);
+            
+            if (energy <= 0) {
+                endGame('🕳️ ابتلعك الثقب', 'قوة الجاذبية كانت شديدة!');
+                return;
+            }
+            hole.remove();
+            playSound(80, 0.3);
+        }
+
+        function collectPowerUp(power) {
+            const types = ['energy', 'multiplier', 'speed'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            switch(type) {
+                case 'energy':
+                    energy = Math.min(100, energy + 30);
+                    showMessage('⚡', '+30 طاقة!');
+                    break;
+                case 'multiplier':
+                    scoreMultiplier = 2;
+                    setTimeout(() => { scoreMultiplier = 1; }, 10000);
+                    showMessage('🎯', 'مضاعف النقاط مفعل لمدة 10 ثوان!');
+                    break;
+                case 'speed':
+                    speedMultiplier = 1.5;
+                    setTimeout(() => { speedMultiplier = 1; }, 8000);
+                    showMessage('🚀', 'السرعة زادت لمدة 8 ثوان!');
+                    break;
+            }
+            
+            createParticles(power.getBoundingClientRect(), '#00ff88');
+            power.remove();
+            playSound(300, 0.1);
+        }
+
+        function useSpecialPower() {
+            if (energy >= 40 && isGameRunning) {
+                energy -= 40;
+                
+                // تنظيف جميع الأعداء القريبين
+                document.querySelectorAll('.alien, .black-hole').forEach(enemy => {
+                    const enemyRect = enemy.getBoundingClientRect();
+                    const playerRect = player.getBoundingClientRect();
+                    const distance = Math.sqrt(
+                        Math.pow(enemyRect.left - playerRect.left, 2) +
+                        Math.pow(enemyRect.top - playerRect.top, 2)
+                    );
+                    
+                    if (distance < 200) {
+                        createParticles(enemy.getBoundingClientRect(), '#ffffff');
+                        enemy.remove();
+                    }
+                });
+                
+                createParticles(player.getBoundingClientRect(), '#00f3ff');
+                showMessage('✨', 'موجة طاقة قوية!');
+                playSound(400, 0.2);
             }
         }
 
-        function createParticles(position) {
-            for (let i = 0; i < 10; i++) {
+        function createParticles(position, color) {
+            for (let i = 0; i < 15; i++) {
                 const particle = document.createElement('div');
-                particle.className = 'particle';
+                particle.style.background = color;
+                particle.style.width = '6px';
+                particle.style.height = '6px';
+                particle.style.position = 'absolute';
+                particle.style.borderRadius = '50%';
                 particle.style.left = (position.left + position.width / 2) + 'px';
                 particle.style.top = (position.top + position.height / 2) + 'px';
+                particle.style.pointerEvents = 'none';
                 document.body.appendChild(particle);
 
                 const angle = Math.random() * Math.PI * 2;
-                const speed = 2 + Math.random() * 3;
+                const speed = 3 + Math.random() * 4;
                 const vx = Math.cos(angle) * speed;
                 const vy = Math.sin(angle) * speed;
 
@@ -346,7 +638,7 @@
                     const rect = particle.getBoundingClientRect();
                     particle.style.left = (rect.left + vx) + 'px';
                     particle.style.top = (rect.top + vy) + 'px';
-                    opacity -= 0.02;
+                    opacity -= 0.03;
                     particle.style.opacity = opacity;
 
                     if (opacity <= 0) {
@@ -357,86 +649,149 @@
             }
         }
 
-        // المؤقت
-        function startTimer() {
-            timeLeft = 60;
-            timerElement.textContent = timeLeft;
+        function showCombo(comboCount, points) {
+            comboDisplay.textContent = `Combo x${comboCount}! +${points}`;
+            comboDisplay.style.display = 'block';
+            comboDisplay.style.color = comboCount > 5 ? '#ff00cc' : '#ffd700';
             
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timerElement.textContent = timeLeft;
-
-                if (timeLeft <= 0) {
-                    endGame('⏰ الوقت انتهى!', `نهائيتك: ${score} نقطة`);
-                }
-            }, 1000);
+            setTimeout(() => {
+                comboDisplay.style.display = 'none';
+            }, 2000);
         }
 
-        // بدء اللعبة
+        function updateEnergy() {
+            if (!isGameRunning) return;
+            
+            energy = Math.max(0, energy - 0.05);
+            energyElement.textContent = Math.round(energy) + '%';
+            
+            if (energy <= 0) {
+                endGame('⚡ نفاد الطاقة', 'نظام الدفع توقف عن العمل!');
+            }
+        }
+
+        function playSound(frequency, duration) {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            } catch (e) {
+                // تجاهل الأخطاء في المتصفحات التي لا تدعم Web Audio API
+            }
+        }
+
+        // نظام الترقيات
+        function showUpgrades() {
+            upgradeMenu.style.display = 'block';
+        }
+
+        function hideUpgrades() {
+            upgradeMenu.style.display = 'none';
+        }
+
+        function buyUpgrade(type) {
+            const costs = {
+                speed: 50,
+                magnet: 100,
+                shield: 150
+            };
+
+            if (treasureScore >= costs[type]) {
+                treasureScore -= costs[type];
+                treasureScoreElement.textContent = treasureScore;
+                
+                switch(type) {
+                    case 'speed':
+                        upgrades.speed += 0.5;
+                        showMessage('🚀', 'السرعة زادت!');
+                        break;
+                    case 'magnet':
+                        upgrades.magnet = true;
+                        showMessage('🧲', 'مغناطيس الكنوز مفعل!');
+                        break;
+                    case 'shield':
+                        upgrades.shield = true;
+                        showMessage('🛡️', 'الدرع الوقائي مفعل!');
+                        break;
+                }
+            } else {
+                showMessage('❌', 'لا تملك كنوز كافية!');
+            }
+        }
+
         function startGame() {
             if (isGameRunning) return;
             
             isGameRunning = true;
-            score = 0;
-            lives = 3;
-            scoreElement.textContent = score;
-            livesElement.textContent = lives;
+            treasureScore = 0;
+            energy = 100;
+            combo = 0;
+            scoreMultiplier = 1;
+            speedMultiplier = 1;
+            
+            treasureScoreElement.textContent = treasureScore;
+            energyElement.textContent = energy + '%';
+            speedElement.textContent = upgrades.speed + 'x';
+            multiplierElement.textContent = scoreMultiplier + 'x';
             
             // تنظيف المنطقة
-            document.querySelectorAll('.coin, .enemy').forEach(el => el.remove());
+            document.querySelectorAll('.treasure, .alien, .black-hole, .power-up, .trail').forEach(el => el.remove());
             
-            // بدء المؤقت
-            startTimer();
+            // بدء الأنظمة
+            gameLoop();
             
             // إنشاء العناصر
-            gameInterval = setInterval(() => {
-                createCoin();
-                if (Math.random() < 0.3) createEnemy();
+            setInterval(() => {
+                createTreasure();
+                createAlien();
+                createBlackHole();
+                createPowerUp();
             }, 2000);
 
-            showMessage('🎮 ابدأ!', 'استخدم مفاتيح الأسهم للتحرك واجمع النقاط!');
+            showMessage('🚀 ابدأ الرحلة!', 'استخدم مفاتيح الأسهم للتحرك، زر المسافة للطاقة الخاصة!');
         }
 
         function endGame(title, text) {
             isGameRunning = false;
-            clearInterval(gameInterval);
-            clearInterval(timerInterval);
-            showMessage(title, text);
-        }
-
-        function resetGame() {
-            isGameRunning = false;
-            clearInterval(gameInterval);
-            clearInterval(timerInterval);
-            
-            score = 0;
-            lives = 3;
-            timeLeft = 60;
-            
-            scoreElement.textContent = score;
-            livesElement.textContent = lives;
-            timerElement.textContent = timeLeft;
-            
-            playerPosition = { x: 375, y: 175 };
-            player.style.left = playerPosition.x + 'px';
-            player.style.top = playerPosition.y + 'px';
-            
-            document.querySelectorAll('.coin, .enemy').forEach(el => el.remove());
+            showMessage(title, `${text}\n\nالنتيجة النهائية: ${treasureScore} كنز`);
         }
 
         function showInstructions() {
-            showMessage('📋 التعليمات', `
-                🎯 هدف اللعبة: اجمع أكبر عدد من النقاط
-                ⬆️⬇️⬅️➡️ : استخدم مفاتيح الأسهم للتحرك
-                💰 اجمع العملات الذهبية: +10 نقاط
-                ❌ تجنب المربعات الحمراء: -1 حياة
-                ⏱️ لديك 60 ثانية فقط!
+            showMessage('📚 دليل المستكشف', `
+                🎯 الهدف: اجمع أكبر عدد من الكنوز
+                
+                🎮 التحكم:
+                - الأسهم أو WASD: التحكم بالسفينة
+                - المسافة: موجة طاقة (تستهلك 40% طاقة)
+                - اجمع الكرات الخضراء لتعزيزات مؤقتة
+                
+                ⚠️ المخاطر:
+                - المخلوقات الفضائية: -20% طاقة
+                - الثقوب السوداء: -30% طاقة + دفع للخلف
+                
+                🛠️ الترقيات:
+                - زد سرعتك وقوتك في متجر الترقيات
+                
+                ⚡ الطاقة:
+                - تستهلك باستمرار، حافظ عليها!
             `);
         }
 
         function showMessage(title, text) {
-            messageTitle.textContent = title;
-            messageText.textContent = text;
+            document.getElementById('messageTitle').textContent = title;
+            document.getElementById('messageText').textContent = text;
             gameMessage.style.display = 'block';
         }
 
@@ -444,7 +799,7 @@
             gameMessage.style.display = 'none';
         }
 
-        // تهيئة أولية
+        // التهيئة الأولية
         showInstructions();
     </script>
 </body>
