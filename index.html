@@ -1,145 +1,673 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>لعبة عنزي 2D</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: #87CEEB; /* سماء */
-      font-family: Arial, sans-serif;
-    }
-    canvas {
-      display: block;
-      margin: 0 auto;
-      background: #88B04B; /* أرض خضراء */
-      border: 3px solid #333;
-    }
-    #info {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      color: white;
-      font-size: 18px;
-      background: rgba(0,0,0,0.5);
-      padding: 5px 10px;
-      border-radius: 5px;
-    }
-  </style>
-</head>
-<body>
-  <div id="info">النقاط: <span id="score">0</span></div>
-  <canvas id="gameCanvas"></canvas>
+"""
+🐪 لعبة "عنزي في الشمال" 🌵
+مغامرات في شمال السعودية
+مطور بلغة Python باستخدام Pygame
 
-  <script>
-    // إعداد الكانفاس
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = 800;
-    canvas.height = 600;
+GitHub Repository: https://github.com/[اسم المستخدم]/anzee-game
+"""
 
-    // شخصية عنزي
-    const player = {
-      x: canvas.width/2,
-      y: canvas.height/2,
-      width: 50,
-      height: 50,
-      speed: 5,
-      color: '#FFD700' // ذهبي
-    };
+import pygame
+import random
+import sys
+import math
 
-    // NPCs
-    const npcs = [];
-    for(let i=0; i<10; i++){
-      npcs.push({
-        x: Math.random()*(canvas.width-40),
-        y: Math.random()*(canvas.height-40),
-        width: 40,
-        height: 40,
-        speedX: Math.random()*2-1,
-        speedY: Math.random()*2-1,
-        color: '#FF4500' // أحمر نار
-      });
-    }
+class AnzeeGame:
+    def __init__(self):
+        # تهيئة Pygame
+        pygame.init()
+        pygame.mixer.init()
+        
+        # إعدادات الشاشة
+        self.WIDTH, self.HEIGHT = 1024, 576
+        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        pygame.display.set_caption("🐪 عنزي في الشمال - مغامرات في صحاري الشمال السعودي")
+        
+        # الألوان
+        self.SKY_BLUE = (135, 206, 235)
+        self.SAND_GOLD = (194, 178, 128)
+        self.SAND_LIGHT = (210, 190, 140)
+        self.MOUNTAIN_BROWN = (139, 69, 19)
+        self.GREEN = (34, 139, 34)
+        self.WHITE = (255, 255, 255)
+        self.BLACK = (0, 0, 0)
+        self.GOLD = (255, 215, 0)
+        self.RED = (255, 0, 0)
+        self.HEALTH_GREEN = (0, 255, 0)
+        
+        # الخطوط
+        self.font_large = pygame.font.SysFont("arial", 48, bold=True)
+        self.font_medium = pygame.font.SysFont("arial", 32)
+        self.font_small = pygame.font.SysFont("arial", 24)
+        
+        # إنشاء الأسطح
+        self.sky_surface = self.create_gradient_surface(self.WIDTH, self.HEIGHT, (100, 180, 255), self.SKY_BLUE)
+        self.sand_texture = self.create_sand_texture()
+        
+        self.clock = pygame.time.Clock()
+        self.running = True
 
-    // نقاط اللاعب
-    let score = 0;
+    class Player:
+        def __init__(self, game):
+            self.game = game
+            self.x = 100
+            self.y = game.HEIGHT - 150
+            self.width = 50
+            self.height = 70
+            self.speed = 7
+            self.jump_power = 16
+            self.is_jumping = False
+            self.jump_count = self.jump_power
+            self.health = 100
+            self.max_health = 100
+            self.coins = 0
+            self.score = 0
+            self.direction = 1
+            self.invincible = 0
+            self.animation_counter = 0
+            self.walking = False
+            
+        def draw(self):
+            self.animation_counter += 1
+            
+            # تأثير الوميض عند المناعة
+            if self.invincible > 0 and self.invincible % 8 < 4:
+                return
+                
+            # الجسم (الثوب)
+            body_color = (70, 130, 180)
+            pygame.draw.ellipse(self.game.screen, body_color, (self.x, self.y, self.width, self.height))
+            
+            # الرأس
+            head_radius = 20
+            head_x = self.x + self.width // 2
+            head_y = self.y - 5
+            pygame.draw.circle(self.game.screen, (210, 180, 140), (head_x, head_y), head_radius)
+            
+            # الغترة (الشماغ)
+            ghutra_points = [
+                (head_x, head_y - head_radius),
+                (head_x - 25, head_y - 10),
+                (head_x + 25, head_y - 10)
+            ]
+            pygame.draw.polygon(self.game.screen, (255, 255, 255), ghutra_points)
+            
+            # العقال
+            pygame.draw.rect(self.game.screen, (0, 0, 0), (head_x - 20, head_y - 15, 40, 5))
+            
+            # العيون
+            eye_offset = 8 * self.direction
+            pygame.draw.circle(self.game.screen, self.game.BLACK, (head_x - eye_offset, head_y - 2), 4)
+            
+            # تأثير الحركة
+            if self.walking:
+                leg_offset = math.sin(self.animation_counter * 0.3) * 5
+                pygame.draw.rect(self.game.screen, (50, 50, 50), (self.x + 10, self.y + self.height - 10, 8, 25 + leg_offset))
+                pygame.draw.rect(self.game.screen, (50, 50, 50), (self.x + self.width - 18, self.y + self.height - 10, 8, 25 - leg_offset))
+            else:
+                pygame.draw.rect(self.game.screen, (50, 50, 50), (self.x + 10, self.y + self.height - 10, 8, 25))
+                pygame.draw.rect(self.game.screen, (50, 50, 50), (self.x + self.width - 18, self.y + self.height - 10, 8, 25))
+            
+            # الذراعين
+            arm_offset = math.sin(self.animation_counter * 0.2) * 3 if self.walking else 0
+            pygame.draw.rect(self.game.screen, (210, 180, 140), (self.x - 5, self.y + 20, 8, 30 + arm_offset))
+            pygame.draw.rect(self.game.screen, (210, 180, 140), (self.x + self.width - 3, self.y + 20, 8, 30 - arm_offset))
+        
+        def move(self, keys):
+            self.walking = False
+            
+            if keys[pygame.K_LEFT]:
+                self.x -= self.speed
+                self.direction = -1
+                self.walking = True
+            if keys[pygame.K_RIGHT]:
+                self.x += self.speed
+                self.direction = 1
+                self.walking = True
+            
+            # الحدود
+            self.x = max(0, min(self.game.WIDTH - self.width, self.x))
+            
+            if self.invincible > 0:
+                self.invincible -= 1
+        
+        def jump(self):
+            if not self.is_jumping:
+                self.is_jumping = True
+        
+        def update_jump(self):
+            if self.is_jumping:
+                if self.jump_count >= -self.jump_power:
+                    neg = 1
+                    if self.jump_count < 0:
+                        neg = -1
+                    self.y -= (self.jump_count ** 2) * 0.25 * neg
+                    self.jump_count -= 1
+                else:
+                    self.is_jumping = False
+                    self.jump_count = self.jump_power
 
-    // التحكم
-    const keys = {};
-    window.addEventListener('keydown', e => keys[e.key] = true);
-    window.addEventListener('keyup', e => keys[e.key] = false);
+    class Character:
+        def __init__(self, game, x, y, char_type):
+            self.game = game
+            self.x = x
+            self.y = y
+            self.width = 40
+            self.height = 60
+            self.type = char_type
+            self.speed = random.uniform(1.0, 2.5)
+            self.direction = random.choice([-1, 1])
+            self.interaction_cooldown = 0
+            self.walk_counter = 0
+            
+            if self.type == 'friendly':
+                self.color = (0, 150, 0)
+                self.name = "البدوي الطيب"
+            elif self.type == 'aggressive':
+                self.color = (200, 0, 0)
+                self.name = "اللص"
+            else:
+                self.color = (128, 0, 128)
+                self.name = "التاجر الغامض"
+        
+        def draw(self):
+            self.walk_counter += 1
+            
+            # الجسم
+            pygame.draw.ellipse(self.game.screen, self.color, (self.x, self.y, self.width, self.height))
+            
+            # الرأس
+            head_radius = 15
+            head_x = self.x + self.width // 2
+            head_y = self.y - 5
+            pygame.draw.circle(self.game.screen, (210, 180, 140), (head_x, head_y), head_radius)
+            
+            # الملابس المختلفة حسب النوع
+            if self.type == 'friendly':
+                pygame.draw.arc(self.game.screen, (100, 50, 0), (self.x - 5, self.y, self.width + 10, 40), 0, math.pi, 3)
+            elif self.type == 'aggressive':
+                pygame.draw.line(self.game.screen, (101, 67, 33), (self.x + self.width, self.y + 20), (self.x + self.width + 20, self.y + 10), 3)
+            
+            # الحركة
+            leg_offset = math.sin(self.walk_counter * 0.3) * 4
+            pygame.draw.rect(self.game.screen, (50, 50, 50), (self.x + 8, self.y + self.height - 10, 6, 20 + leg_offset))
+            pygame.draw.rect(self.game.screen, (50, 50, 50), (self.x + self.width - 14, self.y + self.height - 10, 6, 20 - leg_offset))
+        
+        def move(self):
+            self.x += self.speed * self.direction
+            
+            if self.x <= 50 or self.x >= self.game.WIDTH - self.width - 50:
+                self.direction *= -1
+        
+        def interact(self, player):
+            if self.interaction_cooldown > 0:
+                self.interaction_cooldown -= 1
+                return None
+            
+            distance = math.sqrt((self.x - player.x)**2 + (self.y - player.y)**2)
+            
+            if distance < 60:
+                if self.type == 'friendly':
+                    player.coins += random.randint(1, 3)
+                    player.score += 15
+                    self.interaction_cooldown = 90
+                    return f"{self.name}: تفضل هذه الهدية يا بني!"
+                
+                elif self.type == 'aggressive':
+                    if player.invincible == 0:
+                        player.health -= 15
+                        player.invincible = 45
+                    self.interaction_cooldown = 90
+                    return f"{self.name}: اترك ممتلكاتك!"
+                
+                else:
+                    effect = random.choice(['help', 'harm', 'coin'])
+                    if effect == 'help':
+                        player.health = min(player.max_health, player.health + 20)
+                        self.interaction_cooldown = 90
+                        return f"{self.name}: هذه هدية لشجاعتك!"
+                    elif effect == 'coin':
+                        player.coins += 5
+                        player.score += 25
+                        self.interaction_cooldown = 90
+                        return f"{self.name}: تجارة مربحة اليوم!"
+                    else:
+                        if player.invincible == 0:
+                            player.health -= 10
+                            player.invincible = 45
+                        self.interaction_cooldown = 90
+                        return f"{self.name}: الصفقة لم تكن لصالحك!"
+            
+            return None
 
-    // تحديث حركة اللاعب
-    function movePlayer() {
-      if(keys['ArrowUp'] && player.y > 0) player.y -= player.speed;
-      if(keys['ArrowDown'] && player.y + player.height < canvas.height) player.y += player.speed;
-      if(keys['ArrowLeft'] && player.x > 0) player.x -= player.speed;
-      if(keys['ArrowRight'] && player.x + player.width < canvas.width) player.x += player.speed;
-    }
+    class Coin:
+        def __init__(self, game):
+            self.game = game
+            self.x = random.randint(100, game.WIDTH - 100)
+            self.y = random.randint(100, game.HEIGHT - 200)
+            self.radius = 12
+            self.collected = False
+            self.animation_counter = random.randint(0, 100)
+            self.float_height = random.uniform(0, 5)
+        
+        def draw(self):
+            if not self.collected:
+                self.animation_counter += 1
+                self.float_height = 3 * math.sin(self.animation_counter * 0.1)
+                
+                # عملة ذهبية لامعة
+                pygame.draw.circle(self.game.screen, self.game.GOLD, (self.x, self.y + self.float_height), self.radius)
+                pygame.draw.circle(self.game.screen, (255, 235, 100), (self.x, self.y + self.float_height), self.radius - 3)
+                
+                # بريق
+                sparkle_angle = self.animation_counter * 0.5
+                sparkle_x = self.x + math.cos(sparkle_angle) * 6
+                sparkle_y = self.y + self.float_height + math.sin(sparkle_angle) * 6
+                pygame.draw.circle(self.game.screen, self.game.WHITE, (int(sparkle_x), int(sparkle_y)), 2)
+        
+        def collect(self, player):
+            if self.collected:
+                return False
+                
+            distance = math.sqrt((self.x - player.x)**2 + (self.y - player.y)**2)
+            if distance < 40:
+                self.collected = True
+                player.coins += 1
+                player.score += 10
+                return True
+            return False
 
-    // تحديث حركة NPCs
-    function moveNPCs() {
-      for(const npc of npcs){
-        npc.x += npc.speedX;
-        npc.y += npc.speedY;
+    class PowerUp:
+        def __init__(self, game, power_type):
+            self.game = game
+            self.x = random.randint(100, game.WIDTH - 100)
+            self.y = random.randint(100, game.HEIGHT - 200)
+            self.radius = 15
+            self.type = power_type
+            self.collected = False
+            self.animation_counter = 0
+            
+            if self.type == 'health':
+                self.color = (255, 0, 0)
+                self.name = "♥ صحة"
+            elif self.type == 'speed':
+                self.color = (0, 0, 255)
+                self.name = "⚡ سرعة"
+            else:
+                self.color = (0, 255, 0)
+                self.name = "🦘 قفز"
+        
+        def draw(self):
+            if not self.collected:
+                self.animation_counter += 1
+                float_height = 4 * math.sin(self.animation_counter * 0.1)
+                
+                pygame.draw.circle(self.game.screen, self.color, (self.x, self.y + float_height), self.radius)
+                pygame.draw.circle(self.game.screen, self.game.WHITE, (self.x, self.y + float_height), self.radius - 5)
+        
+        def collect(self, player):
+            if self.collected:
+                return False
+                
+            distance = math.sqrt((self.x - player.x)**2 + (self.y - player.y)**2)
+            if distance < 45:
+                self.collected = True
+                if self.type == 'health':
+                    player.health = min(player.max_health, player.health + 30)
+                elif self.type == 'speed':
+                    player.speed += 2
+                else:
+                    player.jump_power += 3
+                return True
+            return False
 
-        if(npc.x <= 0 || npc.x + npc.width >= canvas.width) npc.speedX *= -1;
-        if(npc.y <= 0 || npc.y + npc.height >= canvas.height) npc.speedY *= -1;
-      }
-    }
+    def create_gradient_surface(self, width, height, color1, color2, vertical=True):
+        surface = pygame.Surface((width, height))
+        if vertical:
+            for y in range(height):
+                ratio = y / height
+                r = int(color1[0] * (1 - ratio) + color2[0] * ratio)
+                g = int(color1[1] * (1 - ratio) + color2[1] * ratio)
+                b = int(color1[2] * (1 - ratio) + color2[2] * ratio)
+                pygame.draw.line(surface, (r, g, b), (0, y), (width, y))
+        else:
+            for x in range(width):
+                ratio = x / width
+                r = int(color1[0] * (1 - ratio) + color2[0] * ratio)
+                g = int(color1[1] * (1 - ratio) + color2[1] * ratio)
+                b = int(color1[2] * (1 - ratio) + color2[2] * ratio)
+                pygame.draw.line(surface, (r, g, b), (x, 0), (x, height))
+        return surface
 
-    // التحقق من التصادم
-    function checkCollision(a, b){
-      return (
-        a.x < b.x + b.width &&
-        a.x + a.width > b.x &&
-        a.y < b.y + b.height &&
-        a.y + a.height > b.y
-      );
-    }
+    def create_sand_texture(self):
+        texture = pygame.Surface((100, 100))
+        texture.fill(self.SAND_GOLD)
+        for _ in range(200):
+            x, y = random.randint(0, 99), random.randint(0, 99)
+            radius = random.randint(1, 3)
+            shade = random.choice([self.SAND_LIGHT, (180, 160, 120)])
+            pygame.draw.circle(texture, shade, (x, y), radius)
+        return texture
 
-    // التحديث
-    function update() {
-      movePlayer();
-      moveNPCs();
+    def draw_palm_tree(self, x, y):
+        # الجذع
+        trunk_points = [
+            (x, y),
+            (x - 10, y - 80),
+            (x - 5, y - 160),
+            (x + 5, y - 160),
+            (x + 10, y - 80)
+        ]
+        pygame.draw.polygon(self.screen, (101, 67, 33), trunk_points)
+        
+        # السعف
+        for angle in range(0, 360, 45):
+            rad = math.radians(angle)
+            end_x = x + math.cos(rad) * 40
+            end_y = y - 160 + math.sin(rad) * 40
+            pygame.draw.line(self.screen, self.GREEN, (x, y - 160), (end_x, end_y), 3)
+            
+            for i in range(1, 4):
+                leaf_x = x + math.cos(rad) * 15 * i
+                leaf_y = y - 160 + math.sin(rad) * 15 * i
+                pygame.draw.circle(self.screen, (0, 100, 0), (int(leaf_x), int(leaf_y)), 8)
 
-      // تصادمات
-      for(const npc of npcs){
-        if(checkCollision(player, npc)){
-          score++;
-          npc.x = Math.random()*(canvas.width-40);
-          npc.y = Math.random()*(canvas.height-40);
-        }
-      }
+    def draw_tent(self, x, y):
+        # هيكل الخيمة
+        points = [
+            (x, y),
+            (x - 60, y - 40),
+            (x + 60, y - 40)
+        ]
+        pygame.draw.polygon(self.screen, (165, 42, 42), points)
+        
+        # تفاصيل الخيمة
+        pygame.draw.line(self.screen, self.BLACK, (x, y), (x, y - 40), 2)
+        pygame.draw.line(self.screen, self.BLACK, (x - 30, y - 20), (x + 30, y - 20), 2)
+        
+        # باب الخيمة
+        pygame.draw.rect(self.screen, (100, 30, 30), (x - 15, y - 10, 30, 10))
 
-      document.getElementById('score').textContent = score;
-    }
+    def draw_camel(self, x, y, facing_right=True):
+        direction = 1 if facing_right else -1
+        
+        # الجسم
+        pygame.draw.ellipse(self.screen, (210, 180, 140), (x, y - 30, 80 * direction, 40))
+        
+        # الرقبة والرأس
+        pygame.draw.ellipse(self.screen, (210, 180, 140), (x + 60 * direction, y - 60, 30 * direction, 50))
+        
+        # الأرجل
+        for i in range(4):
+            leg_x = x + 20 + i * 15 * direction
+            pygame.draw.rect(self.screen, (210, 180, 140), (leg_x, y + 10, 8 * direction, 25))
+        
+        # السنام
+        pygame.draw.ellipse(self.screen, (200, 170, 130), (x + 30 * direction, y - 50, 25 * direction, 35))
 
-    // الرسم
-    function draw() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
+    def draw_well(self, x, y):
+        # قاعدة البئر
+        pygame.draw.rect(self.screen, (150, 75, 0), (x - 25, y - 20, 50, 30))
+        pygame.draw.rect(self.screen, (100, 50, 0), (x - 20, y - 25, 40, 10))
+        
+        # الرافعة
+        pygame.draw.rect(self.screen, (101, 67, 33), (x - 30, y - 60, 5, 60))
+        pygame.draw.rect(self.screen, (101, 67, 33), (x + 25, y - 60, 5, 60))
+        pygame.draw.rect(self.screen, (101, 67, 33), (x - 30, y - 60, 60, 5))
+        
+        # الدلو
+        pygame.draw.rect(self.screen, (150, 75, 0), (x, y - 45, 15, 10))
 
-      // رسم اللاعب
-      ctx.fillStyle = player.color;
-      ctx.fillRect(player.x, player.y, player.width, player.height);
+    def draw_background(self):
+        # السماء
+        self.screen.blit(self.sky_surface, (0, 0))
+        
+        # الشمس
+        sun_x, sun_y = 850, 80
+        pygame.draw.circle(self.screen, (255, 255, 200), (sun_x, sun_y), 50)
+        pygame.draw.circle(self.screen, (255, 255, 100), (sun_x, sun_y), 40)
+        
+        # الجبال
+        for i in range(5):
+            mountain_x = i * 250 - 50
+            points = [
+                (mountain_x, self.HEIGHT - 100),
+                (mountain_x + 150, self.HEIGHT - 300),
+                (mountain_x + 300, self.HEIGHT - 100)
+            ]
+            pygame.draw.polygon(self.screen, self.MOUNTAIN_BROWN, points)
+            # ثلوج على القمم
+            pygame.draw.polygon(self.screen, self.WHITE, [
+                (mountain_x + 120, self.HEIGHT - 300),
+                (mountain_x + 150, self.HEIGHT - 330),
+                (mountain_x + 180, self.HEIGHT - 300)
+            ])
+        
+        # الأرض مع نسيج الرمال
+        for x in range(0, self.WIDTH, 100):
+            for y in range(self.HEIGHT - 100, self.HEIGHT, 100):
+                self.screen.blit(self.sand_texture, (x, y))
+        
+        # النخيل
+        self.draw_palm_tree(200, self.HEIGHT - 100)
+        self.draw_palm_tree(800, self.HEIGHT - 100)
+        
+        # الخيام
+        self.draw_tent(400, self.HEIGHT - 100)
+        self.draw_tent(600, self.HEIGHT - 100)
+        
+        # الجمال
+        self.draw_camel(300, self.HEIGHT - 120, True)
+        self.draw_camel(700, self.HEIGHT - 120, False)
+        
+        # الآبار
+        self.draw_well(500, self.HEIGHT - 100)
 
-      // رسم NPCs
-      for(const npc of npcs){
-        ctx.fillStyle = npc.color;
-        ctx.fillRect(npc.x, npc.y, npc.width, npc.height);
-      }
-    }
+    def draw_ui(self, player, message, message_timer):
+        # شريط الصحة
+        health_width = 200
+        health_height = 20
+        health_x = 20
+        health_y = 20
+        
+        # خلفية شريط الصحة
+        pygame.draw.rect(self.screen, (50, 50, 50), (health_x, health_y, health_width, health_height))
+        
+        # الصحة الحالية
+        health_percent = player.health / player.max_health
+        current_health_width = int(health_width * health_percent)
+        
+        # تدرج لوني للصحة
+        if health_percent > 0.6:
+            health_color = self.HEALTH_GREEN
+        elif health_percent > 0.3:
+            health_color = (255, 255, 0)
+        else:
+            health_color = self.RED
+            
+        pygame.draw.rect(self.screen, health_color, (health_x, health_y, current_health_width, health_height))
+        
+        # نص الصحة
+        health_text = self.font_small.render(f"الصحة: {player.health}/{player.max_health}", True, self.WHITE)
+        self.screen.blit(health_text, (health_x, health_y + 25))
+        
+        # العملات والنقاط
+        coins_text = self.font_small.render(f"العملات: {player.coins} 🪙", True, self.WHITE)
+        score_text = self.font_small.render(f"النقاط: {player.score} ⭐", True, self.WHITE)
+        
+        self.screen.blit(coins_text, (self.WIDTH - 200, 20))
+        self.screen.blit(score_text, (self.WIDTH - 200, 50))
+        
+        # الرسالة
+        if message_timer > 0:
+            message_surface = self.font_small.render(message, True, self.WHITE)
+            message_rect = message_surface.get_rect(center=(self.WIDTH//2, 50))
+            
+            # خلفية للرسالة
+            pygame.draw.rect(self.screen, (0, 0, 0, 128), 
+                            (message_rect.x - 10, message_rect.y - 5, 
+                             message_rect.width + 20, message_rect.height + 10),
+                            border_radius=10)
+            
+            self.screen.blit(message_surface, message_rect)
 
-    // اللعبة
-    function gameLoop(){
-      update();
-      draw();
-      requestAnimationFrame(gameLoop);
-    }
+    def show_start_screen(self):
+        self.screen.fill((30, 60, 90))
+        
+        # العنوان مع تأثير
+        title_text = self.font_large.render("🐪 عنزي في الشمال 🌵", True, self.WHITE)
+        subtitle_text = self.font_medium.render("مغامرات في صحاري الشمال السعودي", True, (255, 255, 200))
+        
+        # تعليمات
+        controls = [
+            "التحكم:",
+            "➡️ ⬅️ - الحركة يميناً ويساراً",
+            "🔼 - القفز", 
+            "ESC - الخروج من اللعبة",
+            "",
+            "اضغط أي زر للبدء..."
+        ]
+        
+        self.screen.blit(title_text, (self.WIDTH//2 - title_text.get_width()//2, 100))
+        self.screen.blit(subtitle_text, (self.WIDTH//2 - subtitle_text.get_width()//2, 170))
+        
+        # رسم بعض العناصر للخلفية
+        self.draw_camel(200, 400, True)
+        self.draw_tent(self.WIDTH//2, 400)
+        self.draw_palm_tree(self.WIDTH - 200, 400)
+        
+        # تعليمات التحكم
+        for i, line in enumerate(controls):
+            control_text = self.font_small.render(line, True, self.WHITE)
+            self.screen.blit(control_text, (self.WIDTH//2 - control_text.get_width()//2, 250 + i * 30))
+        
+        pygame.display.flip()
+        
+        waiting = True
+        while waiting:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    waiting = False
 
-    gameLoop();
-  </script>
-</body>
-</html>
+    def game_over_screen(self, score):
+        overlay = pygame.Surface((self.WIDTH, self.HEIGHT), pygame.SRCALPHA)
+        overlay.fill((0, 0, 0, 180))
+        self.screen.blit(overlay, (0, 0))
+        
+        game_over_text = self.font_large.render("انتهت اللعبة!", True, self.RED)
+        score_text = self.font_medium.render(f"النقاط النهائية: {score}", True, self.WHITE)
+        restart_text = self.font_small.render("اضغط R لإعادة اللعبة أو ESC للخروج", True, self.WHITE)
+        
+        self.screen.blit(game_over_text, (self.WIDTH//2 - game_over_text.get_width()//2, self.HEIGHT//2 - 60))
+        self.screen.blit(score_text, (self.WIDTH//2 - score_text.get_width()//2, self.HEIGHT//2))
+        self.screen.blit(restart_text, (self.WIDTH//2 - restart_text.get_width()//2, self.HEIGHT//2 + 60))
+        
+        pygame.display.flip()
+        
+        waiting = True
+        while waiting:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        return True
+                    if event.key == pygame.K_ESCAPE:
+                        return False
+        return False
+
+    def main_game(self):
+        player = self.Player(self)
+        characters = [self.Character(self, random.randint(100, self.WIDTH-100), self.HEIGHT-150, 
+                                  random.choice(['friendly', 'aggressive', 'mysterious'])) 
+                     for _ in range(6)]
+        coins = [self.Coin(self) for _ in range(15)]
+        powerups = [self.PowerUp(self, random.choice(['health', 'speed', 'jump'])) for _ in range(3)]
+        
+        message = ""
+        message_timer = 0
+        
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        player.jump()
+                    if event.key == pygame.K_ESCAPE:
+                        return True
+            
+            keys = pygame.key.get_pressed()
+            player.move(keys)
+            player.update_jump()
+            
+            # تحديث الشخصيات
+            for char in characters:
+                char.move()
+                msg = char.interact(player)
+                if msg:
+                    message = msg
+                    message_timer = 180
+            
+            # جمع العملات
+            for coin in coins:
+                if coin.collect(player):
+                    coins.remove(coin)
+                    coins.append(self.Coin(self))
+            
+            # جمع الباورابات
+            for powerup in powerups[:]:
+                if powerup.collect(player):
+                    powerups.remove(powerup)
+                    message = f"حصلت على: {powerup.name}!"
+                    message_timer = 120
+                    powerups.append(self.PowerUp(self, random.choice(['health', 'speed', 'jump'])))
+            
+            # الرسم
+            self.draw_background()
+            
+            for coin in coins:
+                coin.draw()
+            
+            for powerup in powerups:
+                powerup.draw()
+            
+            for char in characters:
+                char.draw()
+            
+            player.draw()
+            self.draw_ui(player, message, message_timer)
+            
+            # نهاية اللعبة
+            if player.health <= 0:
+                if self.game_over_screen(player.score):
+                    return True
+                else:
+                    return False
+            
+            pygame.display.flip()
+            self.clock.tick(60)
+        
+        return True
+
+    def run(self):
+        """الدالة الرئيسية لتشغيل اللعبة"""
+        while True:
+            self.show_start_screen()
+            if not self.main_game():
+                break
+        
+        pygame.quit()
+        sys.exit()
+
+def main():
+    """دالة التشغيل الرئيسية"""
+    game = AnzeeGame()
+    game.run()
+
+if __name__ == "__main__":
+    main()
