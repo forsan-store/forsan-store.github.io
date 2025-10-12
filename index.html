@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS Plus KSA - اشتراكات بخصم 50%</title>
+    <title>PS Plus KSA - اشتراكات بخصم حصري</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        :root {
+            --primary-color: #764ba2;
+            --secondary-color: #667eea;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+        }
+
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
             color: #333;
             line-height: 1.6;
         }
@@ -28,7 +35,7 @@
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
+            padding: 15px 0;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
@@ -36,17 +43,39 @@
             z-index: 1000;
         }
 
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
-            color: #764ba2;
+            color: var(--primary-color);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .logo span {
-            color: #667eea;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
         }
 
         /* الهيرو */
@@ -57,7 +86,7 @@
             color: white;
             padding: 150px 0 100px;
             text-align: center;
-            margin-top: 80px;
+            margin-top: 70px;
         }
 
         .hero h1 {
@@ -74,8 +103,8 @@
             font-weight: 500;
         }
 
-        /* المنتجات */
-        .products {
+        /* الأقسام */
+        .section {
             padding: 80px 0;
             background: #f8f9fa;
         }
@@ -84,10 +113,11 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 50px;
-            color: #764ba2;
+            color: var(--primary-color);
             font-weight: 700;
         }
 
+        /* المنتجات */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -109,11 +139,11 @@
         .product-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: #764ba2;
+            border-color: var(--primary-color);
         }
 
         .product-card.featured {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             color: white;
             transform: scale(1.05);
         }
@@ -127,7 +157,7 @@
             top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            background: #667eea;
+            background: var(--secondary-color);
             color: white;
             padding: 8px 20px;
             border-radius: 20px;
@@ -144,7 +174,7 @@
             font-size: 1.6rem;
             margin-bottom: 15px;
             font-weight: 700;
-            color: #2d3748;
+            color: var(--text-dark);
         }
 
         .product-card.featured .product-title {
@@ -155,7 +185,7 @@
             font-size: 2.5rem;
             font-weight: 800;
             margin: 20px 0;
-            color: #764ba2;
+            color: var(--primary-color);
         }
 
         .product-card.featured .price {
@@ -170,7 +200,7 @@
         }
 
         .discount {
-            background: #667eea;
+            background: var(--secondary-color);
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
@@ -180,7 +210,7 @@
         }
 
         .buy-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             color: white;
             border: none;
             padding: 15px 30px;
@@ -198,16 +228,7 @@
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .buy-btn.coming-soon-btn {
-            background: #95a5a6;
-            cursor: not-allowed;
-        }
-
-        .buy-btn.coming-soon-btn:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
+        /* معلومات التوصيل */
         .delivery-info {
             background: #e8f5e8;
             border: 2px solid #4caf50;
@@ -231,102 +252,163 @@
             margin: 5px 0;
         }
 
-        .support-schedule {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            text-align: center;
+        /* آراء العملاء */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
 
-        .support-schedule h4 {
-            color: #856404;
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .support-schedule p {
-            color: #856404;
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 5px 0;
-        }
-
-        .features {
-            padding: 80px 0;
+        .testimonial-card {
             background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
         }
 
-        .feature-grid {
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* خطوات الشراء */
+        .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
 
-        .feature-card {
-            text-align: center;
+        .step-card {
+            background: white;
             padding: 30px;
-            background: #f8f9fa;
             border-radius: 15px;
-            border: 2px solid #e9ecef;
-        }
-
-        .feature-icon {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: #764ba2;
-        }
-
-        .feature-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 15px;
-        }
-
-        .feature-card p {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #4a5568;
-            line-height: 1.5;
-        }
-
-        .feature-card .sub-text {
-            color: #718096;
-            font-size: 0.95rem;
-            font-weight: 400;
-            margin-top: 10px;
-        }
-
-        .legal-notice {
-            background: #fff3cd;
-            border: 2px solid #ffeaa7;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 30px 0;
             text-align: center;
-            color: #856404;
-            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
-        .legal-notice strong {
-            font-weight: 700;
-        }
-
-        footer {
-            background: #2d3748;
+        .step-number {
+            background: var(--primary-color);
             color: white;
-            text-align: center;
-            padding: 40px 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
         }
 
-        footer p {
+        /* الأسئلة الشائعة */
+        .faq-grid {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 20px;
+            background: white;
+            color: var(--text-dark);
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* اتصل بنا */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        /* عنا */
+        .about-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* تتبع الطلبات */
+        .tracking-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .track-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-size: 1.1rem;
-            font-weight: 500;
-            margin: 10px 0;
+            cursor: pointer;
+            width: 100%;
         }
 
         .product-features {
@@ -347,8 +429,19 @@
             color: white;
         }
 
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
             .hero h1 {
                 font-size: 2.2rem;
             }
@@ -356,20 +449,25 @@
             .product-card.featured {
                 transform: none;
             }
-            
-            .section-title {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
 <body>
     <!-- الهيدر -->
     <header>
-        <div class="container">
+        <div class="container nav-container">
             <div class="logo">
                 🎮 <span>PS Plus</span> KSA
             </div>
+            <nav class="nav-links">
+                <a href="#products">العروض</a>
+                <a href="#how-to-buy">كيفية الشراء</a>
+                <a href="#testimonials">آراء العملاء</a>
+                <a href="#faq">الأسئلة الشائعة</a>
+                <a href="#tracking">تتبع الطلب</a>
+                <a href="#contact">اتصل بنا</a>
+                <a href="#about">عننا</a>
+            </nav>
         </div>
     </header>
 
@@ -382,15 +480,9 @@
     </section>
 
     <!-- المنتجات -->
-    <section class="products">
+    <section id="products" class="section">
         <div class="container">
             <h2 class="section-title">العروض المتاحة</h2>
-            
-            <!-- إشعار قانوني -->
-            <div class="legal-notice">
-                ⚠️ <strong>تنويه قانوني:</strong> هذا موقع مستقل وغير تابع لشركة Sony. نقدم خدمة الوساطة في توفير الاشتراكات بأسعار تنافسية.
-            </div>
-
             <div class="product-grid">
                 <!-- اشتراك 1 شهر -->
                 <div class="product-card featured">
@@ -402,25 +494,17 @@
                         <span class="discount">30%</span>
                     </div>
 
-                    <!-- معلومات التوصيل -->
                     <div class="delivery-info">
                         <h4>⏰ مواعيد التوصيل</h4>
                         <p>يتم التوصيل خلال <strong>ساعات العمل فقط</strong></p>
                         <p>أوقات العمل: <strong>3 عصراً - 11 ليلاً</strong></p>
                     </div>
 
-                    <!-- معلومات الدعم الفني -->
-                    <div class="support-schedule">
-                        <h4>📞 الدعم الفني</h4>
-                        <p>متاح خلال <strong>أوقات العمل الرسمية</strong></p>
-                        <p>الرد على الاستفسارات خلال <strong>4 ساعات كحد أقصى</strong></p>
-                    </div>
-
                     <ul class="product-features">
-                        <li>✅ ضمان استرجاع 24 ساعة</li>
                         <li>✅ أسعار تنافسية</li>
                         <li>✅ خدمة عملاء مخصصة</li>
                         <li>✅ دفع آمن</li>
+                        <li>✅ توصيل خلال ساعات العمل</li>
                     </ul>
                     <button class="buy-btn">اشتري الآن - 26.99 ريال</button>
                 </div>
@@ -462,35 +546,150 @@
         </div>
     </section>
 
-    <!-- المميزات -->
-    <section class="features">
+    <!-- كيفية الشراء -->
+    <section id="how-to-buy" class="section" style="background: white;">
         <div class="container">
-            <h2 class="section-title">معلومات الخدمة</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⏰</div>
-                    <h3>مواعيد التوصيل</h3>
-                    <p>التوصيل خلال <strong>ساعات العمل فقط</strong></p>
-                    <p class="sub-text">أوقات العمل: 3 عصراً - 11 ليلاً</p>
+            <h2 class="section-title">كيفية الشراء</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>اختر الاشتراك</h3>
+                    <p>اختر الاشتراك المناسب واضغط على "اشتري الآن"</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📞</div>
-                    <h3>دعم العملاء</h3>
-                    <p>الرد على الاستفسارات خلال <strong>4 ساعات كحد أقصى</strong></p>
-                    <p class="sub-text">دعم فني متخصص</p>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>أدخل معلوماتك</h3>
+                    <p>أدخل رقم واتساب للتواصل معك</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>ضمان الجودة</h3>
-                    <p>استرجاع كامل المبلغ خلال 24 ساعة إذا لم يعمل الكود</p>
-                    <p class="sub-text">ضمان مضمون 100%</p>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>انتظر التواصل</h3>
+                    <p>سيتم التواصل معك خلال ساعة لتأكيد الطلب</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💎</div>
-                    <h3>أسعار شاملة</h3>
-                    <p>لا توجد رسوم خفية - السعر النهائي واضح من البداية</p>
-                    <p class="sub-text">شفافية كاملة</p>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>استلم الكود</h3>
+                    <p>استلم كود الاشتراك خلال ساعات العمل</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- آراء العملاء -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <h2 class="section-title">آراء العملاء</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"خدمة ممتازة وسريعة، استلمت الكود خلال ساعتين فقط. شكراً لكم!"</p>
+                    <p class="testimonial-author">- محمد العتيبي</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"أسعار منافسة جداً والخدمة احترافية. أنصح الجميع بالتجربة"</p>
+                    <p class="testimonial-author">- أحمد السعد</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"تعامل راقي ودعم سريع. كود شغال 100% بدون أي مشاكل"</p>
+                    <p class="testimonial-author">- فهد القحطاني</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الأسئلة الشائعة -->
+    <section id="faq" class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title">الأسئلة الشائعة</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        كيف أتأكد من مصداقيتكم؟
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        نقدم خدمتنا منذ فترة ولدينا عملاء دائمين. يمكنك رؤية آراء العملاء في القسم المخصص.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        كم تستغرق عملية التوصيل؟
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        التوصيل خلال ساعات العمل (3 عصراً - 11 ليلاً) بعد تأكيد الطلب.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        هل الدفع آمن؟
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        نعم، نستخدم طرق دفع آمنة ومباشرة عبر واتساب.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تتبع الطلبات -->
+    <section id="tracking" class="section">
+        <div class="container">
+            <h2 class="section-title">تتبع طلبك</h2>
+            <div class="tracking-form">
+                <div class="form-group">
+                    <input type="text" placeholder="أدخل رقم طلبك" id="order-number">
+                </div>
+                <button class="track-btn" onclick="trackOrder()">تتبع الطلب</button>
+                <div id="tracking-result" style="margin-top: 20px; display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- اتصل بنا -->
+    <section id="contact" class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>واتساب</h3>
+                    <p>للطلبات والاستفسارات</p>
+                    <p style="color: var(--primary-color); font-weight: 600;">+966 50 000 0000</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">⏰</div>
+                    <h3>أوقات العمل</h3>
+                    <p>3 عصراً - 11 ليلاً</p>
+                    <p>الرد خلال 4 ساعات كحد أقصى</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>البريد الإلكتروني</h3>
+                    <p>للشكاوى والمقترحات</p>
+                    <p style="color: var(--primary-color); font-weight: 600;">info@psplus-ksa.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- عنا -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">عنّا</h2>
+            <div class="about-content">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">من نحن؟</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                    نحن فريق متخصص في توفير اشتراكات PS Plus بأسعار تنافسية. نهدف إلى تقديم أفضل الخدمات 
+                    لعملائنا الكرام مع الحفاظ على الجودة والسرعة في التوصيل.
+                </p>
+                <h4 style="color: var(--primary-color); margin: 30px 0 15px;">لماذا تختارنا؟</h4>
+                <ul style="list-style: none; font-size: 1.1rem; line-height: 1.8;">
+                    <li>✅ أسعار منافسة وجودة مضمونة</li>
+                    <li>✅ خدمة عملاء متخصصة</li>
+                    <li>✅ توصيل سريع خلال ساعات العمل</li>
+                    <li>✅ دعم فني متواصل</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -502,24 +701,59 @@
             <p style="opacity: 0.9; margin-top: 15px; font-size: 1rem;">
                 هذا الموقع غير تابع لشركة Sony أو PlayStation.<br>
                 نقدم خدمة وساطة في توفير الاشتراكات بأسعار تنافسية.<br>
-                أوقات العمل: 3 عصراً - 11 ليلاً | الرد على الاستفسارات خلال 4 ساعات
+                أوقات العمل: 3 عصراً - 11 ليلاً
             </p>
         </div>
     </footer>
 
     <script>
-        // إضافة تفاعل للزر
+        // تفعيل الأسئلة الشائعة
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // إغلاق جميع الإجابات
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('active');
+                });
+                
+                // فتح/إغلاق الإجابة الحالية
+                if (!isActive) {
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // تتبع الطلبات
+        function trackOrder() {
+            const orderNumber = document.getElementById('order-number').value;
+            const resultDiv = document.getElementById('tracking-result');
+            
+            if (orderNumber) {
+                resultDiv.innerHTML = `
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border: 2px solid #4caf50;">
+                        <h4 style="color: #2e7d32; margin-bottom: 10px;">حالة الطلب #${orderNumber}</h4>
+                        <p style="color: #2e7d32; font-weight: 600;">✅ قيد المعالجة</p>
+                        <p style="color: #666; margin-top: 10px;">سيتم التواصل معك قريباً لتأكيد التفاصيل</p>
+                    </div>
+                `;
+                resultDiv.style.display = 'block';
+            } else {
+                alert('الرجاء إدخال رقم الطلب');
+            }
+        }
+
+        // زر الشراء
         document.querySelectorAll('.buy-btn').forEach(button => {
             if (!button.classList.contains('coming-soon-btn')) {
                 button.addEventListener('click', function() {
                     const product = this.closest('.product-card').querySelector('.product-title').textContent;
                     const price = "26.99 ريال";
                     
-                    // محاكاة عملية الشراء
                     const phone = prompt(`لشراء ${product}\n\nسعر: ${price}\n\n⏰ سيتم التوصيل خلال ساعات العمل\n\nالرجاء إدخال رقم واتساب للتواصل:`);
                     if (phone) {
-                        alert(`شكراً لك! سيتم التواصل معك على الرقم ${phone} خلال ساعة لتأكيد الطلب، والتوصيل خلال ساعات العمل.`);
-                        // هنا يمكن إضافة ربط برسالة واتساب
+                        alert(`شكراً لك! سيتم التواصل معك على الرقم ${phone} خلال ساعة لتأكيد الطلب.`);
                         window.open(`https://wa.me/966500000000?text=أريد شراء ${product} - السعر: ${price}`, '_blank');
                     }
                 });
