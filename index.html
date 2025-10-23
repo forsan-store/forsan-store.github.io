@@ -2,486 +2,85 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مساعدي الذكي - Assistant AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>KINGSUBS</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            line-height: 1.6;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* الهيدر */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
+        header {
             width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 20px;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #4a5568;
-        }
-
-        .nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #4a5568;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-link:hover {
-            color: #667eea;
-        }
-
-        /* الهيرو */
-        .hero {
-            padding: 120px 0 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .hero .container {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-        }
-
-        .hero-content {
-            flex: 1;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            background: white;
-            color: #667eea;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .ai-robot {
-            font-size: 12rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* المميزات */
-        .features {
-            padding: 80px 0;
-            background: #f7fafc;
-        }
-
-        .section-title {
+            background-color: #000;
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2d3748;
+            padding: 20px 0;
+            border-bottom: 2px solid #FFD700;
         }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        header h1 {
+            color: #FFD700;
+            font-size: 48px;
+            margin: 0;
+            letter-spacing: 2px;
         }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem;
+        .product {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .product img {
+            width: 300px;
+            height: 300px;
+            border: 3px solid #FFD700;
             border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
         }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
+        .product h2 {
+            color: #FFD700;
+            font-size: 32px;
+            margin: 20px 0 10px;
         }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .product p {
+            font-size: 20px;
+            margin: 10px 0 20px;
         }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #2d3748;
-        }
-
-        .feature-card p {
-            color: #718096;
-            line-height: 1.6;
-        }
-
-        /* قسم الشات */
-        .chat-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .chat-container {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .chat-messages {
-            height: 400px;
-            overflow-y: auto;
-            padding: 2rem;
-            background: #f8f9fa;
-        }
-
-        .message {
-            display: flex;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-
-        .ai-message {
-            flex-direction: row;
-        }
-
-        .user-message {
-            flex-direction: row-reverse;
-        }
-
-        .message-avatar {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .message-content {
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            max-width: 70%;
-        }
-
-        .user-message .message-content {
-            background: #667eea;
-            color: white;
-        }
-
-        .chat-input-container {
-            display: flex;
-            padding: 1.5rem;
-            background: white;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 12px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 25px;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .chat-input:focus {
-            border-color: #667eea;
-        }
-
-        .send-button {
-            background: #667eea;
-            color: white;
+        .buy-button {
+            background-color: #FFD700;
+            color: #000;
+            font-size: 22px;
+            padding: 15px 40px;
             border: none;
-            padding: 12px 25px;
-            margin-right: 1rem;
-            border-radius: 25px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
+            transition: 0.3s;
         }
-
-        .send-button:hover {
-            background: #5a67d8;
+        .buy-button:hover {
+            background-color: #e6c200;
         }
-
-        /* الفوتر */
-        .footer {
-            background: #2d3748;
-            color: white;
+        footer {
+            margin-top: 100px;
+            padding: 20px;
             text-align: center;
-            padding: 2rem 0;
-        }
-
-        /* ريسبونسف */
-        @media (max-width: 768px) {
-            .hero .container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .ai-robot {
-                font-size: 8rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .message-content {
-                max-width: 85%;
-            }
+            font-size: 14px;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
-    <!-- الهيدر -->
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">🤖 مساعدي الذكي</h1>
-            <nav class="nav">
-                <a href="#home" class="nav-link">الرئيسية</a>
-                <a href="#features" class="nav-link">المميزات</a>
-                <a href="#chat" class="nav-link">محادثة</a>
-            </nav>
-        </div>
+    <header>
+        <h1>KINGSUBS</h1>
     </header>
 
-    <!-- قسم الهيرو -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">مساعدك الشخصي بالذكاء الاصطناعي</h2>
-                <p class="hero-description">
-                    حلول ذكية لمشاكلك اليومية. اسأل عن أي شيء واحصل على إجابات فورية!
-                </p>
-                <button class="cta-button" onclick="scrollToChat()">ابدأ المحادثة</button>
-            </div>
-            <div class="hero-image">
-                <div class="ai-robot">🤖</div>
-            </div>
-        </div>
-    </section>
+    <div class="product">
+        <img src="https://via.placeholder.com/300x300.png?text=PlayStation+Plus" alt="اشتراك بلايستيشن بلس">
+        <h2>اشتراك بلايستيشن بلس - شهر واحد</h2>
+        <p>احصل على كل مزايا بلايستيشن بلس لمدة شهر واحد. تفعيل فوري وسريع.</p>
+        <button class="buy-button">اشترك الآن</button>
+    </div>
 
-    <!-- قسم المميزات -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">مميزات المساعد</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>ردود فورية</h3>
-                    <p>احصل على إجابات سريعة ودقيقة في ثوانٍ</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>دعم عربي</h3>
-                    <p>تفاهم كامل باللغة العربية الفصحى والعامية</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>آمن ومجاني</h3>
-                    <p>خدمة مجانية بالكامل مع الحفاظ على خصوصيتك</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الشات -->
-    <section id="chat" class="chat-section">
-        <div class="container">
-            <h2 class="section-title">محادثة مع المساعد</h2>
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message ai-message">
-                        <div class="message-avatar">🤖</div>
-                        <div class="message-content">
-                            <p>مرحباً! أنا مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="chat-input-container">
-                    <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." class="chat-input">
-                    <button onclick="sendMessage()" class="send-button">إرسال</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- الفوتر -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 مساعدي الذكي. جميع الحقوق محفوظة.</p>
-        </div>
+    <footer>
+        &copy; 2025 KINGSUBS. جميع الحقوق محفوظة.
     </footer>
-
-    <script>
-        // محاكاة للذكاء الاصطناعي
-        const aiResponses = [
-            "هذا سؤال رائع! يمكنني مساعدتك في ذلك.",
-            "شكراً لسؤالك. إليك الإجابة المناسبة:",
-            "أفهم ما تقصده. دعني أوضح لك ذلك:",
-            "بناءً على سؤالك، هذه هي النصيحة التي يمكنني تقديمها:",
-            "هذا موضوع مهم. إليك المعلومات التي تحتاجها:"
-        ];
-
-        const specificAnswers = {
-            "السلام عليكم": "وعليكم السلام ورحمة الله وبركاته! كيف يمكنني مساعدتك اليوم؟",
-            "شكراً": "العفو! أنا هنا لمساعدتك دائماً. هل هناك شيء آخر تريد الاستفسار عنه؟",
-            "كيف حالك": "الحمدلله بأفضل حال! مستعد لمساعدتك في أي وقت 😊",
-            "ما اسمك": "أنا مساعدك الذكي! يمكنك تسميتي كما تريد 🚀",
-            "ماذا تستطيع أن تفعل": "أستطيع الإجابة على أسئلتك، تقديم النصائح، المساعدة في المذاكرة، توليد الأفكار والمزيد!"
-        };
-
-        function getAIResponse(userMessage) {
-            // التحقق من الإجابات المحددة
-            userMessage = userMessage.toLowerCase().trim();
-            for (const [key, value] of Object.entries(specificAnswers)) {
-                if (userMessage.includes(key.toLowerCase())) {
-                    return value;
-                }
-            }
-
-            // إجابة ذكية عامة
-            const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-            const responses = [
-                "يمكنني تقديم معلومات مفيدة حول هذا الموضوع. هل تريد تفاصيل أكثر؟",
-                "هذا يعتمد على عدة عوامل. هل يمكنك توضيح سؤالك أكثر؟",
-                "لدي بعض الأفكار حول هذا. دعني أشاركك إياها:",
-                "بناءً على معرفتي، هذا ما يمكنني قوله عن موضوعك:"
-            ];
-            
-            return randomResponse + " " + responses[Math.floor(Math.random() * responses.length)];
-        }
-
-        function sendMessage() {
-            const userInput = document.getElementById('userInput');
-            const chatMessages = document.getElementById('chatMessages');
-            const message = userInput.value.trim();
-
-            if (message === '') return;
-
-            // إضافة رسالة المستخدم
-            const userMessageDiv = document.createElement('div');
-            userMessageDiv.className = 'message user-message';
-            userMessageDiv.innerHTML = `
-                <div class="message-avatar">👤</div>
-                <div class="message-content">
-                    <p>${message}</p>
-                </div>
-            `;
-            chatMessages.appendChild(userMessageDiv);
-
-            // مسح حقل الإدخال
-            userInput.value = '';
-
-            // محاكاة typing effect
-            const aiMessageDiv = document.createElement('div');
-            aiMessageDiv.className = 'message ai-message';
-            aiMessageDiv.innerHTML = `
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">
-                    <p>...</p>
-                </div>
-            `;
-            chatMessages.appendChild(aiMessageDiv);
-
-            // التمرير للأسفل
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            // محاكاة وقت المعالجة
-            setTimeout(() => {
-                const aiResponse = getAIResponse(message);
-                aiMessageDiv.querySelector('.message-content p').textContent = aiResponse;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1500);
-        }
-
-        // دعم الضغط على Enter
-        document.getElementById('userInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // التمرير للسفل تلقائياً
-        function scrollToChat() {
-            document.getElementById('chat').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
-        }
-
-        // إضافة بعض الرسائل الترحيبية
-        window.addEventListener('load', function() {
-            const chatMessages = document.getElementById('chatMessages');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        });
-    </script>
 </body>
 </html>
