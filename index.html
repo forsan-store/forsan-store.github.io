@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع احترافي</title>
+    <title>PlayStation Plus - خدمات البلايستيشن بلس</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,18 +14,19 @@
         }
         
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --gray: #7f8c8d;
+            --primary: #00439C;
+            --secondary: #0070CC;
+            --accent: #FFB800;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --gray: #7A7A7A;
         }
         
         body {
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #0D0D0D;
+            color: white;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -36,13 +37,14 @@
         
         /* Header Styles */
         header {
-            background-color: var(--primary);
-            color: white;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.7));
             padding: 1rem 0;
-            position: sticky;
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .header-content {
@@ -52,17 +54,25 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
         
-        .logo i {
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
             margin-left: 10px;
-            color: var(--secondary);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .logo-text span {
+            color: var(--accent);
         }
         
         nav ul {
@@ -71,7 +81,7 @@
         }
         
         nav ul li {
-            margin-right: 1.5rem;
+            margin-left: 1.5rem;
         }
         
         nav ul li a {
@@ -84,7 +94,7 @@
         }
         
         nav ul li a:hover {
-            color: var(--secondary);
+            color: var(--accent);
         }
         
         nav ul li a::after {
@@ -94,7 +104,7 @@
             right: 0;
             width: 0;
             height: 2px;
-            background-color: var(--secondary);
+            background-color: var(--accent);
             transition: width 0.3s;
         }
         
@@ -103,26 +113,35 @@
         }
         
         .cta-button {
-            background-color: var(--secondary);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
             padding: 0.7rem 1.5rem;
             border-radius: 4px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .cta-button i {
+            margin-right: 8px;
         }
         
         .cta-button:hover {
-            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 112, 204, 0.4);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
-            color: white;
-            padding: 5rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 10rem 0 5rem;
             text-align: center;
+            position: relative;
         }
         
         .hero-content {
@@ -131,21 +150,25 @@
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            color: var(--light);
+            color: #ccc;
         }
         
         .hero-buttons {
             display: flex;
             justify-content: center;
             gap: 1rem;
+            margin-top: 2rem;
         }
         
         .btn {
@@ -158,14 +181,13 @@
         }
         
         .btn-primary {
-            background-color: var(--secondary);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
         }
         
         .btn-primary:hover {
-            background-color: #2980b9;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 112, 204, 0.4);
         }
         
         .btn-secondary {
@@ -176,15 +198,14 @@
         
         .btn-secondary:hover {
             background-color: white;
-            color: var(--primary);
+            color: var(--dark);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* Features Section */
-        .features {
+        /* Plans Section */
+        .plans {
             padding: 5rem 0;
-            background-color: white;
+            background-color: var(--dark);
         }
         
         .section-title {
@@ -194,7 +215,7 @@
         
         .section-title h2 {
             font-size: 2.5rem;
-            color: var(--primary);
+            color: white;
             margin-bottom: 1rem;
         }
         
@@ -204,53 +225,102 @@
             margin: 0 auto;
         }
         
-        .features-grid {
+        .plans-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         
-        .feature-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .plan-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
         
-        .feature-card:hover {
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .plan-card.featured::before {
+            height: 8px;
+            background: linear-gradient(to right, var(--accent), #ff8c00);
+        }
+        
+        .plan-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 112, 204, 0.2);
         }
         
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background-color: rgba(52, 152, 219, 0.1);
-            border-radius: 50%;
+        .plan-card.featured {
+            transform: scale(1.05);
+            border: 1px solid var(--accent);
+        }
+        
+        .plan-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .plan-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-card.featured .plan-icon {
+            color: var(--accent);
+        }
+        
+        .plan-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: right;
+        }
+        
+        .plan-features li {
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: var(--secondary);
-            font-size: 1.8rem;
         }
         
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .feature-card p {
-            color: var(--gray);
+        .plan-features i {
+            color: var(--accent);
+            margin-left: 10px;
         }
         
         /* Services Section */
         .services {
             padding: 5rem 0;
-            background-color: #f5f7fa;
+            background-color: #0D0D0D;
         }
         
         .services-grid {
@@ -260,128 +330,158 @@
         }
         
         .service-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border-radius: 10px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
             transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .service-card:hover {
             transform: translateY(-5px);
+            border-color: var(--secondary);
         }
         
-        .service-img {
-            height: 200px;
-            background-color: var(--secondary);
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-        
-        .service-content {
-            padding: 1.5rem;
+            margin-left: 1.5rem;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
         
         .service-content h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--primary);
+            color: white;
         }
         
         .service-content p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
+            color: #ccc;
         }
         
-        .service-link {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-        }
-        
-        .service-link i {
-            margin-right: 5px;
-            transition: transform 0.3s;
-        }
-        
-        .service-link:hover i {
-            transform: translateX(5px);
-        }
-        
-        /* Testimonials */
-        .testimonials {
+        /* Games Section */
+        .games {
             padding: 5rem 0;
-            background-color: white;
+            background-color: var(--dark);
         }
         
-        .testimonial-grid {
+        .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
         
-        .testimonial-card {
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 2rem;
+        .game-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
             position: relative;
         }
         
-        .testimonial-card::before {
-            content: """;
-            font-size: 4rem;
-            color: var(--secondary);
-            opacity: 0.2;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-family: Georgia, serif;
+        .game-card:hover {
+            transform: translateY(-10px);
         }
         
-        .testimonial-text {
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            color: var(--dark);
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--gray);
-            margin-left: 1rem;
+        .game-img {
+            height: 300px;
+            background-color: #333;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
+            font-size: 3rem;
+            background-size: cover;
+            background-position: center;
         }
         
-        .author-info h4 {
-            color: var(--primary);
-            margin-bottom: 0.2rem;
+        .game-content {
+            padding: 1.5rem;
+            background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
         }
         
-        .author-info p {
+        .game-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .game-content p {
             color: var(--gray);
             font-size: 0.9rem;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 0;
+            background-color: #0D0D0D;
+        }
+        
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .faq-question:hover {
+            background-color: #252525;
+        }
+        
+        .faq-question h3 {
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            background-color: #1a1a1a;
+        }
+        
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+            color: #ccc;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
         }
         
         /* CTA Section */
         .cta-section {
             padding: 5rem 0;
-            background: linear-gradient(135deg, var(--secondary) 0%, #2980b9 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             text-align: center;
         }
         
@@ -398,7 +498,7 @@
         
         /* Footer */
         footer {
-            background-color: var(--primary);
+            background-color: #0A0A0A;
             color: white;
             padding: 4rem 0 2rem;
         }
@@ -415,6 +515,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.5rem;
+            color: white;
         }
         
         .footer-column h3::after {
@@ -442,7 +543,7 @@
         }
         
         .footer-links a:hover {
-            color: white;
+            color: var(--accent);
         }
         
         .social-links {
@@ -488,7 +589,7 @@
             }
             
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .hero-buttons {
@@ -501,6 +602,14 @@
                 max-width: 250px;
                 text-align: center;
             }
+            
+            .plan-card.featured {
+                transform: scale(1);
+            }
+            
+            .plan-card.featured:hover {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
@@ -510,21 +619,26 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <i class="fas fa-rocket"></i>
-                    شركتنا
+                    <div class="logo-icon">
+                        <i class="fab fa-playstation"></i>
+                    </div>
+                    <div class="logo-text">PlayStation <span>Plus</span></div>
                 </a>
                 
                 <nav>
                     <ul>
                         <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#">من نحن</a></li>
-                        <li><a href="#">الخدمات</a></li>
-                        <li><a href="#">المشاريع</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="#plans">الباقات</a></li>
+                        <li><a href="#services">الخدمات</a></li>
+                        <li><a href="#games">الألعاب</a></li>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
                     </ul>
                 </nav>
                 
-                <button class="cta-button">ابدأ الآن</button>
+                <button class="cta-button">
+                    <i class="fas fa-crown"></i>
+                    اشترك الآن
+                </button>
             </div>
         </div>
     </header>
@@ -533,148 +647,249 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>نقدم حلولاً مبتكرة لنمو عملك</h1>
-                <p>نحن نساعد الشركات على النمو من خلال حلول تكنولوجية متطورة واستراتيجيات تسويقية فعالة.</p>
+                <h1>ارتقِ بتجربة الألعاب مع PlayStation Plus</h1>
+                <p>استمتع بمئات الألعاب الحصرية، خصومات حصرية، وتجربة ألعاب متعددة عبر الإنترنت مع باقة الاشتراك المميزة من سوني</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">اكتشف خدماتنا</a>
-                    <a href="#" class="btn btn-secondary">اتصل بنا</a>
+                    <a href="#plans" class="btn btn-primary">اكتشف الباقات</a>
+                    <a href="#games" class="btn btn-secondary">استعرض الألعاب</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
+    <!-- Plans Section -->
+    <section class="plans" id="plans">
         <div class="container">
             <div class="section-title">
-                <h2>لماذا تختارنا؟</h2>
-                <p>نحن نتميز بتقديم حلول مبتكرة وخدمة عملاء استثنائية</p>
+                <h2>باقات PlayStation Plus</h2>
+                <p>اختر الباقة التي تناسب احتياجاتك واستمتع بتجربة ألعاب استثنائية</p>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-lightbulb"></i>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-icon">
+                        <i class="fas fa-gamepad"></i>
                     </div>
-                    <h3>أفكار مبتكرة</h3>
-                    <p>نقدم حلولاً إبداعية وفريدة تلبي احتياجات عملك وتدفعه نحو النمو.</p>
+                    <h3>باقة الأساس</h3>
+                    <div class="plan-price">75 <span>ريال/شهرياً</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> اللعب عبر الإنترنت</li>
+                        <li><i class="fas fa-check"></i> 2 لعبة مجانية شهرياً</li>
+                        <li><i class="fas fa-check"></i> خصومات حصرية</li>
+                        <li><i class="fas fa-check"></i> تخزين سحابي</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">اشترك الآن</a>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-cogs"></i>
+                <div class="plan-card featured">
+                    <div class="plan-icon">
+                        <i class="fas fa-crown"></i>
                     </div>
-                    <h3>حلول متكاملة</h3>
-                    <p>نطور حلولاً شاملة تغطي جميع جوانب عملك لتحقيق أقصى استفادة.</p>
+                    <h3>باقة الextra</h3>
+                    <div class="plan-price">105 <span>ريال/شهرياً</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> كل مزايا الأساس</li>
+                        <li><i class="fas fa-check"></i> كتالوج ألعاب PS4, PS5</li>
+                        <li><i class="fas fa-check"></i> أكثر من 400 لعبة</li>
+                        <li><i class="fas fa-check"></i> تجربة الألعاب قبل الشراء</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">اشترك الآن</a>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
+                <div class="plan-card">
+                    <div class="plan-icon">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <h3>دعم فني متواصل</h3>
-                    <p>فريق دعم فني متاح على مدار الساعة لمساعدتك في حل أي تحديات.</p>
+                    <h3>باقة الPremium</h3>
+                    <div class="plan-price">135 <span>ريال/شهرياً</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> كل مزايا الextra</li>
+                        <li><i class="fas fa-check"></i> كتالوج ألعاب PS1, PS2, PS3</li>
+                        <li><i class="fas fa-check"></i> دفق الألعاب عبر السحابة</li>
+                        <li><i class="fas fa-check"></i> ألعاب حصرية محدودة</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">اشترك الآن</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services">
+    <section class="services" id="services">
         <div class="container">
             <div class="section-title">
-                <h2>خدماتنا</h2>
-                <p>نقدم مجموعة واسعة من الخدمات المهنية لتلبية احتياجات عملك</p>
+                <h2>خدماتنا الحصرية</h2>
+                <p>اكتشف المزايا والخدمات التي تجعل PlayStation Plus الخيار الأمثل للاعبين</p>
             </div>
             
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-img">
-                        <i class="fas fa-code"></i>
+                    <div class="service-icon">
+                        <i class="fas fa-cloud-download-alt"></i>
                     </div>
                     <div class="service-content">
-                        <h3>تطوير الويب</h3>
-                        <p>نصمم ونطور مواقع ويب احترافية وسريعة الاستجابة تلبي معايير السيو.</p>
-                        <a href="#" class="service-link">
-                            <i class="fas fa-arrow-left"></i> اكتشف المزيد
-                        </a>
+                        <h3>التخزين السحابي</h3>
+                        <p>احفظ تقدمك في الألعاب بشكل آمن في السحابة وواصل من أي جهاز وفي أي وقت</p>
                     </div>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-img">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>اللعب الجماعي</h3>
+                        <p>انضم إلى أصدقائك في مغامرات ألعاب متعددة اللاعبين عبر الإنترنت</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>ألعاب مجانية</h3>
+                        <p>احصل على ألعاب مجانية كل شهر وأضفها إلى مكتبتك بشكل دائم</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>خصومات حصرية</h3>
+                        <p>استفد من خصومات وعروض حصرية في متجر PlayStation Store</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>دفق الألعاب</h3>
+                        <p>العب ألعاب PS3 وألعاب كلاسيكية أخرى عبر دفق السحابة بدون تحميل</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="service-content">
-                        <h3>تطبيقات الجوال</h3>
-                        <p>نطور تطبيقات جوال مبتكرة لأنظمة iOS و Android تلبي احتياجات المستخدمين.</p>
-                        <a href="#" class="service-link">
-                            <i class="fas fa-arrow-left"></i> اكتشف المزيد
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>التسويق الرقمي</h3>
-                        <p>نخطط وننفذ استراتيجيات تسويق رقمي فعالة لزيادة ظهور علامتك التجارية.</p>
-                        <a href="#" class="service-link">
-                            <i class="fas fa-arrow-left"></i> اكتشف المزيد
-                        </a>
+                        <h3>التطبيق المرافق</h3>
+                        <p>تحكم في جهازك، تسوق، وتواصل مع الأصدقاء من خلال تطبيق PlayStation App</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
+    <!-- Games Section -->
+    <section class="games" id="games">
         <div class="container">
             <div class="section-title">
-                <h2>آراء عملائنا</h2>
-                <p>اكتشف ما يقوله عملاؤنا عن تجربتهم معنا</p>
+                <h2>الألعاب الحالية</h2>
+                <p>استمبع بمجموعة مختارة من الألعاب المتاحة حاليًا للمشتركين</p>
             </div>
             
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        لقد ساعدنا فريق العمل على تحويل فكرتنا إلى واقع ملموس. كانت تجربة رائعة من البداية إلى النهاية.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">م</div>
-                        <div class="author-info">
-                            <h4>محمد أحمد</h4>
-                            <p>مدير شركة التقنية</p>
-                        </div>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                    </div>
+                    <div class="game-content">
+                        <h3>God of War Ragnarök</h3>
+                        <p>مغامرة ملحمية مع كراتوس وأتريوس في العالم الإسكندنافي</p>
                     </div>
                 </div>
                 
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        الاحترافية والجودة في العمل كانت استثنائية. أنصح بالتعامل معهم لأي مشروع تقني.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">س</div>
-                        <div class="author-info">
-                            <h4>سارة الخالد</h4>
-                            <p>رئيسة قسم التسويق</p>
-                        </div>
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2057&q=80');">
+                    </div>
+                    <div class="game-content">
+                        <h3>Spider-Man: Miles Morales</h3>
+                        <p>انطلق في مغامرة جديدة مع مايلز موراليس في نيويورك</p>
                     </div>
                 </div>
                 
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        سرعة الاستجابة والدعم الفني المتميز جعلوا التعامل معهم تجربة لا تنسى.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">خ</div>
-                        <div class="author-info">
-                            <h4>خالد السعدي</h4>
-                            <p>مؤسس شركة ناشئة</p>
-                        </div>
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                    </div>
+                    <div class="game-content">
+                        <h3>FIFA 23</h3>
+                        <p>أفضل تجربة كرة قدم مع أحدث التقنيات والميزات</p>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2084&q=80');">
+                    </div>
+                    <div class="game-content">
+                        <h3>Horizon Forbidden West</h3>
+                        <p>استكشف عالمًا مستقبليًا مليئًا بالآلات العملاقة والأسرار</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>الأسئلة الشائعة</h2>
+                <p>إجابات على أكثر الأسئلة شيوعًا حول خدمة PlayStation Plus</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>كيف يمكنني الاشتراك في PlayStation Plus؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>يمكنك الاشتراك من خلال متجر PlayStation Store على جهازك، أو عبر الموقع الإلكتروني، أو من خلال تطبيق PlayStation App. اختر الباقة المناسبة لك واتبع خطوات الدفع.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>هل يمكنني مشاركة الاشتراك مع أفراد عائلتي؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، يمكنك تفعيل "التقاسم العائلي" على جهاز PS4 أو PS5 الأساسي، مما يسمح لجميع المستخدمين على هذا الجهاز بالاستفادة من مزايا الاشتراك.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>ماذا يحدث للألعاب المجانية إذا انتهى اشتراكي؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>الألعاب المجانية التي حصلت عليها تبقى في مكتبتك، لكنك لن تتمكن من لعبها إلا بعد تجديد الاشتراك. أما الألعاب من كتالوج الاشتراك فستتوقف عن العمل حتى تجدد الاشتراك.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>هل يمكنني تغيير باقة الاشتراك؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، يمكنك الترقية إلى باقة أعلى في أي وقت، وسيتم محاسبتك على أساس الفرق المتبقي من فترة اشتراكك. أما التخفيض إلى باقة أدنى فيمكن فقط عند انتهاء الاشتراك الحالي.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>كيف يعمل التخزين السحابي؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>يتيح لك التخزين السحابي حفظ بيانات اللعبة على خوادم سوني. يمكنك الوصول إلى هذه البيانات من أي جهاز PS4 أو PS5، مما يسمح لك بمتابعة اللعب من حيث توقفت حتى إذا غيرت الجهاز.</p>
                     </div>
                 </div>
             </div>
@@ -684,9 +899,9 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
-            <h2>مستعد لبدء مشروعك القادم؟</h2>
-            <p>اتصل بنا اليوم واحصل على استشارة مجانية حول كيفية تطوير عملك</p>
-            <a href="#" class="btn btn-secondary">اتصل بنا الآن</a>
+            <h2>جاهز لبدء المغامرة؟</h2>
+            <p>انضم إلى ملايين اللاعبين حول العالم واستمتع بتجربة PlayStation Plus الاستثنائية</p>
+            <a href="#" class="btn btn-secondary">اشترك الآن</a>
         </div>
     </section>
 
@@ -695,13 +910,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>شركتنا</h3>
-                    <p>نحن رواد في تقديم حلول التكنولوجيا والاستشارات الإدارية التي تساعد الشركات على النمو والازدهار.</p>
+                    <h3>PlayStation Plus</h3>
+                    <p>الخدمة الرائدة في عالم ألعاب الفيديو، تقدم تجربة ألعاب استثنائية مع مزايا حصرية للاعبين.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
@@ -709,42 +924,49 @@
                     <h3>روابط سريعة</h3>
                     <ul class="footer-links">
                         <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#">من نحن</a></li>
-                        <li><a href="#">الخدمات</a></li>
-                        <li><a href="#">المشاريع</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="#plans">باقات الاشتراك</a></li>
+                        <li><a href="#services">الخدمات</a></li>
+                        <li><a href="#games">الألعاب</a></li>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>الخدمات</h3>
+                    <h3>الباقات</h3>
                     <ul class="footer-links">
-                        <li><a href="#">تطوير الويب</a></li>
-                        <li><a href="#">تطبيقات الجوال</a></li>
-                        <li><a href="#">التسويق الرقمي</a></li>
-                        <li><a href="#">استشارات الأعمال</a></li>
-                        <li><a href="#">التصميم الجرافيكي</a></li>
+                        <li><a href="#">باقة الأساس</a></li>
+                        <li><a href="#">باقة الExtra</a></li>
+                        <li><a href="#">باقة الPremium</a></li>
+                        <li><a href="#">باقات العائلة</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>اتصل بنا</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</li>
-                        <li><i class="fas fa-phone"></i> +966 5X XXX XXXX</li>
-                        <li><i class="fas fa-envelope"></i> info@company.com</li>
+                        <li><i class="fas fa-headset"></i> الدعم الفني: 920000000</li>
+                        <li><i class="fas fa-envelope"></i> info@ps-plus.sa</li>
+                        <li><i class="fas fa-globe"></i> www.ps-plus.sa</li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>جميع الحقوق محفوظة &copy; 2023 شركتنا</p>
+                <p>جميع الحقوق محفوظة &copy; 2023 PlayStation Plus. PlayStation وشعار PlayStation هي علامات تجارية لشركة Sony Interactive Entertainment Inc.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple script for smooth scrolling
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -766,9 +988,9 @@
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(44, 62, 80, 0.95)';
+                header.style.backgroundColor = 'rgba(13, 13, 13, 0.95)';
             } else {
-                header.style.backgroundColor = 'var(--primary)';
+                header.style.backgroundColor = 'rgba(13, 13, 13, 0.9)';
             }
         });
     </script>
